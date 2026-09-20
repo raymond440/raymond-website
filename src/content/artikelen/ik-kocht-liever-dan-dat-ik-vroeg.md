@@ -2,7 +2,7 @@
 titel: "Ik kocht liever dan dat ik vroeg."
 datum: 2026-09-20
 beschrijving: "Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet."
-concept: true
+concept: false
 ---
 
 Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet. Kopen voelde als geven, maar het was veiligheid, want dan stond ik nooit met lege handen. Dat deed ik mijn halve leven, met geld, met bedrijven, met kilo's en met klussen die ik niet kon weigeren. Het loste iets op voor even. Wat ik echt nodig had bleef liggen.
