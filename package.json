@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lock": "npx -y npm@10.9.2 install --package-lock-only"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

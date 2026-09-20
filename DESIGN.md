@@ -43,3 +43,7 @@ Afgeleid van The Hoxton (nieuwsbrieven), gelezen door de bril van Sivers: tekst 
 ## Artikelen
 
 Markdown in `src/content/artikelen/`. `concept: true` toont het alleen lokaal. Zet op `false` om te publiceren.
+
+## Lockbestand
+
+Cloudflare bouwt met npm 10, de Mac heeft npm 11. Npm 11 laat twee `@emnapi`-pakketten uit het lockbestand, en dan faalt `npm ci` op Cloudflare. Na elke `npm install` of `npm uninstall`: draai `npm run lock` en commit `package-lock.json`.
