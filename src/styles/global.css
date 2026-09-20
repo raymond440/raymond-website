@@ -98,3 +98,7 @@ footer.site a { color: inherit; }
 
 .kop-groot { font-size: 1.9rem; line-height: 1.2; font-weight: 500; margin: 3rem 0 0.3rem; letter-spacing: -0.01em; }
 .ondertitel { color: var(--gedempt); margin: 0 0 0.9rem; }
+
+/* concrete ondertitel: wat het stuk is, onder een poëtische titel */
+.lijst .omschrijving { color: var(--inkt); margin: 0.15rem 0 0.2rem; }
+.ondertitel-artikel { font-size: 1.15rem; line-height: 1.45; color: var(--gedempt); margin: 0 0 0.9rem; }

@@ -16,6 +16,7 @@ const { Content } = await render(a);
   <article>
     {a.data.tekening && <Tekening naam={a.data.tekening} breedte={110} />}
     <h1>{a.data.titel}</h1>
+    <p class="ondertitel-artikel">{a.data.beschrijving}</p>
     <p class="meta">{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
     <div class="prose"><Content /></div>
     <Reageren titel={a.data.titel} />

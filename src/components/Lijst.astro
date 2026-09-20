@@ -2,7 +2,7 @@
 import { datum } from '../site';
 
 interface Props {
-  items: { id: string; data: { titel: string; datum: Date; concept: boolean } }[];
+  items: { id: string; data: { titel: string; beschrijving: string; datum: Date; concept: boolean } }[];
 }
 const { items } = Astro.props;
 ---
@@ -10,6 +10,7 @@ const { items } = Astro.props;
   {items.map((a) => (
     <li>
       <a class="titel" href={`/artikelen/${a.id}/`}>{a.data.titel}</a>
+      <p class="omschrijving">{a.data.beschrijving}</p>
       <p class="meta">{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
     </li>
   ))}
