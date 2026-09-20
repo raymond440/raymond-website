@@ -3,6 +3,7 @@ import opentype from 'opentype.js';
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';
 import { artikelen } from '../../site';
+import { svgInhoud, type Naam } from '../../lib/tekeningen';
 
 const fontPad = 'node_modules/@fontsource/caveat-brush/files/caveat-brush-latin-400-normal.woff';
 const buf = readFileSync(fontPad);
@@ -60,16 +61,16 @@ function regels(tekst: string, grootte: number, maxBreedte: number): string[] {
 export async function getStaticPaths() {
   const lijst = await artikelen();
   return [
-    { params: { id: 'site' }, props: { titel: 'Raymond Klompsma', onder: 'Wat ik zie en waar ik in geloof.' } },
-    ...lijst.map((a) => ({ params: { id: a.id }, props: { titel: a.data.titel, onder: 'Raymond Klompsma' } })),
+    { params: { id: 'site' }, props: { titel: 'Raymond Klompsma', onder: 'Wat ik zie en waar ik in geloof.', tekening: 'zon' as Naam } },
+    ...lijst.map((a) => ({ params: { id: a.id }, props: { titel: a.data.titel, onder: 'Raymond Klompsma', tekening: (a.data.tekening ?? 'zon') as Naam } })),
   ];
 }
 
 export const GET: APIRoute = async ({ props }) => {
-  const { titel, onder } = props as { titel: string; onder: string };
+  const { titel, onder, tekening } = props as { titel: string; onder: string; tekening: Naam };
   const grootte = titel.length > 45 ? 78 : 96;
   // Balanceren: zelfde aantal regels, zo smal mogelijk, zodat er geen alleenstaand woord overblijft.
-  const maxB = B - MARGE * 2;
+  const maxB = 640; // rechts is ruimte voor de tekening
   const aantal = regels(titel, grootte, maxB).length;
   let smal = maxB;
   while (smal > 300 && regels(titel, grootte, smal - 20).length === aantal) smal -= 20;
@@ -85,6 +86,7 @@ export const GET: APIRoute = async ({ props }) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${B}" height="${H}" viewBox="0 0 ${B} ${H}">
     <rect width="${B}" height="${H}" fill="#fef9f3"/>
     <rect x="${MARGE}" y="120" width="96" height="14" fill="#ff9272"/>
+    <svg x="780" y="110" width="340" height="340" viewBox="0 0 200 200">${svgInhoud(tekening, true)}</svg>
     ${kopPaden}
     ${onderPad}
     <rect x="${MARGE}" y="${H - 120}" width="${B - MARGE * 2}" height="1" fill="#dac9b3"/>

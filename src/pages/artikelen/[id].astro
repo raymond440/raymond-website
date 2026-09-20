@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Basis from '../../layouts/Basis.astro';
 import Inschrijven from '../../components/Inschrijven.astro';
 import Reageren from '../../components/Reageren.astro';
+import Tekening from '../../components/Tekening.astro';
 import { artikelen, datum } from '../../site';
 
 export async function getStaticPaths() {
@@ -13,6 +14,7 @@ const { Content } = await render(a);
 ---
 <Basis titel={a.data.titel} beschrijving={a.data.beschrijving} ogId={a.id}>
   <article>
+    {a.data.tekening && <Tekening naam={a.data.tekening} breedte={110} />}
     <h1>{a.data.titel}</h1>
     <p class="meta">{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
     <div class="prose"><Content /></div>

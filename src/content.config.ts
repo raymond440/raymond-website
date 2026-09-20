@@ -8,6 +8,7 @@ const artikelen = defineCollection({
     datum: z.coerce.date(),
     beschrijving: z.string(),
     // concepten zijn alleen zichtbaar in `npm run dev`, nooit in de build
+    tekening: z.enum(['zon', 'deur', 'pakje', 'trap']).optional(),
     concept: z.boolean().default(false),
   }),
 });

@@ -2,13 +2,14 @@
 import Basis from '../layouts/Basis.astro';
 import Inschrijven from '../components/Inschrijven.astro';
 import Lijst from '../components/Lijst.astro';
-import { artikelen } from '../site';
+import { artikelen, CONTACT_EMAIL } from '../site';
 
 const recent = (await artikelen()).slice(0, 5);
 ---
 <Basis>
-  <h1>Ik ben Raymond.</h1>
-  <p>Ik schrijf op wat ik zie en waar ik in geloof.</p>
+  <h1>Ik bouwde twintig jaar bedrijven en leerde daarbij vooral iets over mezelf.</h1>
+  <p>Daar schrijf ik nu over.</p>
+  <p>Ik vind het leuk om mensen te leren kennen. <a href={`mailto:${CONTACT_EMAIL}`}>Mail me</a>, ik antwoord zelf.</p>
 
   <p class="label kop-lijst">Laatst geschreven</p>
   <Lijst items={recent} />

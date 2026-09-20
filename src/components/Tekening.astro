@@ -1,0 +1,10 @@
+---
+import { svgInhoud, type Naam } from '../lib/tekeningen';
+
+interface Props {
+  naam: Naam;
+  breedte?: number;
+}
+const { naam, breedte = 160 } = Astro.props;
+---
+<svg viewBox="0 0 200 200" width={breedte} height={breedte} role="img" aria-label={naam} class="tekening" set:html={svgInhoud(naam)} />

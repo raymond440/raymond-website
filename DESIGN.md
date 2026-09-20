@@ -27,12 +27,26 @@ Afgeleid van The Hoxton (nieuwsbrieven), gelezen door de bril van Sivers: tekst 
 7. **Leesbreedte** is 38rem. Niets in de tekstkolom is breder.
 8. **Tekst is Sivers.** Kort, dicht, geen dashes als zinsverbinder, geen verzachters.
 
+## Tekenstijl
+
+Getekende lijnen die met opzet niet kloppen. De wiebelige zon uit het onbevangenheidsartikel is het merkteken.
+
+- **Lijn:** inkt (`--inkt`), 3.2 dik, ronde uiteinden, onregelmatig.
+- **Kleur:** één koraal vlak per tekening, iets naast de lijn geplaatst, zoals bij drukwerk. Geen schaduw, geen verloop.
+- **Vorm:** eenvoudig en kinderlijk, maar niet slordig. Voorbeelden: zon, deur op een kier, pakje, trap.
+- **Formaat:** klein en met veel lucht. Eén per artikel of nieuwsbrief. Nooit een plaat die de tekst verdringt.
+- **Waar:** boven een artikel, in het deelplaatje, in de nieuwsbrief, en later op "Over mij". Niet op de homepage.
+- **Nieuwe tekening toevoegen:** in `src/lib/tekeningen.ts`. Losse png's staan op `/tekening/<naam>.png`, bruikbaar in de nieuwsbrief.
+- **Per artikel kiezen:** met `tekening: deur` in de frontmatter. Zonder keuze krijgt een artikel geen tekening en een zon in het deelplaatje.
+- **Een echte hand is beter.** Deze tekeningen zijn gegenereerd. Zodra Raymond of een illustrator ze zelf tekent, vervangen die de gegenereerde.
+
 ## Componenten (`src/components/`)
 
 - `Inschrijven.astro`: aanmeldblok. Het enige koraal.
 - `Lijst.astro`: artikellijst met titel, datum en zandlijnen.
 - `Reageren.astro`: mailregel onder een artikel.
 - `Analytics.astro`: PostHog, slapend zolang er geen sleutel is.
+- `Tekening.astro`: een tekening uit `src/lib/tekeningen.ts`.
 
 ## Pagina's (`src/pages/`)
 

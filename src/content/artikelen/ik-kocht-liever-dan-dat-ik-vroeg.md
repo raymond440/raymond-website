@@ -2,6 +2,7 @@
 titel: "Ik kocht liever dan dat ik vroeg."
 datum: 2026-09-20
 beschrijving: "Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet."
+tekening: deur
 concept: false
 ---
 

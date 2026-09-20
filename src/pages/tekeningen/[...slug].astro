@@ -1,0 +1,51 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Tekening from '../../components/Tekening.astro';
+
+// Alleen lokaal zichtbaar, nooit in de gepubliceerde site.
+export function getStaticPaths() {
+  return import.meta.env.DEV ? [{ params: { slug: undefined } }] : [];
+}
+import { NAMEN as namen } from '../../lib/tekeningen';
+---
+<Basis titel="Tekeningen">
+  <p class="label">Proefpagina tekenstijl, alleen lokaal</p>
+  <h1>De vier tekeningen</h1>
+  <p>Inkt, één koraal vlak dat iets naast de lijn valt, geen schaduw. Elke lijn is met opzet niet recht.</p>
+  <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.5rem 1rem; margin:2rem 0;">
+    {namen.map((n) => (
+      <div><Tekening naam={n} breedte={200} /><p class="meta">{n}</p></div>
+    ))}
+  </div>
+
+  <h2>Boven een artikel</h2>
+  <div style="margin:1.5rem 0 3rem;">
+    <Tekening naam="deur" breedte={110} />
+    <h1 style="margin-top:0.5rem;">Ik kocht liever dan dat ik vroeg.</h1>
+    <p class="meta">20 september 2026</p>
+    <p>Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet. Kopen voelde als geven, maar het was veiligheid.</p>
+  </div>
+
+  <h2>Bovenaan de nieuwsbrief</h2>
+  <div style="max-width:30rem; margin:1.5rem 0 3rem; padding:1.5rem; border:1px solid var(--zand);">
+    <Tekening naam="pakje" breedte={90} />
+    <p class="label" style="color:var(--gedempt); margin:0.8rem 0 0;">Raymond Klompsma</p>
+    <h2 style="margin:0.3rem 0 0.6rem;">Ik kocht liever dan dat ik vroeg.</h2>
+    <p>Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet.</p>
+  </div>
+
+  <h2>Als deelplaatje</h2>
+  <div style="position:relative; aspect-ratio:1200/630; background:var(--creme); border:1px solid var(--zand); margin:1.5rem 0 3rem; overflow:hidden;">
+    <div style="position:absolute; left:7.5%; top:22%; width:58%;">
+      <div style="font-family:var(--speels); font-size:clamp(1.6rem,5.5vw,3.2rem); line-height:1.1;">Ik kocht liever dan dat ik vroeg.</div>
+    </div>
+    <div style="position:absolute; right:5%; top:16%; width:24%;"><Tekening naam="zon" breedte={220} /></div>
+    <div style="position:absolute; left:7.5%; bottom:9%; font-family:var(--speels); font-size:1.2rem; color:var(--gedempt);">Raymond Klompsma</div>
+  </div>
+
+  <h2>Bij "Over mij"</h2>
+  <div style="display:flex; gap:1.5rem; align-items:center; margin:1.5rem 0 3rem;">
+    <Tekening naam="trap" breedte={130} />
+    <p style="margin:0;">Ik ben Raymond Klompsma. Ik schrijf op wat ik zie en waar ik in geloof.</p>
+  </div>
+</Basis>
