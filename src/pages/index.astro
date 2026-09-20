@@ -8,11 +8,9 @@ const recent = (await artikelen()).slice(0, 5);
 ---
 <Basis>
   <h1>Wat als het wel kan?</h1>
-  <p>Iedereen zegt dat het niet kan. Jij ook, en jij het hardst.</p>
-  <p>Twintig jaar bouwde ik bedrijven. Ik begin vaak zonder te weten waar het eindigt. Soms ging het mis, en ook daar schrijf ik over.</p>
-  <p><a href={`mailto:${CONTACT_EMAIL}`}>Reageren</a> kan altijd. Ik lees alles en antwoord zelf.</p>
+  <p>Iedereen zegt dat het niet kan, jij ook, en jij het hardst. Twintig jaar bouwde ik bedrijven en ik begin vaak zonder te weten waar het eindigt. Soms ging het mis, en ook daar schrijf ik over. <a href={`mailto:${CONTACT_EMAIL}`}>Reageren</a> kan altijd, ik lees alles en antwoord zelf.</p>
 
-  <p class="label kop-lijst">Laatst geschreven</p>
+  <h2 class="kop-groot">Wat ik deed en wat ervan kwam.</h2>
   <Lijst items={recent} />
 
   <Inschrijven plek="home" />
