@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Basis from '../../layouts/Basis.astro';
 import Inschrijven from '../../components/Inschrijven.astro';
+import Reageren from '../../components/Reageren.astro';
 import { artikelen, datum } from '../../site';
 
 export async function getStaticPaths() {
@@ -10,12 +11,12 @@ export async function getStaticPaths() {
 const { a } = Astro.props;
 const { Content } = await render(a);
 ---
-<Basis titel={a.data.titel} beschrijving={a.data.beschrijving}>
+<Basis titel={a.data.titel} beschrijving={a.data.beschrijving} ogId={a.id}>
   <article>
     <h1>{a.data.titel}</h1>
     <p class="meta">{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
-    <Content />
+    <div class="prose"><Content /></div>
+    <Reageren titel={a.data.titel} />
   </article>
-  <hr />
   <Inschrijven plek={`artikel:${a.id}`} />
 </Basis>

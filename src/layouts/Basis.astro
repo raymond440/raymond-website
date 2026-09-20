@@ -8,11 +8,13 @@ import { CONTACT_EMAIL } from '../site';
 interface Props {
   titel?: string;
   beschrijving?: string;
+  ogId?: string;
 }
-const { titel, beschrijving = 'Raymond Klompsma. Wat ik zie en waar ik in geloof.' } = Astro.props;
+const { titel, beschrijving = 'Raymond Klompsma. Wat ik zie en waar ik in geloof.', ogId = 'site' } = Astro.props;
 const paginaTitel = titel ? `${titel} · Raymond Klompsma` : 'Raymond Klompsma';
 const pad = Astro.url.pathname;
 const canonical = new URL(pad, Astro.site);
+const ogAfbeelding = new URL(`/og/${ogId}.png`, Astro.site);
 const nav = [
   { href: '/artikelen/', label: 'Artikelen' },
   { href: '/over/', label: 'Over mij' },
@@ -30,6 +32,9 @@ const nav = [
     <meta property="og:description" content={beschrijving} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogAfbeelding} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Raymond Klompsma" href="/rss.xml" />
     <Analytics />
   </head>

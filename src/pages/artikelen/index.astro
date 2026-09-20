@@ -1,17 +1,11 @@
 ---
 import Basis from '../../layouts/Basis.astro';
-import { artikelen, datum } from '../../site';
+import Lijst from '../../components/Lijst.astro';
+import { artikelen } from '../../site';
 
 const lijst = await artikelen();
 ---
 <Basis titel="Artikelen" beschrijving="Alles wat ik schreef, nieuwste bovenaan.">
   <h1>Artikelen</h1>
-  <ul class="lijst">
-    {lijst.map((a) => (
-      <li>
-        <a class="titel" href={`/artikelen/${a.id}/`}>{a.data.titel}</a>
-        <p>{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
-      </li>
-    ))}
-  </ul>
+  <Lijst items={lijst} />
 </Basis>

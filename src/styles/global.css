@@ -72,3 +72,16 @@ hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
 
 footer.site { border-top: 1px solid var(--zand); padding: 1.5rem 0 3rem; color: var(--gedempt); }
 footer.site a { color: inherit; }
+
+/* artikeltekst */
+.prose h2 { font-size: 1.35rem; margin: 2.2rem 0 0.5rem; }
+.prose h3 { font-size: 1.1rem; font-weight: 700; margin: 1.8rem 0 0.4rem; }
+.prose ul, .prose ol { padding-left: 1.3rem; margin: 0 0 1.1rem; }
+.prose li { margin-bottom: 0.3rem; }
+.prose blockquote { border-left: 1px solid var(--zand); margin: 1.5rem 0; padding-left: 1.1rem; }
+.prose hr { margin: 2.2rem 0; }
+.prose img { max-width: 100%; height: auto; border: 1px solid var(--zand); }
+.prose strong { font-weight: 700; }
+
+.reageren { margin: 2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--zand); }
+.pagina-kop { margin-bottom: 0.25rem; }
