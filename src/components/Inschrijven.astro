@@ -10,7 +10,7 @@ const actie = import.meta.env.PUBLIC_NEWSLETTER_FORM_URL ?? '';
 <section class="inschrijven" data-plek={plek} data-actie={actie}>
   <div class="inschrijf-tekening" aria-hidden="true"><Tekening naam="zon" breedte={96} /></div>
   <h2 data-ab="kop">Ik schrijf als er iets is.</h2>
-  <p>Over wat ik zie en waar ik in geloof. Geen schema, geen trucjes. Je kunt terugmailen, ik lees alles.</p>
+  <p>Over vastzitten en toch beginnen. Geen schema, geen trucjes. Je kunt terugmailen, ik lees alles.</p>
   <form>
     <input type="email" name="email" placeholder="jouw@email.nl" required autocomplete="email" aria-label="E-mailadres" />
     <button type="submit" data-ab="knop">Schrijf me in</button>
@@ -45,7 +45,7 @@ const actie = import.meta.env.PUBLIC_NEWSLETTER_FORM_URL ?? '';
         form.hidden = true;
         status.textContent = 'Gelukt. Check je inbox voor de bevestiging.';
       } catch {
-        status.textContent = 'Er ging iets mis. Mail me direct.';
+        status.textContent = 'Er ging iets mis. Probeer het straks nog eens.';
       }
     });
   });
