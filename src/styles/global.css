@@ -33,12 +33,12 @@ body {
   text-transform: uppercase;
 }
 
-header.site { padding: 1.75rem 0 1.25rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; border-bottom: 1px solid var(--zand); }
+header.site { padding: 1.75rem 0 0.5rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
 header.site a.naam { font-family: var(--speels); font-size: 1.6rem; color: var(--inkt); text-decoration: none; }
 nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; opacity: 0.7; }
 nav a:hover, nav a[aria-current] { opacity: 1; }
 
-main { padding: 2.5rem 0 3rem; }
+main { padding: 3rem 0 3rem; }
 h1 { font-size: 2.2rem; line-height: 1.15; font-weight: 500; margin: 0 0 1rem; letter-spacing: -0.01em; }
 h2 { font-size: 1.3rem; font-weight: 500; margin: 2.5rem 0 0.5rem; }
 p { margin: 0 0 1.1rem; }
@@ -49,8 +49,7 @@ hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
 .concept { color: var(--koraal-inkt); font-weight: 700; }
 
 .lijst { list-style: none; padding: 0; margin: 0; }
-.lijst li { padding: 1.1rem 0; border-top: 1px solid var(--zand); }
-.lijst li:last-child { border-bottom: 1px solid var(--zand); }
+.lijst li { padding: 0.7rem 0; }
 .lijst a.titel { font-size: 1.25rem; text-decoration: none; }
 .lijst a.titel:hover { text-decoration: underline; text-decoration-color: var(--zand); }
 .lijst p { margin: 0.25rem 0 0; }
@@ -70,7 +69,7 @@ hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
 .inschrijven button:hover { background: var(--koraal-inkt); color: var(--creme); }
 .inschrijven .status { margin: 0.6rem 0 0; font-size: 0.9rem; min-height: 1.2em; }
 
-footer.site { border-top: 1px solid var(--zand); padding: 1.5rem 0 3rem; color: var(--gedempt); }
+footer.site { padding: 1rem 0 3rem; color: var(--gedempt); }
 footer.site a { color: inherit; }
 
 /* artikeltekst */
@@ -83,7 +82,7 @@ footer.site a { color: inherit; }
 .prose img { max-width: 100%; height: auto; border: 1px solid var(--zand); }
 .prose strong { font-weight: 700; }
 
-.reageren { margin: 2rem 0 0; padding-top: 1rem; border-top: 1px solid var(--zand); }
+.reageren { margin: 2.5rem 0 0; }
 .pagina-kop { margin-bottom: 0.25rem; }
 
 /* uitgelichte quote tussen de alinea's */
@@ -92,8 +91,5 @@ footer.site a { color: inherit; }
   font-family: var(--speels);
   font-size: 1.9rem;
   line-height: 1.25;
-  margin: 2.2rem 0;
-  padding: 1.3rem 0;
-  border-top: 1px solid var(--zand);
-  border-bottom: 1px solid var(--zand);
+  margin: 2.6rem 0;
 }
