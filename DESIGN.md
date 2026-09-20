@@ -35,7 +35,7 @@ Getekende lijnen die met opzet niet kloppen. De wiebelige zon uit het onbevangen
 - **Kleur:** één koraal vlak per tekening, iets naast de lijn geplaatst, zoals bij drukwerk. Geen schaduw, geen verloop.
 - **Vorm:** eenvoudig en kinderlijk, maar niet slordig. Voorbeelden: zon, deur op een kier, pakje, trap.
 - **Formaat:** klein en met veel lucht. Eén per artikel of nieuwsbrief. Nooit een plaat die de tekst verdringt.
-- **Waar:** boven een artikel, in het deelplaatje, in de nieuwsbrief, en later op "Over mij". Niet op de homepage.
+- **Waar:** boven een artikel, in het deelplaatje, in de nieuwsbrief, op "Over mij" (trap), op de 404-pagina (deur) en klein in het aanmeldblok (zon). Niet boven de homepagetekst zelf.
 - **Nieuwe tekening toevoegen:** in `src/lib/tekeningen.ts`. Losse png's staan op `/tekening/<naam>.png`, bruikbaar in de nieuwsbrief.
 - **Per artikel kiezen:** met `tekening: deur` in de frontmatter. Zonder keuze krijgt een artikel geen tekening en een zon in het deelplaatje.
 - **Een echte hand is beter.** Deze tekeningen zijn gegenereerd. Zodra Raymond of een illustrator ze zelf tekent, vervangen die de gegenereerde.

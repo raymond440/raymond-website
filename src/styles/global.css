@@ -54,7 +54,9 @@ hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
 .lijst a.titel:hover { text-decoration: underline; text-decoration-color: var(--zand); }
 .lijst p { margin: 0.25rem 0 0; }
 
-.inschrijven { margin: 2.5rem 0; padding: 1.5rem; border: 1px solid var(--zand); }
+.inschrijven { position: relative; margin: 2.5rem 0; padding: 1.5rem; border: 1px solid var(--zand); }
+.inschrijf-tekening { position: absolute; top: 0.2rem; right: 0.6rem; line-height: 0; }
+.inschrijven h2, .inschrijven > p:first-of-type { padding-right: 6rem; }
 .inschrijven h2 { margin: 0 0 0.4rem; font-family: var(--speels); font-size: 1.7rem; font-weight: 400; }
 .inschrijven p { color: var(--gedempt); }
 .inschrijven form { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
