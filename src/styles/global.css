@@ -96,4 +96,5 @@ footer.site a { color: inherit; }
   margin: 2.6rem 0;
 }
 
-.kop-groot { font-size: 1.9rem; line-height: 1.2; font-weight: 500; margin: 3rem 0 0.6rem; letter-spacing: -0.01em; }
+.kop-groot { font-size: 1.9rem; line-height: 1.2; font-weight: 500; margin: 3rem 0 0.3rem; letter-spacing: -0.01em; }
+.ondertitel { color: var(--gedempt); margin: 0 0 0.9rem; }
