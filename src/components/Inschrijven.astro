@@ -1,0 +1,61 @@
+---
+interface Props {
+  plek: string; // waar op de site staat dit formulier, voor de analytics
+}
+const { plek } = Astro.props;
+const actie = import.meta.env.PUBLIC_NEWSLETTER_FORM_URL ?? '';
+---
+<section class="inschrijven" data-plek={plek} data-actie={actie}>
+  <h2 data-ab="kop">Ik schrijf als er iets is.</h2>
+  <p>Over wat ik zie en waar ik in geloof. Geen schema, geen trucjes. Je kunt terugmailen, ik lees alles.</p>
+  <form>
+    <input type="email" name="email" placeholder="jouw@email.nl" required autocomplete="email" aria-label="E-mailadres" />
+    <button type="submit" data-ab="knop">Schrijf me in</button>
+  </form>
+  <p class="status" role="status" aria-live="polite"></p>
+</section>
+
+<script>
+  const ph = () => (window as any).posthog;
+
+  document.querySelectorAll<HTMLElement>('.inschrijven').forEach((blok) => {
+    const form = blok.querySelector('form')!;
+    const status = blok.querySelector<HTMLElement>('.status')!;
+    const actie = blok.dataset.actie;
+    const plek = blok.dataset.plek;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!actie) {
+        status.textContent = 'Het formulier is nog niet gekoppeld.';
+        return;
+      }
+      const email = new FormData(form).get('email') as string;
+      status.textContent = 'Bezig...';
+      try {
+        await fetch(actie, {
+          method: 'POST',
+          mode: 'no-cors', // de nieuwsbriefdienst antwoordt zonder CORS-headers, de inschrijving komt wel aan
+          body: new URLSearchParams({ email, embed: '1' }),
+        });
+        ph()?.capture('nieuwsbrief_aangemeld', { plek });
+        form.hidden = true;
+        status.textContent = 'Gelukt. Check je inbox voor de bevestiging.';
+      } catch {
+        status.textContent = 'Er ging iets mis. Mail me direct.';
+      }
+    });
+  });
+
+  // A/B-test op kop en knop. Werkt zodra er in PostHog een experiment "inschrijf-kop" staat.
+  const varianten: Record<string, { kop: string; knop: string }> = {
+    kort: { kop: 'Mail van mij, als er iets is.', knop: 'Ja, graag' },
+    vraag: { kop: 'Wil je meedenken? Schrijf je in en mail terug.', knop: 'Ik doe mee' },
+  };
+  ph()?.onFeatureFlags?.(() => {
+    const v = varianten[ph().getFeatureFlag('inschrijf-kop') as string];
+    if (!v) return;
+    document.querySelectorAll('[data-ab=kop]').forEach((el) => (el.textContent = v.kop));
+    document.querySelectorAll('[data-ab=knop]').forEach((el) => (el.textContent = v.knop));
+  });
+</script>

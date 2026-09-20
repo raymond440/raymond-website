@@ -1,0 +1,11 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Inschrijven from '../components/Inschrijven.astro';
+import { CONTACT_EMAIL } from '../site';
+---
+<Basis titel="Over mij">
+  <h1>Over mij</h1>
+  <p>[Tekst volgt, door Raymond te schrijven.]</p>
+  <p>Mail me: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Ik antwoord zelf.</p>
+  <Inschrijven plek="over" />
+</Basis>

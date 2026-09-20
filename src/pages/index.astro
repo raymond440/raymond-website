@@ -1,0 +1,23 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Inschrijven from '../components/Inschrijven.astro';
+import { artikelen, datum } from '../site';
+
+const recent = (await artikelen()).slice(0, 5);
+---
+<Basis>
+  <h1>Ik ben Raymond.</h1>
+  <p>Ik schrijf op wat ik zie en waar ik in geloof.</p>
+
+  <h2>Recent</h2>
+  <ul class="lijst">
+    {recent.map((a) => (
+      <li>
+        <a class="titel" href={`/artikelen/${a.id}/`}>{a.data.titel}</a>
+        <p>{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
+      </li>
+    ))}
+  </ul>
+
+  <Inschrijven plek="home" />
+</Basis>
