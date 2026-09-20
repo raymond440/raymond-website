@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 
-// Te bevestigen door Raymond voor livegang.
-export const CONTACT_EMAIL = 'raymond@klompsma.nl';
+// Alias in Google Workspace, met filter en label in Gmail.
+export const CONTACT_EMAIL = 'hey-raymond@klompsma.nl';
 
 export const datum = (d: Date) =>
   d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
