@@ -5,20 +5,16 @@ beschrijving: "Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet."
 concept: true
 ---
 
-Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet. Kopen voelde als gulheid. Het was veiligheid. Dan stond ik nooit met lege handen.
+Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet. Kopen voelde als geven, maar het was veiligheid, want dan stond ik nooit met lege handen. Dat deed ik mijn halve leven, met geld, met bedrijven, met kilo's en met klussen die ik niet kon weigeren. Het loste iets op voor even. Wat ik echt nodig had bleef liggen.
 
-Dat deed ik mijn halve leven. Met geld, met bedrijven, met kilo's, met klussen die ik niet kon weigeren. Even was het opgelost. Wat ik nodig had bleef liggen.
+Ik dacht dat ik niet genoeg deed, dus deed ik meer. Harder werken, meer uren, één ding erbij. Genoeg doen kun je oplossen. Genoeg zijn kun je niet oplossen, daar helpt geen lijst tegen. Ik werkte aan het probleem dat ik kón oplossen, zodat ik het andere niet hoefde te voelen.
 
-Genoeg doen kun je oplossen. Harder werken, meer uren, één ding erbij. Genoeg zijn niet. Daar helpt geen lijst tegen. Ik werkte aan het probleem dat ik kón oplossen. Zo hoefde ik het andere niet te voelen.
+Het begon op het schoolplein. Ik werd niet gekozen, en ergens onderweg besloot ik dat ik hard moest werken om erbij te mogen horen. Dat besluit groeide met me mee. Het werd een schil, en die schil kreeg een stem die van alles een prestatie maakte. Zelfs ontspannen. Zelfs loslaten deed ik in de moet-stand.
 
-Het begon op het schoolplein. Ik werd niet gekozen, en ergens besloot ik: ik moet hard werken om erbij te mogen horen. Dat besluit groeide mee. Het werd een schil, en de schil werd een stem. De stem maakte alles tot een prestatie. Zelfs loslaten deed ik in de moet-stand.
+<aside class="uitgelicht">Ik werkte aan het probleem dat ik kón oplossen, zodat ik het andere niet hoefde te voelen.</aside>
 
-Ik probeerde die stem te verslaan. Mijn coach zei het al jaren geleden: een stem die je bevecht roept harder. Het klopte.
+Jarenlang probeerde ik die stem te verslaan. Mijn coach zei het al lang geleden: een stem die je bevecht gaat harder roepen. Hij had gelijk. Wat uiteindelijk werkte was eenvoudiger dan vechten. Ik begon te kijken.
 
-Wat wel werkte: ik stopte met vechten en begon te kijken.
+Op een ochtend stond ik op de weegschaal. Ik zag dat ik weer was afgevallen, en meteen was het niet genoeg. Vroeger liep ik daar een dag onder gebukt. Nu zag ik het gebeuren, zoals je iemand een kamer ziet binnenkomen, en ik deed er niets mee. Voor het eerst viel ik er niet in.
 
-Op een ochtend stond ik op de weegschaal. Ik zag dat ik weer was afgevallen. Meteen was het niet genoeg.
-
-Vroeger bukte ik er een dag voor. Nu zag ik het gebeuren en deed er niets mee. Voor het eerst viel ik er niet in.
-
-De stem praat nog. Ik luister anders.
+De stem is niet weg. Hij praat gewoon door. Ik luister er alleen anders naar.

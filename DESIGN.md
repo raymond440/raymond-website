@@ -19,7 +19,7 @@ Afgeleid van The Hoxton (nieuwsbrieven), gelezen door de bril van Sivers: tekst 
 ## Regels
 
 1. **Koraal maximaal één keer per pagina**, als gevuld vlak (de aanmeldknop). Nooit als tekstkleur, want het contrast is te laag.
-2. **Caveat Brush alleen als accent:** de naam in de header, de kop van het aanmeldblok, en op een deelplaatje. Nooit voor lopende tekst of artikelkoppen.
+2. **Caveat Brush alleen als accent:** de naam in de header, de kop van het aanmeldblok, de uitgelichte quote in een artikel (één per artikel, tussen twee alinea's), en op een deelplaatje. Nooit voor lopende tekst of artikelkoppen.
 3. **Hoeken altijd 0.** Geen schaduwen, geen verlopen.
 4. **Lijnen zijn 1px zand.** Knoppen en invoervelden hebben een 1px inktrand.
 5. **Labels** (datum, "concept", navigatie, knoppen) zijn klein, sans en hoofdletters met letterspatiëring.
