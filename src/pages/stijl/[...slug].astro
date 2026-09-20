@@ -1,0 +1,45 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Inschrijven from '../../components/Inschrijven.astro';
+
+// Alleen lokaal zichtbaar, nooit in de gepubliceerde site.
+export function getStaticPaths() {
+  return import.meta.env.DEV ? [{ params: { slug: undefined } }] : [];
+}
+
+const kleuren = [
+  ['Crème', '#fef9f3', 'achtergrond'],
+  ['Inkt', '#3f3b39', 'tekst, links, randen'],
+  ['Zand', '#dac9b3', 'lijnen, 1px'],
+  ['Koraal', '#ff9272', 'accent, één plek per pagina'],
+  ['Koraal-inkt', '#531b0b', 'tekst op koraal'],
+  ['Gedempt', '#7a736d', 'datum, ondertekst'],
+];
+---
+<Basis titel="Stijl">
+  <p class="label">Stijlpagina, alleen lokaal</p>
+  <h1>Ik kocht liever dan dat ik vroeg.</h1>
+  <p class="meta">20 september 2026 · concept</p>
+  <p>Vragen betekent dat je iemand nodig hebt, en dat durfde ik niet. Kopen voelde als gulheid. Het was veiligheid. Dan stond ik nooit met lege handen.</p>
+  <p>Dat deed ik mijn halve leven. Met geld, met bedrijven, met kilo's, met klussen die ik niet kon weigeren. <a href="#">Een link in de tekst.</a></p>
+
+  <h2>Kleuren</h2>
+  <ul class="lijst">
+    {kleuren.map(([naam, hex, gebruik]) => (
+      <li style="display:flex; gap:1rem; align-items:center;">
+        <span style={`width:2.5rem; height:2.5rem; background:${hex}; border:1px solid #dac9b3; flex:none;`}></span>
+        <span><strong>{naam}</strong> <span class="meta">{hex}</span><br /><span class="meta">{gebruik}</span></span>
+      </li>
+    ))}
+  </ul>
+
+  <h2>Supporting font: Caveat Brush</h2>
+  <div style="padding:1.1rem 0; border-top:1px solid #dac9b3;">
+    <div style="font-family: var(--speels); font-size:2.6rem; line-height:1.1;">Raymond Klompsma</div>
+    <div style="font-family: var(--speels); font-size:1.7rem;">Ik schrijf als er iets is.</div>
+    <p class="meta" style="margin-top:0.4rem;">Alleen voor naam, aanmeldkop en een enkel accentwoord.</p>
+  </div>
+
+  <h2>Aanmeldblok</h2>
+  <Inschrijven plek="stijl" />
+</Basis>

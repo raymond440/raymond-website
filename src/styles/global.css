@@ -1,60 +1,74 @@
+/* Designsysteem, afgeleid van The Hoxton: crème, warm bruin, zand, één koraalaccent. Alleen licht. */
 :root {
-  --bg: #fbfaf7;
-  --fg: #1c1b19;
-  --muted: #6b675f;
-  --line: #e4e0d6;
-  --accent: #b4461f;
-  --measure: 38rem;
+  --creme: #fef9f3;
+  --inkt: #3f3b39;
+  --zand: #dac9b3;
+  --koraal: #ff9272;
+  --koraal-inkt: #531b0b;
+  --gedempt: #7a736d;
+
+  --serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+  --sans: Avenir, 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+  --speels: 'Caveat Brush', 'Comic Sans MS', cursive;
+
+  --maat: 38rem;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #161513;
-    --fg: #ece8df;
-    --muted: #9a958a;
-    --line: #2c2a26;
-    --accent: #e0774f;
-  }
-}
-* { box-sizing: border-box; }
+* { box-sizing: border-box; border-radius: 0; }
 html { font-size: 19px; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  background: var(--creme);
+  color: var(--inkt);
+  font-family: var(--serif);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
-.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.25rem; }
-header.site { padding: 1.75rem 0 1rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-header.site a.naam { font-weight: 700; color: var(--fg); text-decoration: none; }
-nav a { margin-left: 1.25rem; color: var(--muted); text-decoration: none; font-size: 0.9rem; }
-nav a:hover, nav a[aria-current] { color: var(--fg); }
-main { padding: 2rem 0 3rem; }
-h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 1rem; letter-spacing: -0.01em; }
-h2 { font-size: 1.3rem; margin: 2.5rem 0 0.5rem; }
-a { color: var(--accent); }
+.wrap { max-width: var(--maat); margin: 0 auto; padding: 0 1.25rem; }
+
+/* labels: klein, sans, hoofdletters */
+.label, nav a, .meta, .concept, footer.site, .inschrijven button {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+header.site { padding: 1.75rem 0 1.25rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; border-bottom: 1px solid var(--zand); }
+header.site a.naam { font-family: var(--speels); font-size: 1.6rem; color: var(--inkt); text-decoration: none; }
+nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; opacity: 0.7; }
+nav a:hover, nav a[aria-current] { opacity: 1; }
+
+main { padding: 2.5rem 0 3rem; }
+h1 { font-size: 2.2rem; line-height: 1.15; font-weight: 500; margin: 0 0 1rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.3rem; font-weight: 500; margin: 2.5rem 0 0.5rem; }
 p { margin: 0 0 1.1rem; }
-hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
-.meta { color: var(--muted); font-size: 0.85rem; }
-.concept { color: var(--accent); font-size: 0.85rem; font-weight: 700; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--zand); text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
+a:hover { text-decoration-color: var(--inkt); }
+hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
+.meta { color: var(--gedempt); }
+.concept { color: var(--koraal-inkt); font-weight: 700; }
+
 .lijst { list-style: none; padding: 0; margin: 0; }
-.lijst li { padding: 1rem 0; border-top: 1px solid var(--line); }
-.lijst li:last-child { border-bottom: 1px solid var(--line); }
-.lijst a.titel { font-size: 1.2rem; font-weight: 700; color: var(--fg); text-decoration: none; }
-.lijst a.titel:hover { color: var(--accent); }
-.lijst p { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.95rem; }
-.inschrijven { margin: 2.5rem 0; padding: 1.5rem; border: 1px solid var(--line); border-radius: 6px; }
-.inschrijven h2 { margin: 0 0 0.4rem; }
-.inschrijven p { color: var(--muted); }
+.lijst li { padding: 1.1rem 0; border-top: 1px solid var(--zand); }
+.lijst li:last-child { border-bottom: 1px solid var(--zand); }
+.lijst a.titel { font-size: 1.25rem; text-decoration: none; }
+.lijst a.titel:hover { text-decoration: underline; text-decoration-color: var(--zand); }
+.lijst p { margin: 0.25rem 0 0; }
+
+.inschrijven { margin: 2.5rem 0; padding: 1.5rem; border: 1px solid var(--zand); }
+.inschrijven h2 { margin: 0 0 0.4rem; font-family: var(--speels); font-size: 1.7rem; font-weight: 400; }
+.inschrijven p { color: var(--gedempt); }
 .inschrijven form { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
 .inschrijven input[type=email] {
-  flex: 1 1 14rem; padding: 0.65rem 0.8rem; font: inherit; font-size: 0.95rem;
-  background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 4px;
+  flex: 1 1 14rem; padding: 0.7rem 0.8rem; font: inherit; font-size: 0.95rem;
+  background: var(--creme); color: var(--inkt); border: 1px solid var(--inkt);
 }
 .inschrijven button {
-  padding: 0.65rem 1.1rem; font: inherit; font-size: 0.95rem; font-weight: 700; cursor: pointer;
-  background: var(--fg); color: var(--bg); border: 0; border-radius: 4px;
+  padding: 0.75rem 1.2rem; font-weight: 700; cursor: pointer;
+  background: var(--koraal); color: var(--koraal-inkt); border: 1px solid var(--koraal-inkt);
 }
+.inschrijven button:hover { background: var(--koraal-inkt); color: var(--creme); }
 .inschrijven .status { margin: 0.6rem 0 0; font-size: 0.9rem; min-height: 1.2em; }
-footer.site { border-top: 1px solid var(--line); padding: 1.5rem 0 3rem; color: var(--muted); font-size: 0.85rem; }
+
+footer.site { border-top: 1px solid var(--zand); padding: 1.5rem 0 3rem; color: var(--gedempt); }
+footer.site a { color: inherit; }
