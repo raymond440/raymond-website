@@ -7,9 +7,10 @@ import { artikelen, CONTACT_EMAIL } from '../site';
 const recent = (await artikelen()).slice(0, 5);
 ---
 <Basis>
-  <h1>Ik bouwde twintig jaar bedrijven en leerde daarbij vooral iets over mezelf.</h1>
-  <p>Daar schrijf ik nu over.</p>
-  <p>Ik vind het leuk om mensen te leren kennen. <a href={`mailto:${CONTACT_EMAIL}`}>Mail me</a>, ik antwoord zelf.</p>
+  <h1>Wat als het wel kan?</h1>
+  <p>Iedereen zegt dat het niet kan. Jij ook, en jij het hardst.</p>
+  <p>Twintig jaar bouwde ik bedrijven. Ik begin vaak zonder te weten waar het eindigt. Soms ging het mis, en ook daar schrijf ik over.</p>
+  <p><a href={`mailto:${CONTACT_EMAIL}`}>Reageren</a> kan altijd. Ik lees alles en antwoord zelf.</p>
 
   <p class="label kop-lijst">Laatst geschreven</p>
   <Lijst items={recent} />

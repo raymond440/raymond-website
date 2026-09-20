@@ -61,7 +61,7 @@ function regels(tekst: string, grootte: number, maxBreedte: number): string[] {
 export async function getStaticPaths() {
   const lijst = await artikelen();
   return [
-    { params: { id: 'site' }, props: { titel: 'Raymond Klompsma', onder: 'Wat ik zie en waar ik in geloof.', tekening: 'zon' as Naam } },
+    { params: { id: 'site' }, props: { titel: 'Raymond Klompsma', onder: 'Wat als het wel kan?', tekening: 'zon' as Naam } },
     ...lijst.map((a) => ({ params: { id: a.id }, props: { titel: a.data.titel, onder: 'Raymond Klompsma', tekening: (a.data.tekening ?? 'zon') as Naam } })),
   ];
 }

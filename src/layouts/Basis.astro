@@ -10,7 +10,7 @@ interface Props {
   beschrijving?: string;
   ogId?: string;
 }
-const { titel, beschrijving = 'Raymond Klompsma. Wat ik zie en waar ik in geloof.', ogId = 'site' } = Astro.props;
+const { titel, beschrijving = 'Iedereen zegt dat het niet kan. Raymond Klompsma schrijft over wat hij deed en wat ervan kwam.', ogId = 'site' } = Astro.props;
 const paginaTitel = titel ? `${titel} · Raymond Klompsma` : 'Raymond Klompsma';
 const pad = Astro.url.pathname;
 const canonical = new URL(pad, Astro.site);
