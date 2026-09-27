@@ -36,8 +36,9 @@ body {
   text-transform: uppercase;
 }
 
-header.site { padding: 1.75rem 0 0.5rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-header.site a.naam { font-family: var(--speels); font-weight: 500; font-size: 35px; line-height: 50px; color: var(--inkt); text-decoration: none; }
+header.site { padding: 1.75rem 0 0.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+header.site a.naam { display: block; line-height: 0; }
+header.site a.naam img { display: block; height: 48px; width: auto; }
 nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; }
 nav a:hover, nav a[aria-current] { text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 
