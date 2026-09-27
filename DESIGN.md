@@ -34,7 +34,7 @@ Typografische maten komen letterlijk uit het bronsysteem (`type.groups` in `toke
 
 ## Logo
 
-Het RAY-logo (gele blokletters, een handtekening in pen erdoorheen, "Raymond Klompsma" eronder in geel) staat sinds 27 september 2026 in de header van de site, als afbeelding (`public/logo.png`, bronbestand `src/assets/ray-logo.png`), op 48px hoogte met ruime marge, in plaats van de getypte naam. Dat volgt de eigen regel van het bronsysteem: de Caveat-naam was een tijdelijke vervanging tot er een transparante versie van het logo was.
+Het RAY-logo staat sinds 27 september 2026 in de header van de site, als afbeelding (`public/logo.png`, bronbestand `src/assets/ray-logo.png`), op 68px hoogte, in plaats van de getypte naam. Het is inmiddels alleen nog "RAY" met de handtekening, zonder de volledige naam eronder (die stond er eerst wel bij, tot Raymond het logo zelf in Claude Design bijwerkte). Dat volgt de eigen regel van het bronsysteem: de Caveat-naam was een tijdelijke vervanging tot er een transparante versie van het logo was.
 
 Bewaard in de vault: `projecten/Website raymondklompsma.nl/logo/ray-logo.jpg` (oud, op wit) en `ray-logo-transparant.png` (huidig, transparant, bijgesneden op de inhoud). Gebruik het bestand altijd ongewijzigd; nooit nabouwen.
 
