@@ -38,7 +38,7 @@ body {
 
 header.site { padding: 1.75rem 0 0.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 header.site a.naam { display: block; line-height: 0; }
-header.site a.naam img { display: block; height: 48px; width: auto; }
+header.site a.naam img { display: block; height: 68px; width: auto; }
 nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; }
 nav a:hover, nav a[aria-current] { text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 
@@ -101,12 +101,15 @@ footer.site a { color: inherit; }
   color: var(--inkt);
   margin: 1.5rem 0;
 }
-.prose .uitgelicht .markeer {
-  /* met de hand: een wiebelige, naadloos herhalende tegel (public/markeer.svg), geen vlakke gradiënt */
+/* de markeerstift: met de hand, één doorlopende streep (public/markeer.svg) die over de hele
+   regel wordt uitgerekt, geen herhalende tegel. Herhalen oogde als losse dabs per woord, echt
+   arceren is één beweging. Herbruikbaar: de uitgelichte quote in artikelen, en de titel op de
+   homepage. */
+.markeer {
   background-image: url('/markeer.svg');
-  background-repeat: repeat-x;
-  background-position: 0 62%;
-  background-size: 62px 72%;
+  background-repeat: no-repeat;
+  background-position: center 62%;
+  background-size: 100% 72%;
   padding: 0 0.15em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -119,11 +122,6 @@ footer.site a { color: inherit; }
 .lijst .omschrijving { color: var(--inkt); margin: 0.15rem 0 0.2rem; }
 .ondertitel-artikel { font-size: 1.15rem; line-height: 1.45; color: var(--gedempt); margin: 0 0 0.9rem; }
 
-/* callout: een uitgelichte gedachte, geen citaat. Volledig kader zoals het aanmeldblok, geen
-   linker lijn (dat is de blockquote-vorm en die is hier niet bedoeld). Geen accentkleur, geen tekening. */
-.callout {
-  margin: 1.6rem 0;
-  padding: 1.1rem 1.3rem;
-  border: 1px solid var(--zand);
-}
-.callout p { margin: 0; color: var(--inkt); }
+/* h1 met markeerstift: zie .markeer hierboven. Iets grotere achtergrondband, want de titel is
+   groter dan de uitgelichte quote in artikelen. */
+h1 .markeer { background-size: 100% 60%; background-position: center 66%; }

@@ -38,7 +38,7 @@ Het RAY-logo (gele blokletters, een handtekening in pen erdoorheen, "Raymond Klo
 
 Bewaard in de vault: `projecten/Website raymondklompsma.nl/logo/ray-logo.jpg` (oud, op wit) en `ray-logo-transparant.png` (huidig, transparant, bijgesneden op de inhoud). Gebruik het bestand altijd ongewijzigd; nooit nabouwen.
 
-**Nog open:** het logo staat nu alleen in de header. Favicon (nu nog de losse zon-tekening) en het deelplaatje (nu nog Caveat-tekst) gebruiken het logo nog niet. Op kleine schermen kan de header wat drukker ogen door de vaste breedte van het logo; nog niet apart getest op mobiel.
+**Nog open:** het logo staat nu alleen in de header, op 68px hoogte (was 48px: te klein om te lezen). Bronbestand is de officiële `ray-logo-bijgesneden.png` uit het Claude Design-systeem. Favicon (nu nog de losse zon-tekening) en het deelplaatje (nu nog Caveat-tekst) gebruiken het logo nog niet. Op kleine schermen kan de header wat drukker ogen door de vaste breedte van het logo; nog niet apart getest op mobiel. Er bestaat ook een lichte variant (`ray-logo-licht.png`) voor een donkere ondergrond, nu niet gebruikt want de site is alleen licht.
 
 ## Tekenstijl
 
@@ -53,9 +53,15 @@ Getekende lijnen die met opzet niet kloppen. De wiebelige zon uit het onbevangen
 - **Per artikel kiezen:** met `tekening: deur` in de frontmatter. Zonder keuze krijgt een artikel geen tekening en een zon in het deelplaatje.
 - **Een echte hand is beter.** Deze tekeningen zijn gegenereerd. Zodra Raymond of een illustrator ze zelf tekent, vervangen die de gegenereerde.
 
-## Uitgelichte quote (markeerstift)
+## Markeerstift (`.markeer`)
 
-Eén handgeschreven zin per artikel, in Markdown geschreven als `> [!quote] tekst` en bij publicatie omgezet naar `<aside class="uitgelicht"><span class="markeer">tekst</span></aside>`. De `.markeer`-span geeft de gele highlighter-streep achter de tekst (een `linear-gradient`, met `box-decoration-break: clone` zodat elke regel apart wordt gemarkeerd bij meerdere regels). **Vergeet de binnenste `<span class="markeer">` niet** bij het schrijven van een nieuw artikel, anders blijft de tekst zonder markering.
+Herbruikbare klasse voor "met de hand gearceerd": een gele achtergrond uit `public/markeer.svg`, één doorlopende streep die met `background-size: 100% ...` over de hele regel wordt uitgerekt, met `box-decoration-break: clone` zodat elke regel apart wordt gearceerd bij meerdere regels. Nooit een herhalende tegel (`repeat-x`): dat oogde als losse dabs per woord, geen echte streep.
+
+**Gebruikt op twee plekken:**
+1. **Uitgelichte quote in een artikel:** in Markdown geschreven als `> [!quote] tekst`, bij publicatie omgezet naar `<aside class="uitgelicht"><span class="markeer">tekst</span></aside>`. **Vergeet de binnenste `<span class="markeer">` niet** bij het schrijven van een nieuw artikel.
+2. **De titel op de homepage:** `<h1><span class="markeer">Wat als het wel kan?</span></h1>`. De regel `h1 .markeer` in `global.css` geeft een iets andere achtergrondmaat, want de titel is groter dan de uitgelichte quote.
+
+**Er is geen apart callout-blok.** Eerdere versie had een homepage-intro in een kader (zoals het aanmeldblok) of met een linker lijn (blockquote-vorm); beide voelden als citaat, niet als eigen gedachte. De oplossing: gewone lopende tekst, geen kader, en de titel zelf gearceerd in plaats van een apart tekstblok.
 
 ## Componenten (`src/components/`)
 

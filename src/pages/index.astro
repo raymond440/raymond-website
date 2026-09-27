@@ -7,10 +7,8 @@ import { artikelen, CONTACT_EMAIL } from '../site';
 const recent = (await artikelen()).slice(0, 5);
 ---
 <Basis>
-  <h1>Wat als het wel kan?</h1>
-  <aside class="callout">
-    <p>Die vraag stel ik mezelf al zolang ik me kan herinneren. In bedrijven die ik bouwde, in hoe ik vader ben, in wat ik van mezelf leer. Ik noem het onbevangen: beginnen voor je het zeker weet.</p>
-  </aside>
+  <h1><span class="markeer">Wat als het wel kan?</span></h1>
+  <p>Die vraag stel ik mezelf al zolang ik me kan herinneren. In bedrijven die ik bouwde, in hoe ik vader ben, in wat ik van mezelf leer. Ik noem het onbevangen: beginnen voor je het zeker weet.</p>
   <p>Hier schrijf ik op wat ik onderweg tegenkom. Soms ging het goed, soms ging het mis, en ook daarover schrijf ik. <a href={`mailto:${CONTACT_EMAIL}`}>Reageren</a> kan altijd, ik lees alles en antwoord zelf.</p>
 
   <h2 class="kop-groot">Laatste artikelen</h2>
