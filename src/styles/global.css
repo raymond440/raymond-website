@@ -1,4 +1,4 @@
-/* Designsysteem, afgeleid van The Hoxton: crème, warm bruin, zand, één koraalaccent. Alleen licht. */
+/* Designsysteem "Raymond Klompsma", vastgelegd in Claude Design (design-system.json v3, sept 2026). */
 :root {
   --creme: #fef9f3;
   --inkt: #3f3b39;
@@ -6,15 +6,18 @@
   --koraal: #ff9272;
   --koraal-inkt: #531b0b;
   --gedempt: #7a736d;
+  --geel: #fbd700; /* merkgeel uit het RAY-logo: logo, vulling van de zon, markeerstift. Nooit als tekstkleur. */
+  --pen: #030406; /* de pennenstreek van de handtekening in het logo; op creme gebruik je inkt, niet pen */
 
-  --serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+  --serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: Avenir, 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
-  --speels: 'Caveat Brush', 'Comic Sans MS', cursive;
+  --speels: 'Caveat', 'Comic Sans MS', cursive; /* dunne pen, zoals de handtekening in het logo. Geen Caveat Brush meer. */
 
   --maat: 38rem;
 }
 * { box-sizing: border-box; border-radius: 0; }
 html { font-size: 19px; }
+:where(a, button, input):focus-visible { outline: 2px solid var(--inkt); outline-offset: 2px; }
 body {
   margin: 0;
   background: var(--creme);
@@ -34,9 +37,9 @@ body {
 }
 
 header.site { padding: 1.75rem 0 0.5rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-header.site a.naam { font-family: var(--speels); font-size: 1.6rem; color: var(--inkt); text-decoration: none; }
-nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; opacity: 0.7; }
-nav a:hover, nav a[aria-current] { opacity: 1; }
+header.site a.naam { font-family: var(--speels); font-weight: 500; font-size: 35px; line-height: 50px; color: var(--inkt); text-decoration: none; }
+nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; }
+nav a:hover, nav a[aria-current] { text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 
 main { padding: 3rem 0 3rem; }
 h1 { font-size: 2.2rem; line-height: 1.15; font-weight: 500; margin: 0 0 1rem; letter-spacing: -0.01em; }
@@ -50,14 +53,14 @@ hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
 
 .lijst { list-style: none; padding: 0; margin: 0; }
 .lijst li { padding: 0.7rem 0; }
-.lijst a.titel { font-size: 1.25rem; text-decoration: none; }
-.lijst a.titel:hover { text-decoration: underline; text-decoration-color: var(--zand); }
+.lijst a.titel { font-size: 23.8px; line-height: 39px; text-decoration: none; }
+.lijst a.titel:hover { text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 .lijst p { margin: 0.25rem 0 0; }
 
 .inschrijven { position: relative; margin: 2.5rem 0; padding: 1.5rem; border: 1px solid var(--zand); }
 .inschrijf-tekening { position: absolute; top: 0.2rem; right: 0.6rem; line-height: 0; }
 .inschrijven h2, .inschrijven > p:first-of-type { padding-right: 6rem; }
-.inschrijven h2 { margin: 0 0 0.4rem; font-family: var(--speels); font-size: 1.7rem; font-weight: 400; }
+.inschrijven h2 { margin: 0 0 0.4rem; font-family: var(--speels); font-weight: 500; font-size: 37px; line-height: 53px; }
 .inschrijven p { color: var(--gedempt); }
 .inschrijven form { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
 .inschrijven input[type=email] {
@@ -87,13 +90,21 @@ footer.site a { color: inherit; }
 .reageren { margin: 2.5rem 0 0; }
 .pagina-kop { margin-bottom: 0.25rem; }
 
-/* uitgelichte quote tussen de alinea's */
+/* uitgelichte quote tussen de alinea's: één handgeschreven zin op een gele markeerstift */
 .prose .uitgelicht {
   display: block;
   font-family: var(--speels);
-  font-size: 1.9rem;
-  line-height: 1.25;
-  margin: 2.6rem 0;
+  font-weight: 500;
+  font-size: 41px;
+  line-height: 52px;
+  color: var(--inkt);
+  margin: 1.5rem 0;
+}
+.prose .uitgelicht .markeer {
+  background: linear-gradient(transparent 30%, var(--geel) 30%, var(--geel) 92%, transparent 92%);
+  padding: 0 0.15em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .kop-groot { font-size: 1.9rem; line-height: 1.2; font-weight: 500; margin: 3rem 0 0.3rem; letter-spacing: -0.01em; }

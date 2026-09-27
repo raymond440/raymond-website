@@ -12,7 +12,7 @@ Ik dacht dat ik niet genoeg deed, dus deed ik meer. Harder werken, meer uren, é
 
 Het begon op het schoolplein. Ik werd niet gekozen, en ergens onderweg besloot ik dat ik hard moest werken om erbij te mogen horen. Dat besluit groeide met me mee. Het werd een schil, en die schil kreeg een stem die van alles een prestatie maakte. Zelfs ontspannen. Zelfs loslaten deed ik in de moet-stand.
 
-<aside class="uitgelicht">Ik werkte aan het probleem dat ik kón oplossen, zodat ik het andere niet hoefde te voelen.</aside>
+<aside class="uitgelicht"><span class="markeer">Ik werkte aan het probleem dat ik kón oplossen, zodat ik het andere niet hoefde te voelen.</span></aside>
 
 Jarenlang probeerde ik die stem te verslaan. Mijn coach zei het al lang geleden: een stem die je bevecht gaat harder roepen. Hij had gelijk. Wat uiteindelijk werkte was eenvoudiger dan vechten. Ik begon te kijken.
 

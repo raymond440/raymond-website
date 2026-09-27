@@ -51,11 +51,14 @@ export function delen(naam: Naam): Deel[] {
 }
 
 // hex=true: vaste kleuren, voor losse bestanden (png, svg). Anders CSS-variabelen van de site.
+// De zon vult in geel (het merkgeel van het RAY-logo), de andere tekeningen blijven koraal.
 export function svgInhoud(naam: Naam, hex = false): string {
   const inkt = hex ? '#3f3b39' : 'var(--inkt)';
   const koraal = hex ? '#ff9272' : 'var(--koraal)';
+  const geel = hex ? '#fbd700' : 'var(--geel)';
+  const vulKleur = naam === 'zon' ? geel : koraal;
   const d = delen(naam);
-  const vullingen = d.filter((x) => x.vul).map((x) => `<path d="${x.d}" fill="${koraal}" stroke="none" transform="translate(4 3)"/>`);
+  const vullingen = d.filter((x) => x.vul).map((x) => `<path d="${x.d}" fill="${vulKleur}" stroke="none" transform="translate(4 3)"/>`);
   const lijnen = d.filter((x) => !x.vul).map((x) => `<path d="${x.d}" stroke="${inkt}" stroke-width="3.2"/>`);
   return `<g fill="none" stroke-linecap="round" stroke-linejoin="round">${vullingen.join('')}${lijnen.join('')}</g>`;
 }

@@ -16,7 +16,7 @@ Maar het andere uiterste klopt net zo min. Er zijn mensen die alles meekregen en
 
 Een derde is wél van jou, en het is precies het derde waar het op aankomt. Zonder inzet blijven talent en geluk liggen, ongebruikt.
 
-<aside class="uitgelicht">De wieg opent de deur. Lopen moet je zelf.</aside>
+<aside class="uitgelicht"><span class="markeer">De wieg opent de deur. Lopen moet je zelf.</span></aside>
 
 Neem mijn eigen leven. Het zit er allemaal in.
 

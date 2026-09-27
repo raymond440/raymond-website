@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { artikelen } from '../../site';
 import { svgInhoud, type Naam } from '../../lib/tekeningen';
 
-const fontPad = 'node_modules/@fontsource/caveat-brush/files/caveat-brush-latin-400-normal.woff';
+const fontPad = 'node_modules/@fontsource/caveat/files/caveat-latin-500-normal.woff';
 const buf = readFileSync(fontPad);
 const font = opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer);
 
