@@ -12,11 +12,12 @@
   --serif: 'Newsreader Variable', 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: Avenir, 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
   --speels: 'Caveat', 'Comic Sans MS', cursive; /* dunne pen, zoals de handtekening in het logo. Geen Caveat Brush meer. */
+  --display: 'Fraunces Variable', 'Fraunces', 'Newsreader Variable', Georgia, serif; /* warm en scheef, zoals de met de hand gesneden letters van het logo. Alleen koppen, nooit lopende tekst. */
 
   --maat: 38rem;
 }
 * { box-sizing: border-box; border-radius: 0; }
-html { font-size: 19px; }
+html { font-size: 20px; } /* was 19px */
 :where(a, button, input):focus-visible { outline: 2px solid var(--inkt); outline-offset: 2px; }
 body {
   margin: 0;
@@ -28,11 +29,17 @@ body {
 }
 .wrap { max-width: var(--maat); margin: 0 auto; padding: 0 1.25rem; }
 
-/* labels: klein, sans, hoofdletters */
+/* koppen: Fraunces, met de assen zacht (SOFT 100) en eigenwijs (WONK 1) aan */
+h1, .kop-groot, .lijst a.titel {
+  font-family: var(--display);
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
+}
+
+/* labels: klein, sans, hoofdletters. Vaste px, los van de root-lettergrootte. */
 .label, nav a, .meta, .concept, footer.site, .inschrijven button {
   font-family: var(--sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.09em;
+  font-size: 13.68px;
+  letter-spacing: 1.2312px;
   text-transform: uppercase;
 }
 
@@ -43,7 +50,7 @@ nav a { margin-left: 1.25rem; color: var(--inkt); text-decoration: none; }
 nav a:hover, nav a[aria-current] { text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 
 main { padding: 3rem 0 3rem; }
-h1 { font-size: 2.2rem; line-height: 1.15; font-weight: 500; margin: 0 0 1rem; letter-spacing: -0.01em; }
+h1 { font-size: 44px; line-height: 50px; font-weight: 500; margin: 0 0 1rem; letter-spacing: -0.44px; }
 h2 { font-size: 1.3rem; font-weight: 500; margin: 2.5rem 0 0.5rem; }
 p { margin: 0 0 1.1rem; }
 a { color: inherit; text-decoration: underline; text-decoration-color: var(--zand); text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
@@ -54,7 +61,7 @@ hr { border: 0; border-top: 1px solid var(--zand); margin: 2rem 0; }
 
 .lijst { list-style: none; padding: 0; margin: 0; }
 .lijst li { padding: 0.7rem 0; }
-.lijst a.titel { font-size: 23.8px; line-height: 39px; text-decoration: none; }
+.lijst a.titel { font-size: 25px; line-height: 36px; text-decoration: none; }
 .lijst a.titel:hover { text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 .lijst p { margin: 0.25rem 0 0; }
 
@@ -115,12 +122,12 @@ footer.site a { color: inherit; }
   box-decoration-break: clone;
 }
 
-.kop-groot { font-size: 1.9rem; line-height: 1.2; font-weight: 500; margin: 3rem 0 0.3rem; letter-spacing: -0.01em; }
+.kop-groot { font-size: 38px; line-height: 44px; font-weight: 500; margin: 3rem 0 0.3rem; letter-spacing: -0.38px; }
 .ondertitel { color: var(--gedempt); margin: 0 0 0.9rem; }
 
 /* concrete ondertitel: wat het stuk is, onder een poëtische titel */
 .lijst .omschrijving { color: var(--inkt); margin: 0.15rem 0 0.2rem; }
-.ondertitel-artikel { font-size: 1.15rem; line-height: 1.45; color: var(--gedempt); margin: 0 0 0.9rem; }
+.ondertitel-artikel { font-size: 23px; line-height: 35px; color: var(--gedempt); margin: 0 0 0.9rem; }
 
 /* h1 met markeerstift: zie .markeer hierboven. Iets grotere achtergrondband, want de titel is
    groter dan de uitgelichte quote in artikelen. */

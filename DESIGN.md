@@ -14,11 +14,12 @@ Bron: het design system "Raymond Klompsma" in Claude Design (design-system.json 
 | `--gedempt` | `#7a736d` | datum, ondertitels, voettekst. Haalt 4.46:1 op creme: niet onder 19px gebruiken, behalve in hoofdletter-labels |
 | `--geel` | `#fbd700` | merkgeel uit het RAY-logo: logo, vulling van de zon-tekening, markeerstift achter een uitgelichte zin. Nooit als tekstkleur op licht |
 | `--pen` | `#030406` | de pennenstreek van de handtekening in het logo. Op creme gebruik je inkt, niet pen |
-| `--serif` | Newsreader Variable, Newsreader | artikeltekst, koppen |
+| `--serif` | Newsreader Variable, Newsreader | lopende tekst en intro (niet meer koppen) |
+| `--display` | Fraunces Variable, Fraunces | koppen: titel, kop, artikeltitel. Met `font-variation-settings: 'SOFT' 100, 'WONK' 1`, zodat de letter zacht en een beetje eigenwijs wordt |
 | `--sans` | Avenir, Helvetica Neue, Arial | labels, navigatie, knoppen |
 | `--speels` | Caveat (gewicht 500) | supporting font, de hand van Raymond. Geen Caveat Brush meer: die was te dik, Caveat is de dunne pen die bij de handtekening in het logo past |
 
-Typografische maten komen letterlijk uit het bronsysteem (`type.groups` in `tokens.json`): titel 41.8px/48px, kop 36.1px/43px, artikeltitel 23.8px/39px, intro (ondertitel) 21.9px/34px, tekst 19px/1.65, labels 13.68px met 1.2312px letterspatiëring, naam 35px/50px, handkop 37px/53px, uitgelicht 41px/52px, alle laatste drie in Caveat 500.
+**Basis-lettergrootte is 20px** (was 19px). Typografische maten komen letterlijk uit het bronsysteem (`type.groups` in `tokens.json`, versie 3): titel 44px/50px (Fraunces), kop 38px/44px (Fraunces), artikeltitel 25px/36px (Fraunces), intro (ondertitel) 23px/35px (Newsreader), tekst 20px/1.65 (Newsreader), labels 13.68px met 1.2312px letterspatiëring (vaste px, los van de root-lettergrootte), naam 35px/50px, handkop 37px/53px, uitgelicht 41px/52px (laatste drie in Caveat 500, ongewijzigd).
 
 ## Regels
 
