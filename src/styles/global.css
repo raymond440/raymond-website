@@ -102,3 +102,11 @@ footer.site a { color: inherit; }
 /* concrete ondertitel: wat het stuk is, onder een poëtische titel */
 .lijst .omschrijving { color: var(--inkt); margin: 0.15rem 0 0.2rem; }
 .ondertitel-artikel { font-size: 1.15rem; line-height: 1.45; color: var(--gedempt); margin: 0 0 0.9rem; }
+
+/* callout: een uitgelichte gedachte, geen advertentie. Geen accentkleur, geen tekening. */
+.callout {
+  margin: 1.6rem 0;
+  padding: 1.1rem 1.3rem;
+  border-left: 3px solid var(--zand);
+}
+.callout p { margin: 0; color: var(--inkt); }

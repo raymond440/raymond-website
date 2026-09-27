@@ -5,7 +5,7 @@ export async function GET(context) {
   const lijst = await artikelen();
   return rss({
     title: 'Raymond Klompsma',
-    description: 'Iedereen zegt dat het niet kan. Ik schrijf over wat ik deed en wat ervan kwam.',
+    description: 'Wat als het wel kan? Ik schrijf over ondernemen, opvoeden en zichzelf leren kennen.',
     site: context.site,
     items: lijst.map((a) => ({
       title: a.data.titel,
