@@ -102,7 +102,11 @@ footer.site a { color: inherit; }
   margin: 1.5rem 0;
 }
 .prose .uitgelicht .markeer {
-  background: linear-gradient(transparent 30%, var(--geel) 30%, var(--geel) 92%, transparent 92%);
+  /* met de hand: een wiebelige, naadloos herhalende tegel (public/markeer.svg), geen vlakke gradiënt */
+  background-image: url('/markeer.svg');
+  background-repeat: repeat-x;
+  background-position: 0 62%;
+  background-size: 62px 72%;
   padding: 0 0.15em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -115,10 +119,11 @@ footer.site a { color: inherit; }
 .lijst .omschrijving { color: var(--inkt); margin: 0.15rem 0 0.2rem; }
 .ondertitel-artikel { font-size: 1.15rem; line-height: 1.45; color: var(--gedempt); margin: 0 0 0.9rem; }
 
-/* callout: een uitgelichte gedachte, geen advertentie. Geen accentkleur, geen tekening. */
+/* callout: een uitgelichte gedachte, geen citaat. Volledig kader zoals het aanmeldblok, geen
+   linker lijn (dat is de blockquote-vorm en die is hier niet bedoeld). Geen accentkleur, geen tekening. */
 .callout {
   margin: 1.6rem 0;
   padding: 1.1rem 1.3rem;
-  border-left: 3px solid var(--zand);
+  border: 1px solid var(--zand);
 }
 .callout p { margin: 0; color: var(--inkt); }
