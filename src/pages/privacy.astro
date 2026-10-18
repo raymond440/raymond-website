@@ -1,0 +1,31 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { CONTACT_EMAIL } from '../site';
+---
+<Basis titel="Privacy" beschrijving="Wat Hedwig, mijn eigen mailprogramma, doet met mijn Google-gegevens.">
+  <h1>Privacy.</h1>
+  <div class="prose">
+    <p>Deze pagina hoort bij Hedwig. Hedwig is een programma dat ik voor mezelf bouwde om mijn mail en agenda te doen. Het is niet voor anderen. Ik ben de enige gebruiker.</p>
+
+    <h2>Welke gegevens</h2>
+    <p>Hedwig krijgt via Google toegang tot twee van mijn eigen accounts: raymond@klompsma.nl en raymond@opreis.nl. Het leest mijn mail, maakt concepten aan, archiveert en labelt berichten. Het leest mijn agenda en zet er afspraken in. Meer toegang vraagt het niet.</p>
+
+    <h2>Waar het blijft</h2>
+    <p>Hedwig draait op mijn eigen computer. De toegangssleutels en de gegevens die het onthoudt staan daar, in een database die niemand anders kan openen. Er is geen server van mij waar mail of agenda naartoe gaat.</p>
+
+    <h2>Wat het deelt</h2>
+    <p>Niets met derden voor reclame, handel of analyse. Ik verkoop geen gegevens en niemand kijkt mee. Om een antwoord in mijn stijl te schrijven stuurt Hedwig de tekst van die ene mail naar Claude van Anthropic. Dat gebeurt alleen als ik erom vraag. Taken zet het in Todoist, en websites die ik wil lezen haalt het op. Meer verlaat de computer niet.</p>
+
+    <h2>Verzenden</h2>
+    <p>Hedwig verstuurt zelf nooit mail. Antwoorden komen als concept in Gmail te staan. Ik lees ze en verstuur ze zelf.</p>
+
+    <h2>Google-gegevens</h2>
+    <p>Het gebruik van gegevens die Hedwig van Google ontvangt voldoet aan het Limited Use-beleid van Google, ook waar het gaat om het inzetten van die gegevens voor AI. Ik gebruik ze alleen om Hedwig voor mezelf te laten werken.</p>
+
+    <h2>Intrekken en wissen</h2>
+    <p>Ik kan de toegang op elk moment intrekken in mijn Google-account onder Beveiliging. Door de map van Hedwig te verwijderen verdwijnt alles wat het onthield.</p>
+
+    <h2>Vragen</h2>
+    <p>Mail me: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Ik antwoord zelf.</p>
+  </div>
+</Basis>
