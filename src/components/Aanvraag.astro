@@ -18,7 +18,7 @@ interface Props {
 }
 const { soort, kop, intro, knop, velden } = Astro.props;
 const id = `aanvraag-${soort}`;
-const api = import.meta.env.PUBLIC_AANVRAAG_API === '1'; // pas aan zodra de Worker en Email Routing staan
+const api = true; // Worker en Email Routing staan (zie worker/)
 const mailAan = CONTACT_EMAIL;
 ---
 <section class="aanvraag" id="aanvraag" aria-labelledby={`${id}-kop`} data-soort={soort} data-api={api ? '1' : '0'} data-mail={mailAan}>
