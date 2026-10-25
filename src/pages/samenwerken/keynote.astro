@@ -1,0 +1,93 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Foto from '../../components/Foto.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import Aanvraag from '../../components/Aanvraag.astro';
+import podium from '../../assets/keynote/podium.jpg';
+import openHanden from '../../assets/keynote/open-handen.jpg';
+import handenPols from '../../assets/keynote/handen-pols.jpg';
+import wijzend from '../../assets/keynote/wijzende-vinger.jpg';
+import clicker from '../../assets/keynote/clicker.jpg';
+import achteren from '../../assets/keynote/achteren-zaal.jpg';
+import openZaal from '../../assets/keynote/open-handen-zaal.jpg';
+import banner from '../../assets/keynote/banner.jpg';
+
+const reviews = [
+  {
+    tekst: 'Meestal weet je binnen twee minuten of je zit te luisteren naar een goede spreker. Fantastische sprekers weten dit gevoel nog 45 minuten vast te houden. En dat doet Raymond. Hij is een geboren storyteller.',
+    wie: 'Aljan de Boer, Head of Inspiration, tweevoudig winnaar Best of MIE',
+  },
+  {
+    tekst: 'Indrukwekkend, verfrissend en knap hoe hij zich presenteert, ook aan een corporate als Schneider Electric. Onze mensen waren zeer onder de indruk en we hebben echt een duwtje in de juiste richting gekregen.',
+    wie: 'John Coppens, Sales Excellence Leader, Schneider Electric',
+  },
+  {
+    tekst: 'Raymond pakt. Dat gaat verder dan het platgetreden passie. Raymond pakt je op, neemt je mee in zijn verhaal en pakt je in. Feestje voor het publiek, feestje voor hemzelf, feestje voor de organisator.',
+    wie: 'Stephan van Sloten, Altuition',
+  },
+];
+---
+<Basis titel="Keynote" beschrijving="Een keynote van 40 tot 45 minuten over één vraag: wat zou er gebeuren als je je gasten behandelt alsof het je vrienden zijn?" actief="samenwerken" ogId="keynote">
+  <main class="pagina samen">
+    <Kruimel items={[{ label: 'Samenwerken', href: '/samenwerken/' }, { label: 'Keynote' }]} />
+    <section class="keynote" aria-labelledby="key-kop">
+      <Foto src={podium} laden="eager" alt="Raymond op het podium tijdens de keynote op de Inspiratiedag van Toerisme Oost-Vlaanderen, met de zaal op de voorgrond." bijschrift="Inspiratiedag in Oost-Vlaanderen, oktober 2026." />
+      <p class="label">Keynote</p>
+      <h1 id="key-kop">Ik vertel graag een verhaal.</h1>
+      <p>Ik sta al meer dan tien jaar op podia. Op congressen, bij sales kick-offs, op inspiratiedagen en in de kantine van een bedrijf. Groot of klein, het maakt me niet uit. Ik vind het gewoon heel leuk om te doen.</p>
+      <p>Mijn verhaal gaat over één vraag: wat zou er gebeuren als je je gasten behandelt alsof het je vrienden zijn? Je klanten, je bezoekers, je medewerkers. Bij vrienden is het vanzelfsprekend. Je geeft om ze, je bent eerlijk, je doet dingen samen en je vertrouwt ze. Waarom zou dat bij gasten anders zijn?</p>
+
+      <h3>Waar het over gaat.</h3>
+      <Foto src={openHanden} variant="rechts" alt="Raymond legt met open handen iets uit aan de zaal." bijschrift="Wat je maakt, maal hoe je je gasten behandelt." sizes="(min-width: 700px) 350px, 100vw" />
+      <p>Ik heb er een formule voor. Wat het oplevert, is wat je maakt maal hoe je je gasten behandelt. Het is een vermenigvuldiging. Is een van de twee nul, dan is alles nul.</p>
+      <aside class="uitgelicht"><span class="markeer">Behandel je gasten als vrienden.</span></aside>
+      <p>Dus maak het beste wat je te bieden hebt, en behandel de mensen die ervoor komen als vrienden. Met verhalen uit mijn eigen bedrijven, srprs.me en Hotel Wonderland, en van anderen. Over een meisje dat niet stil kon zitten. Over een opengeslagen bed met een sprookje erop. Over het eerste kopje koffie.</p>
+      <p>Het mooiste is dat het meeste bijna niets kost. Bij al mijn bedrijven kwam meer dan de helft van de klanten via mond-tot-mondreclame. Niet omdat ik dat najoeg, maar omdat ik dit deed. En eronder ligt wat ik in alles probeer: onbevangenheid terugbrengen in de wereld.</p>
+
+      <div class="collage">
+        <Foto src={handenPols} variant="mini" draai="-2.5deg" alt="Raymond met zijn handen op zijn pols." bijschrift="Even wachten." sizes="(min-width: 700px) 230px, 50vw" />
+        <Foto src={wijzend} variant="mini" draai="1.8deg" alt="Raymond wijst en kijkt opzij." bijschrift="En toen." sizes="(min-width: 700px) 230px, 50vw" />
+        <Foto src={clicker} variant="mini" draai="-1.2deg" alt="Raymond houdt de clicker omhoog." bijschrift="Eén vraag." sizes="(min-width: 700px) 230px, 50vw" />
+      </div>
+
+      <h3>Voor wie.</h3>
+      <p>Voor iedereen die mensen ontvangt. Toerisme en gastvrijheid, retail, dienstverlening, marketing en klantbeleving. Maar ook voor een team dat weer wil weten waarom het doet wat het doet. Ik pas het verhaal aan op de zaal. Zitten er burgemeesters, gidsen en B&amp;B-houders, dan gaan de voorbeelden daarover. Zit er een salesteam van een technisch bedrijf, dan ook.</p>
+
+      <h3>Wat anderen zeggen.</h3>
+      <div class="reviews">
+        {reviews.map((r) => (
+          <blockquote class="review"><p>{r.tekst}</p><footer>{r.wie}</footer></blockquote>
+        ))}
+      </div>
+
+      <h3>Praktisch.</h3>
+      <ul class="praktisch">
+        <li>Een keynote van ongeveer 40 tot 45 minuten, met tijd voor vragen.</li>
+        <li>In het Nederlands.</li>
+        <li>Ik kom graag vooraf kennismaken, zodat het verhaal past bij jouw zaal.</li>
+      </ul>
+
+      <div class="collage">
+        <Foto src={achteren} variant="mini" draai="1.6deg" alt="Raymond van achteren gezien, met de zaal voor hem." bijschrift="De zaal." sizes="(min-width: 700px) 230px, 50vw" />
+        <Foto src={openZaal} variant="mini" draai="-2deg" alt="Raymond met open handen naar de zaal." bijschrift="Samen." sizes="(min-width: 700px) 230px, 50vw" />
+        <Foto src={banner} variant="mini" draai="2.4deg" alt="Raymond loopt naar voren, naast de banner." bijschrift="Naar voren." sizes="(min-width: 700px) 230px, 50vw" />
+      </div>
+
+      <p class="naar-ode"><span class="label">Waar het vandaan komt</span><a href="/onbevangen/">Het verhaal onder de keynote staat in de ode aan onbevangenheid.</a></p>
+
+      <Aanvraag
+        soort="keynote"
+        kop="Zullen we het erover hebben?"
+        intro="Vertel me over je event en wie er in de zaal zit. Ik antwoord zelf."
+        knop="Vraag een keynote aan"
+        velden={[
+          { naam: 'naam', label: 'Je naam', verplicht: true, autocomplete: 'name' },
+          { naam: 'mail', label: 'E-mail', type: 'email', verplicht: true, autocomplete: 'email' },
+          { naam: 'organisatie', label: 'Organisatie', autocomplete: 'organization' },
+          { naam: 'wanneer', label: 'Wanneer, ongeveer', placeholder: 'Bijvoorbeeld maart 2027' },
+          { naam: 'bericht', label: 'Over je event', type: 'textarea', verplicht: true, breed: true, placeholder: 'Wat voor event is het, en wie zit er in de zaal?' },
+        ]}
+      />
+    </section>
+  </main>
+</Basis>

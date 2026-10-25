@@ -1,0 +1,78 @@
+---
+interface Veld {
+  naam: string;
+  label: string;
+  type?: 'text' | 'email' | 'textarea';
+  verplicht?: boolean;
+  breed?: boolean;
+  placeholder?: string;
+  autocomplete?: string;
+}
+interface Props {
+  soort: 'keynote' | 'mentor' | 'stip';
+  kop: string;
+  intro: string;
+  knop: string;
+  velden: Veld[];
+}
+const { soort, kop, intro, knop, velden } = Astro.props;
+const id = `aanvraag-${soort}`;
+---
+<section class="aanvraag" id="aanvraag" aria-labelledby={`${id}-kop`} data-soort={soort}>
+  <h3 id={`${id}-kop`}>{kop}</h3>
+  <p>{intro}</p>
+  <form class="aanvraag-form" method="post" action="/api/aanvraag" novalidate={false}>
+    <input type="hidden" name="soort" value={soort} />
+    {velden.map((v) => (
+      <div class:list={['veld', { breed: v.breed }]}>
+        <label for={`${id}-${v.naam}`}>{v.label}</label>
+        {v.type === 'textarea' ? (
+          <textarea id={`${id}-${v.naam}`} name={v.naam} rows="4" placeholder={v.placeholder} required={v.verplicht} />
+        ) : (
+          <input
+            id={`${id}-${v.naam}`}
+            name={v.naam}
+            type={v.type ?? 'text'}
+            placeholder={v.placeholder}
+            autocomplete={v.autocomplete}
+            required={v.verplicht}
+          />
+        )}
+      </div>
+    ))}
+    <div class="vh" aria-hidden="true">
+      <label for={`${id}-website`}>Laat dit veld leeg</label>
+      <input id={`${id}-website`} name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <button type="submit">{knop}</button>
+  </form>
+  <p class="klaar" role="status" aria-live="polite" hidden></p>
+  <p class="fout" role="alert" hidden></p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.aanvraag').forEach((blok) => {
+    const form = blok.querySelector('form')!;
+    const klaar = blok.querySelector<HTMLElement>('.klaar')!;
+    const fout = blok.querySelector<HTMLElement>('.fout')!;
+    const knop = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      fout.hidden = true;
+      knop.disabled = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        klaar.textContent = 'Dank je. Je bericht is bij me aangekomen. Ik antwoord zelf, meestal binnen een paar dagen.';
+        klaar.hidden = false;
+        (window as any).posthog?.capture('aanvraag_verstuurd', { soort: blok.dataset.soort });
+      } catch {
+        fout.textContent = 'Het versturen lukte niet. Mail me gerust rechtstreeks: hey-raymond@klompsma.nl.';
+        fout.hidden = false;
+        knop.disabled = false;
+      }
+    });
+  });
+</script>

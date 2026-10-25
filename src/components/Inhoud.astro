@@ -1,0 +1,107 @@
+---
+// Klikbare inhoudsopgave die meeloopt: links naast de ode, en bij een artikel met subtitels.
+// Op een smal scherm klapt hij in tot een knop met het huidige onderdeel.
+export interface Item {
+  id: string;
+  titel: string;
+  nr?: number;
+  aantal?: number; // aantal aftakkende artikelen
+  kinderen?: Item[];
+}
+interface Props {
+  items: Item[];
+  beginLabel: string; // wat de knop toont zolang je nog boven het eerste onderdeel zit
+  eersteActief?: boolean; // het eerste item geldt als actief zolang er niets anders is
+  legenda?: boolean;
+}
+const { items, beginLabel, eersteActief = false, legenda = false } = Astro.props;
+---
+<aside class="toc" aria-label="Inhoud" data-begin={beginLabel} data-eerste={eersteActief ? '1' : undefined}>
+  <p class="toc-kop">Inhoud</p>
+  <button class="toc-knop" type="button" aria-expanded="false" aria-controls="toc-lijst">
+    <span>Inhoud</span><span class="nu">{beginLabel}</span>
+  </button>
+  <div class="toc-lijst" id="toc-lijst">
+    <ol>
+      {items.map((d) => (
+        <li class="toc-deel">
+          <a href={`#${d.id}`} data-id={d.id}>
+            {d.nr !== undefined ? <span class="toc-nr">{d.nr}</span> : eersteActief && <span class="toc-nr"></span>}{d.titel}
+            {d.aantal ? <span class="tak-stip" title="Hier gaat een artikel op verder">{d.aantal}</span> : null}
+          </a>
+          {d.kinderen && d.kinderen.length > 0 && (
+            <ul>
+              {d.kinderen.map((k) => (
+                <li>
+                  <a href={`#${k.id}`} data-id={k.id}>
+                    {k.titel}
+                    {k.aantal ? <span class="tak-stip" title="Hier gaat een artikel op verder">{k.aantal}</span> : null}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ol>
+    {legenda && <p class="toc-voet"><span class="tak-stip">1</span> hier gaat een artikel op verder</p>}
+  </div>
+</aside>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.toc').forEach((toc) => {
+    const knop = toc.querySelector<HTMLButtonElement>('.toc-knop')!;
+    const lijst = toc.querySelector<HTMLElement>('.toc-lijst')!;
+    const nu = toc.querySelector<HTMLElement>('.nu')!;
+    const smal = matchMedia('(max-width: 1000px)');
+    const begin = toc.dataset.begin ?? '';
+
+    // breed staat de lijst altijd open; smal klapt hij open en dicht
+    const zetOpen = (open: boolean) => {
+      knop.setAttribute('aria-expanded', String(open));
+      lijst.hidden = smal.matches ? !open : false;
+    };
+    zetOpen(false);
+    smal.addEventListener('change', () => zetOpen(false));
+    knop.addEventListener('click', () => zetOpen(knop.getAttribute('aria-expanded') !== 'true'));
+    lijst.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a') && smal.matches) zetOpen(false);
+    });
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && smal.matches && knop.getAttribute('aria-expanded') === 'true') {
+        zetOpen(false);
+        knop.focus();
+      }
+    });
+
+    // het actieve onderdeel markeren terwijl je leest
+    const links = new Map<string, HTMLAnchorElement>();
+    toc.querySelectorAll<HTMLAnchorElement>('a[data-id]').forEach((a) => links.set(a.dataset.id!, a));
+    const koppen = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    const eerste = toc.dataset.eerste === '1';
+
+    const markeer = () => {
+      const grens = 140;
+      let actief: HTMLElement | undefined = eerste ? koppen[0] : undefined;
+      for (const k of koppen) if (k.getBoundingClientRect().top - grens <= 0) actief = k;
+      links.forEach((a) => a.removeAttribute('aria-current'));
+      const a = actief && links.get(actief.id);
+      if (a) a.setAttribute('aria-current', 'true');
+      nu.textContent = a ? (a.textContent ?? '').replace(/^\d+/, '').replace(/\d+$/, '').trim() || begin : begin;
+    };
+    let wacht = false;
+    addEventListener(
+      'scroll',
+      () => {
+        if (wacht) return;
+        wacht = true;
+        requestAnimationFrame(() => {
+          markeer();
+          wacht = false;
+        });
+      },
+      { passive: true },
+    );
+    markeer();
+  });
+</script>

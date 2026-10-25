@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raymondklompsma.nl/sitemap-index.xml

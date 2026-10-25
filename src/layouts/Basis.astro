@@ -1,54 +1,69 @@
 ---
-import '@fontsource-variable/newsreader';
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/newsreader/opsz-italic.css';
 import '@fontsource-variable/fraunces/full.css';
 import '@fontsource/caveat/500.css';
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
-import { CONTACT_EMAIL } from '../site';
+import Voet from '../components/Voet.astro';
 
 interface Props {
   titel?: string;
   beschrijving?: string;
   ogId?: string;
+  // welk onderdeel van het menu oplicht
+  actief?: 'onbevangen' | 'verder' | 'samenwerken';
+  // de ode heeft een bredere kolom (inhoudsopgave, tekst en kantlijn)
+  breed?: boolean;
+  type?: 'website' | 'article';
 }
-const { titel, beschrijving = 'Wat als het wel kan? Raymond Klompsma schrijft over ondernemen, opvoeden en zichzelf leren kennen.', ogId = 'site' } = Astro.props;
+const {
+  titel,
+  beschrijving = 'Wat als het wel kan? Raymond Klompsma schrijft over ondernemen, opvoeden en zichzelf leren kennen.',
+  ogId = 'site',
+  actief,
+  breed = false,
+  type = 'website',
+} = Astro.props;
 const paginaTitel = titel ? `${titel} · Raymond Klompsma` : 'Raymond Klompsma';
-const pad = Astro.url.pathname;
-const canonical = new URL(pad, Astro.site);
+const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogAfbeelding = new URL(`/og/${ogId}.png`, Astro.site);
-const nav = [
-  { href: '/artikelen/', label: 'Artikelen' },
-  { href: '/over/', label: 'Over mij' },
+const menu = [
+  { id: 'onbevangen', href: '/onbevangen/', label: 'Onbevangen' },
+  { id: 'verder', href: '/verder-geschreven/', label: 'Verder geschreven' },
+  { id: 'samenwerken', href: '/samenwerken/', label: 'Samenwerken' },
 ];
 ---
 <!doctype html>
 <html lang="nl">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{paginaTitel}</title>
     <meta name="description" content={beschrijving} />
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={paginaTitel} />
     <meta property="og:description" content={beschrijving} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogAfbeelding} />
+    <meta property="og:locale" content="nl_NL" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Raymond Klompsma" href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <Analytics />
   </head>
   <body>
-    <div class="wrap">
+    <div class:list={['buiten', { breed }]}>
       <header class="site">
-        <a class="naam" href="/"><img src="/logo.png" alt="Raymond Klompsma" width="120" height="68" /></a>
-        <nav>
-          {nav.map((n) => <a href={n.href} aria-current={pad.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        <a href="/" aria-label="Naar de homepage"><img src="/logo.png" alt="Raymond Klompsma" width="120" height="68" /></a>
+        <nav aria-label="Hoofdmenu">
+          {menu.map((m) => <a href={m.href} aria-current={actief === m.id ? 'page' : undefined}>{m.label}</a>)}
         </nav>
       </header>
-      <main><slot /></main>
-      <footer class="site">Reageren kan altijd. Ik antwoord zelf. <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></footer>
+      <slot />
     </div>
+    <Voet />
   </body>
 </html>

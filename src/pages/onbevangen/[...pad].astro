@@ -1,0 +1,68 @@
+---
+// Eén pagina op /onbevangen. De rest-route zorgt dat de pagina alleen bestaat als de ode zichtbaar is (geen concept).
+import Basis from '../../layouts/Basis.astro';
+import Inhoud from '../../components/Inhoud.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import Tekening from '../../components/Tekening.astro';
+import { datum } from '../../site';
+import { laadOde } from '../../lib/ode';
+
+export async function getStaticPaths() {
+  return (await laadOde()) ? [{ params: { pad: undefined } }] : [];
+}
+const ode = (await laadOde())!;
+const woorden = ['nul', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien'];
+const items = [
+  { id: 'vooraf', titel: 'Vooraf' },
+  ...ode.delen.map((d) => ({
+    id: d.id,
+    nr: d.nr,
+    titel: d.titel.replace(/\.$/, ''),
+    kinderen: d.onderdelen.map((o) => ({ id: o.id, titel: o.titel.replace(/\.$/, ''), aantal: o.takken.length })),
+  })),
+];
+---
+<Basis titel={ode.titel.replace(/\.$/, '')} beschrijving={ode.beschrijving} actief="onbevangen" breed ogId="onbevangen" type="article">
+  <div class="ode">
+    <div class="master" id="master">
+      <Inhoud items={items} beginLabel="Vooraf" eersteActief legenda={ode.aantalTakken > 0} />
+
+      <article class="artikel" id="top">
+        <Kruimel items={[{ label: 'Onbevangen' }]} />
+        <header class="kop-artikel">
+          <div class="zon" aria-hidden="true"><Tekening naam="zon" breedte={76} /></div>
+          <h1>{ode.titel}</h1>
+          <p class="intro">{ode.beschrijving}</p>
+          <p class="label meta">{ode.minuten} minuten lezen · {woorden[ode.delen.length] ?? ode.delen.length} delen · laatst bijgewerkt {datum(ode.bijgewerkt)}</p>
+        </header>
+
+        <div class="vooraf" id="vooraf">
+          <p class="label vooraf-kop">Vooraf</p>
+          <Fragment set:html={ode.vooraf} />
+          <p class="vooraf-naam">Raymond</p>
+        </div>
+
+        {ode.delen.map((d) => (
+          <section class="deel" id={d.id}>
+            <p class="label deel-nr">Deel {d.nr}</p>
+            <h2>{d.titel}</h2>
+            <Fragment set:html={d.html} />
+            {d.takken.length > 0 && (
+              <div class="takken eind">
+                <p class="label">Verder lezen bij deel {d.nr}</p>
+                <ul>
+                  {d.takken.map((t) => (
+                    <li>
+                      <a class="tak-titel" href={`/artikelen/${t.id}/`}>{t.titel}</a>
+                      <span>{t.omschrijving}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        ))}
+      </article>
+    </div>
+  </div>
+</Basis>

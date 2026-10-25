@@ -1,0 +1,41 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Foto from '../../components/Foto.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import podium from '../../assets/keynote/podium.jpg';
+---
+<Basis titel="Samenwerken" beschrijving="Vader, ondernemer, spreker en mentor van ondernemers. Waarmee ik je kan helpen: een keynote, meedenken als mentor, of eerst een stip." actief="samenwerken" ogId="samenwerken">
+  <main class="pagina samen">
+    <Kruimel items={[{ label: 'Samenwerken' }]} />
+    <h1>Samenwerken.</h1>
+    <p class="intro">Vader, ondernemer, spreker en mentor van ondernemers. Ik begin graag voor ik het zeker weet, en dat doe ik het liefst samen.</p>
+
+    <section class="samen-wie">
+      <div>
+        <p class="label">Wie ik ben</p>
+        <p>Op mijn negentiende begon ik mijn eerste bedrijf, met vrienden en zonder plan. Dat werd Concept7, een digitaal bureau in Groningen. We schreven er een boek bij, "Zo kan het ook", dat op scholen als lesmateriaal werd gebruikt.</p>
+        <p>Daarna kwam srprs.me: verrassingsreizen, waarbij je pas op het laatste moment hoorde waar je heen ging. Tienduizenden mensen stapten zo in het vliegtuig. Daarna bouwde ik Hotel Wonderland, het eerste immersive theater van Nederland. Dat moest na zes weken dicht door corona.</p>
+        <p>Wat al die bedrijven delen, is wat ik in de ode <a href="/onbevangen/">onbevangenheid</a> noem. Iets zien, denken "wat als het wel kan", en beginnen. Ik woon met mijn gezin in Friesland.</p>
+      </div>
+    </section>
+
+    <section class="aanbod" aria-labelledby="aanbod-kop">
+      <p class="label" id="aanbod-kop">Waarmee ik je kan helpen</p>
+      <ol class="aanbod-lijst">
+        <li><a href="/samenwerken/keynote/" class="aanbod-titel">Een keynote.</a><p>Een verhaal voor je zaal over gasten behandelen als vrienden. Voor iedereen die mensen ontvangt.</p></li>
+        <li><a href="/samenwerken/mentor/" class="aanbod-titel">Meedenken als mentor.</a><p>Voor founders die groeien en daarbij niet kwijt willen raken waarom ze begonnen.</p></li>
+        <li><a href="/samenwerken/stip/" class="aanbod-titel">De stip.</a><p>Waar je over vijf jaar staat, met de route ernaartoe. En daarna je merk en je cultuur erop laten aansluiten.</p></li>
+      </ol>
+    </section>
+
+    <section class="keynote-kort" aria-labelledby="kk-kop">
+      <Foto src={podium} variant="klein" alt="Raymond op het podium tijdens de keynote op de Inspiratiedag van Toerisme Oost-Vlaanderen." bijschrift="Oost-Vlaanderen, oktober 2026." sizes="(min-width: 700px) 340px, 100vw" />
+      <div>
+        <p class="label">Keynote</p>
+        <h2 id="kk-kop" class="kop-groot">Ik vertel graag een verhaal.</h2>
+        <p>Over één vraag: wat zou er gebeuren als je je gasten behandelt alsof het je vrienden zijn? Een verhaal van 40 tot 45 minuten, met voorbeelden uit mijn eigen bedrijven, voor iedereen die mensen ontvangt.</p>
+        <p class="alle"><a href="/samenwerken/keynote/">Alles over de keynote</a></p>
+      </div>
+    </section>
+  </main>
+</Basis>

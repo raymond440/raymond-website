@@ -1,0 +1,25 @@
+---
+interface Props {
+  items: { label: string; href?: string }[];
+}
+const { items } = Astro.props;
+const alle = [{ label: 'Home', href: '/' }, ...items];
+---
+<nav class="kruimel" aria-label="Kruimelpad">
+  {alle.map((i, n) => (
+    <>
+      {n > 0 && <span class="sep" aria-hidden="true">›</span>}
+      {i.href && n < alle.length - 1 ? <a href={i.href}>{i.label}</a> : <span aria-current="page">{i.label}</span>}
+    </>
+  ))}
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: alle.map((i, n) => ({
+    '@type': 'ListItem',
+    position: n + 1,
+    name: i.label,
+    ...(i.href && n < alle.length - 1 ? { item: new URL(i.href, Astro.site).href } : {}),
+  })),
+})} />

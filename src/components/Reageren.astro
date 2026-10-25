@@ -7,6 +7,6 @@ interface Props {
 const { titel } = Astro.props;
 const onderwerp = encodeURIComponent(`Over: ${titel}`);
 ---
-<p class="reageren">
+<p class="reageer">
   Raakt dit je, of ben je het oneens? <a href={`mailto:${CONTACT_EMAIL}?subject=${onderwerp}`}>Schrijf terug</a>. Ik lees het zelf.
 </p>

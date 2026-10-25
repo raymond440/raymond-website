@@ -3,6 +3,7 @@ import Basis from '../layouts/Basis.astro';
 import { CONTACT_EMAIL } from '../site';
 ---
 <Basis titel="Privacy" beschrijving="Wat Hedwig, mijn eigen mailprogramma, doet met mijn Google-gegevens.">
+  <main class="pagina smal">
   <h1>Privacy.</h1>
   <div class="prose">
     <p>Deze pagina hoort bij Hedwig. Hedwig is een programma dat ik voor mezelf bouwde om mijn mail en agenda te doen. Het is niet voor anderen. Ik ben de enige gebruiker.</p>
@@ -28,4 +29,5 @@ import { CONTACT_EMAIL } from '../site';
     <h2>Vragen</h2>
     <p>Mail me: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Ik antwoord zelf.</p>
   </div>
+  </main>
 </Basis>

@@ -1,0 +1,73 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import Aanvraag from '../../components/Aanvraag.astro';
+
+// Reviews van founders die ik mentor of mentorde zijn er nog niet. Zodra ze er zijn, komt hier een lijst
+// { tekst, wie } en verschijnt de sectie "Wat anderen zeggen." vanzelf.
+const reviews: { tekst: string; wie: string }[] = [];
+---
+<Basis titel="Meedenken als mentor" beschrijving="Ik denk graag met je mee. Voor founders die groeien en daarbij niet kwijt willen raken waarom ze begonnen." actief="samenwerken" ogId="mentor">
+  <main class="pagina samen">
+    <Kruimel items={[{ label: 'Samenwerken', href: '/samenwerken/' }, { label: 'Meedenken als mentor' }]} />
+    <section class="keynote" aria-labelledby="men-kop">
+      <p class="label">Mentor</p>
+      <h1 id="men-kop">Ik denk graag met je mee.</h1>
+      <p>Ik ben geen fulltime coach. Ik onderneem sinds mijn negentiende en dat blijf ik doen. Juist die combinatie werkt. Waar we het samen over hebben, loop ik zelf ook tegenaan, vaak in dezelfde week.</p>
+      <p>Zie me als een compagnon zonder aandelen. Ik kijk mee, denk mee en ben betrokken. Geen verborgen agenda, wel eerlijke feedback. En ken ik iemand die je verder helpt, dan stel ik je voor.</p>
+
+      <h3>Voor wie.</h3>
+      <p>Voor founders die iets gebouwd hebben dat werkt, en nu groeien. Er komen mensen bij, geld, snelheid. Precies dan raak je makkelijk kwijt waarom je ooit begon. Ik heb dat moment zelf een paar keer meegemaakt. Het is ook de fase die ik het leukst vind.</p>
+      <aside class="uitgelicht"><span class="markeer">Groeien zonder jezelf te verliezen.</span></aside>
+      <p>Een bedrijf loopt vaker vast op de founder dan op de markt. Dat is geen verwijt, zo gaat het gewoon. Ik ben er niet om je te coachen. Ik ben er om naast je te denken.</p>
+
+      <h3>Hoe het werkt.</h3>
+      <ol class="stappen">
+        <li><strong>Bijpraten.</strong><span>Je vertelt wat er speelt, wat vastzit en wat blijft malen. Ik stel mijn vragen. Dat deel slaan we nooit over, anders worden het losse flodders.</span></li>
+        <li><strong>Eén onderwerp.</strong><span>Voor elke sessie bereid ik een thema voor en duik ik erin. Je stip en het plan erachter, je merk, je cultuur, je eigen rol. Hier breng ik mijn vak mee.</span></li>
+        <li><strong>Het volgende onderwerp.</strong><span>Aan het eind kiezen we samen waar we het de volgende keer over hebben. Het komt uit wat er die dag bovenkwam, dus uit jouw echte week.</span></li>
+      </ol>
+
+      <h3>In welke vorm.</h3>
+      <ol class="vormen">
+        <li><strong>Doorlopend.</strong><span>We zien elkaar ongeveer eens per maand, het liefst aan tafel. Brandt er tussendoor echt iets, dan app je gewoon. Dit werkt het best als we het minstens een half jaar doen.</span></li>
+        <li><strong>Eén sessie.</strong><span>Een dagdeel samen op één vraag die nu speelt. Vooraf zetten we de agenda, daarna ben je nergens aan vast. Wil je later nog een keer, dan kan dat altijd.</span></li>
+      </ol>
+
+      <h3>Waar ik naar kijk.</h3>
+      <p>Onder een bedrijf liggen drie dingen. Een stip, met een plan om er te komen. Een merk dat naar buiten laat zien wie je bent. En een cultuur die datzelfde naar binnen draagt. Staan ze alle drie stevig, dan kun je er veel gewicht op zetten. Wiebelt er één, dan merk je dat zodra je groeit.</p>
+      <p>Ik heb ze zelf gebouwd. Bij Concept7 een cultuur waar ik als eigenaar zelf wilde werken, bij srprs.me een merk met een ziel, en overal een stip waar ik in geloofde. Soms ging het goed, soms leerde ik het op de harde manier. Allebei neem ik mee aan tafel. Wil je de fundering zelf neerzetten, kijk dan bij <a href="/samenwerken/stip/">de stip</a>.</p>
+
+      {reviews.length > 0 && (
+        <>
+          <h3>Wat anderen zeggen.</h3>
+          <div class="reviews">
+            {reviews.map((r) => <blockquote class="review"><p>{r.tekst}</p><footer>{r.wie}</footer></blockquote>)}
+          </div>
+        </>
+      )}
+
+      <h3>Praktisch.</h3>
+      <ul class="praktisch">
+        <li>Ik werk met een paar founders tegelijk, zodat ik er echt voor je ben.</li>
+        <li>We beginnen met een kennismaking, zonder verplichtingen. Dan weten we allebei of het klikt.</li>
+        <li>We zien elkaar bij mij in Friesland, bij jou in de buurt of ergens ertussenin. Liever niet op je eigen kantoor, daar ben je zo weer aan het werk.</li>
+      </ul>
+
+      <p class="naar-ode"><span class="label">Waar het vandaan komt</span><a href="/onbevangen/">Wat ik meeneem aan tafel, staat in de ode aan onbevangenheid.</a></p>
+
+      <Aanvraag
+        soort="mentor"
+        kop="Zullen we kennismaken?"
+        intro="Vertel me over je bedrijf en waar je nu staat. Ik antwoord zelf."
+        knop="Plan een kennismaking"
+        velden={[
+          { naam: 'naam', label: 'Je naam', verplicht: true, autocomplete: 'name' },
+          { naam: 'mail', label: 'E-mail', type: 'email', verplicht: true, autocomplete: 'email' },
+          { naam: 'organisatie', label: 'Je bedrijf', breed: true, autocomplete: 'organization' },
+          { naam: 'bericht', label: 'Wat speelt er?', type: 'textarea', verplicht: true, breed: true, placeholder: 'Waar sta je nu, en waar loop je tegenaan?' },
+        ]}
+      />
+    </section>
+  </main>
+</Basis>
