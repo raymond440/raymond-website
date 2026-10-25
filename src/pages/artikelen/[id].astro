@@ -27,7 +27,7 @@ const items = subtitels.map((h) => ({ id: h.slug, titel: h.text.replace(/\.$/, '
         {plek && (
           <a class="hoort-bij" href={`/onbevangen/#${plek.onderdeelId}`}>
             <span class="label">Hoort bij</span>
-            <span>Een ode aan onbevangenheid <span class="pijl">›</span> Deel {plek.deel} <span class="pijl">›</span> {plek.onderdeel.replace(/\.$/, '')}</span>
+            <span>Een ode aan onbevangenheid <span class="pijl">›</span> Deel {plek.deel} <span class="pijl">›</span> {(plek.onderdeel || plek.deelTitel).replace(/\.$/, '')}</span>
           </a>
         )}
         <h1>{a.data.titel}{a.data.concept && <span class="concept"> · concept</span>}</h1>
@@ -37,7 +37,7 @@ const items = subtitels.map((h) => ({ id: h.slug, titel: h.text.replace(/\.$/, '
         {plek && (
           <a class="terug-naar-master" href={`/onbevangen/#${plek.onderdeelId}`}>
             <span class="label">Verder in de ode</span>
-            <span class="tt">Terug naar {kleineLetter(plek.onderdeel)}, waar dit stuk uit voortkomt.</span>
+            <span class="tt">Terug naar {kleineLetter(plek.onderdeel || plek.deelTitel)}, waar dit stuk uit voortkomt.</span>
           </a>
         )}
       </article>

@@ -4,22 +4,18 @@ import Basis from '../layouts/Basis.astro';
 import Kruimel from '../components/Kruimel.astro';
 import Aanvraag from '../components/Aanvraag.astro';
 import ErbijLogo from '../components/ErbijLogo.astro';
-import Honingraat from '../components/Honingraat.astro';
 
-// De brief van Melissa: de tekst komt van Raymond. Zolang die er niet is, blijft het briefje verborgen.
-const brief: string[] | null = null;
 const punten = [
-  { kop: 'Honing is het middel.', tekst: 'Tastbaar en deelbaar. Je kunt het vasthouden en weggeven zonder iets uit te leggen.', draai: -5 },
-  { kop: 'Kruisbestuiving is de beweging.', tekst: 'Iets kleins wat iemands dag omgooit. Een gebaar, niet af te dwingen.', draai: 4 },
-  { kop: 'De bij is de verbinder.', tekst: 'Een bij kiest geen belangrijke bloem en kijkt niet wat het meeste oplevert. Hij vliegt gewoon.', draai: -3 },
-  { kop: 'Onbevangenheid is de sleutel.', tekst: 'Anders is honing een product en kruisbestuiving harde marketing. Nu is het een uitnodiging.', draai: 6 },
+  { kop: 'Honing is het middel.', tekst: 'Tastbaar en deelbaar. Je kunt het vasthouden en weggeven zonder iets uit te leggen.' },
+  { kop: 'Kruisbestuiving is de beweging.', tekst: 'Iets kleins wat iemands dag omgooit. Een gebaar, niet af te dwingen.' },
+  { kop: 'De bij is de verbinder.', tekst: 'Een bij kiest geen belangrijke bloem en kijkt niet wat het meeste oplevert. Hij vliegt gewoon.' },
+  { kop: 'Onbevangenheid is de sleutel.', tekst: 'Anders is honing een product en kruisbestuiving harde marketing. Nu is het een uitnodiging.' },
 ];
 ---
 <Basis titel="ERBIJ, honing om te delen" beschrijving="ERBIJ is 100% deelbare honing: je koopt twee potjes, één voor jezelf en één om weg te geven aan iemand die het volgens jou verdient." ogId="erbij">
   <main class="pagina samen erbij-pagina">
     <Kruimel items={[{ label: 'ERBIJ' }]} />
     <section class="erbij-held" aria-labelledby="erbij-kop">
-      <Honingraat />
       <h1 id="erbij-kop" class="vh">ERBIJ</h1>
       <ErbijLogo class="erbij-logo" />
       <p class="erbij-tag">100% deelbare honing.</p>
@@ -31,15 +27,7 @@ const punten = [
 
       <h3>Hoe het in elkaar zit.</h3>
       <ol class="raten">
-        {punten.map((p, n) => (
-          <li>
-            <span class="raat-nr" style={`--draai:${p.draai}deg`} aria-hidden="true">
-              <svg viewBox="0 0 104 120" focusable="false"><path d="M52 6 L97 31 L96 88 L51 114 L7 89 L8 32 Z" fill="none" stroke="var(--honing)" stroke-width="5" stroke-linejoin="round" /></svg>
-              <b>{n + 1}</b>
-            </span>
-            <div><strong>{p.kop}</strong><span>{p.tekst}</span></div>
-          </li>
-        ))}
+        {punten.map((p) => <li><strong>{p.kop}</strong><span>{p.tekst}</span></li>)}
       </ol>
 
       <h3>Uit Groningen.</h3>
@@ -47,28 +35,33 @@ const punten = [
 
       <aside class="erbij-weetje"><p class="label">Op het etiket</p><p>Tenminste houdbaar tot: zie onderkant pot. Maar niet ondersteboven houden zonder deksel, want dan loopt de honing eruit. In principe blijft honing voor altijd goed. In een oude Egyptische tombe vonden ze honing van meer dan 3.000 jaar oud, nog perfect eetbaar. Ja, die bijen kennen hun vak.</p></aside>
 
-      {brief && (
-        <section class="brief" aria-labelledby="brief-kop">
-          <header class="brief-hoofd">
-            <ErbijLogo class="brief-logo" label="ERBIJ" />
-            <p class="brief-adres" id="brief-kop">Bijenkast 31G11, Groningen</p>
-          </header>
-          <div class="brief-tekst">{brief.map((a) => <p>{a}</p>)}</div>
-          <div class="brief-ondertekening">
-            <span class="handtekening">Melissa Bijdehand</span>
-            <svg class="bijenvlucht" viewBox="0 0 220 60" aria-hidden="true" focusable="false">
-              <path d="M4 44 C 30 4, 50 58, 80 28 S 130 6, 150 30 S 190 40, 206 18" fill="none" stroke="var(--inkt)" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1 7" />
-              <g transform="translate(206 18) rotate(-20)">
-                <ellipse cx="0" cy="0" rx="6" ry="4" fill="var(--honing)" stroke="var(--inkt)" stroke-width="1.2" />
-                <path d="M-2 -3 L-2 3 M1 -3.2 L1 3.2" stroke="var(--inkt)" stroke-width="1.2" />
-                <ellipse cx="-1" cy="-6" rx="3.5" ry="2.4" fill="var(--creme)" stroke="var(--inkt)" stroke-width="0.9" transform="rotate(-25 -1 -6)" />
-              </g>
-            </svg>
-          </div>
-          <p class="brief-voet">Alles wat bestaat, is verbonden.</p>
-          <p class="brief-noot">Melissa bestaat niet echt. Ze is de stem van ERBIJ.</p>
-        </section>
-      )}
+      <aside class="melissa" aria-labelledby="melissa-kop">
+        <div class="briefhoofd">
+          <ErbijLogo class="briefhoofd-logo" label="" />
+          <p class="briefhoofd-adres">Bijenkast 31G11<br />Groningen</p>
+        </div>
+        <p class="label" id="melissa-kop">Een woordje van de koningin</p>
+        <p>Hallo. Mijn naam is Melissa, bijenkoningin. Raymond zou deze pagina in z'n eentje schrijven, maar ik lees mee. Ik hou graag de controle over wat er over mij en mijn werk gepubliceerd wordt, snap je? Voor je het weet ben je een speelbal van de media.</p>
+        <p>Dus even voor de duidelijkheid: die honing, dat zijn wij. En dat weggeven, dat doen wij al veel langer. Elke ochtend uit ons zeshoekige bedje, van bloem naar bloem, en geen bij die vraagt wat het oplevert. Raymond noemt dat onbevangen. Wij noemen het een gewone werkdag.</p>
+        <p>Heb je een vraag over honing, over bijen of over Raymond? Mail hem op <a href="mailto:hey-raymond@klompsma.nl">hey-raymond@klompsma.nl</a>, hij geeft het aan mij door. Kan even duren. Ik run een bedrijf met 50.051 medewerkers, en chaos dondert de korf los.</p>
+        <p class="groet">Bij leven en welzijn,</p>
+        <p class="naam">
+          <span class="naam-tekst">Melissa Bijdehand</span>
+          <svg class="bijenvlucht" viewBox="0 0 220 90" aria-hidden="true" focusable="false">
+            <path d="M4 62 C 30 78, 52 70, 60 52 C 68 34, 50 22, 42 36 C 34 50, 62 66, 92 58 C 122 50, 128 24, 150 22 C 172 20, 178 44, 196 30" fill="none" stroke="var(--honing)" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1 6" />
+            <g transform="translate(203 24) rotate(-24)">
+              <ellipse cx="-7" cy="-7" rx="6" ry="4" fill="#fffdf8" stroke="var(--inkt)" stroke-width="1.1" transform="rotate(-25 -7 -7)" />
+              <ellipse cx="1" cy="-8" rx="5" ry="3.5" fill="#fffdf8" stroke="var(--inkt)" stroke-width="1.1" transform="rotate(20 1 -8)" />
+              <ellipse cx="0" cy="0" rx="9" ry="6" fill="var(--honing)" stroke="var(--inkt)" stroke-width="1.2" />
+              <path d="M-3 -5.6 L-3 5.6 M2 -5.4 L2 5.4" stroke="var(--inkt)" stroke-width="1.8" />
+              <circle cx="9.5" cy="0" r="3" fill="var(--inkt)" />
+            </g>
+          </svg>
+        </p>
+        <p class="functie">Founder &amp; Koningin van bijenkast 31G11</p>
+        <p class="briefvoet">Alles wat bestaat, is verbonden.</p>
+      </aside>
+      <p class="melissa-noot">Voor de duidelijkheid: Melissa bestaat niet echt. Ze is de koningin van de bijenkast, en we schuiven haar naar voren als eigenaar ervan.</p>
 
       <h3>Waar het nu staat.</h3>
       <p>ERBIJ is nog een prototype. Aan het etiket, het potje en de verpakking werk ik nog. De eerste potjes staan bij mij thuis. Ik bouw het rustig op, en ik deel onderweg wat goed gaat en wat niet. Juist dat hoort erbij.</p>
@@ -91,7 +84,7 @@ const punten = [
           { naam: 'bericht', label: 'Nog iets?', type: 'textarea', breed: true, placeholder: 'Een ander bezorgadres, of een vraag.' },
         ]}
       >
-        <p slot="prijs" class="prijs">Twee potjes, € 29,95.</p>
+        <Fragment slot="prijs"><p class="prijs">Twee potjes, € 29,95.</p><p class="label prijs-noot">Inclusief verzending</p></Fragment>
         <p class="klein">250 gram pure honing uit Groningen per potje. Honing kan van nature kristalliseren. Geef geen honing aan kinderen onder één jaar.</p>
       </Aanvraag>
 

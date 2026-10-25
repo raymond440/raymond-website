@@ -408,56 +408,64 @@ h1 .markeer { background-size: 100% 60%; background-position: center 66%; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .klaar:empty { display: none; }
 
-/* ERBIJ: eigen merk binnen de site. Honinggeel alleen als accent, verder de gewone huisstijl. */
-:root { --honing: #f7ac2e; }
-.erbij-held { position: relative; margin: 0.5rem 0 2.2rem; padding: 3rem 0 2.2rem; isolation: isolate; }
-.honingraat { position: absolute; inset: -1rem -2rem; width: calc(100% + 4rem); height: calc(100% + 2rem); z-index: -1; opacity: 0.55; pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 62% 70% at 38% 50%, #000 15%, transparent 78%); mask-image: radial-gradient(ellipse 62% 70% at 38% 50%, #000 15%, transparent 78%); }
-.erbij-logo { display: block; width: min(68%, 26rem); height: auto; color: var(--honing); }
-.erbij-tag { font-family: var(--speels); font-weight: 500; font-size: 36px; line-height: 40px; margin: 0.9rem 0 0; transform: rotate(-1.5deg); transform-origin: left; }
-.erbij-intro { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 26px; line-height: 38px; }
-.raten { list-style: none; padding: 0; margin: 1.4rem 0 1.8rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1.8rem; max-width: none !important; }
-.raten li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 0.9rem; align-items: start; }
-.raat-nr { position: relative; width: 52px; height: 60px; display: grid; place-items: center; transform: rotate(var(--draai, 0deg)); }
-.raat-nr svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.raat-nr b { position: relative; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 500; font-size: 24px; }
-.raten strong { display: block; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 500; font-size: 21px; line-height: 28px; }
-.raten li span:not(.raat-nr) { display: block; margin-top: 0.25rem; font-size: 17px; line-height: 27px; }
-.erbij-weetje { margin: 2rem 0; padding: 0.2rem 0 0.2rem 1.2rem; max-width: var(--maat); font-size: 17px; line-height: 28px; background: linear-gradient(var(--honing), var(--honing)) left / 3px 100% no-repeat; }
-.erbij-weetje .label { color: var(--gedempt); margin: 0 0 0.3rem; }
-.erbij-weetje p { margin: 0; }
-.erbij-pagina .bestel { border: 2px solid var(--honing); }
-.bestel { margin-top: 2.5rem; padding: 1.75rem; max-width: 44rem; }
+/* ERBIJ: eigen merk binnen de site (uit het prototype). Honinggeel alleen als accent, verder de gewone huisstijl. */
+.bestel { margin-top: 2.5rem; padding: 1.75rem; border: 1px solid var(--zand); max-width: 44rem; }
+.bestel h3 { margin-top: 0 !important; }
+.bestel .prijs-noot { color: var(--gedempt); margin: -0.5rem 0 0.9rem; }
 .bestel .prijs { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 31px; line-height: 38px; margin: 0.2rem 0 0.8rem; }
+.bestel .knoppen { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; margin: 1.2rem 0 0.4rem; }
+.bestel .knop { font-family: var(--sans); font-size: 13.68px; letter-spacing: 1.2312px; text-transform: uppercase; font-weight: 700; padding: 0.8rem 1.3rem; background: var(--inkt); color: var(--creme); text-decoration: none; border: 1px solid var(--inkt); }
 .bestel .klein { font-size: 16px; line-height: 26px; color: var(--gedempt); margin: 1rem 0 0; }
-.veld select { font: inherit; font-size: 17px; padding: 0.6rem 0.75rem; background: var(--creme); color: var(--inkt); border: 1px solid var(--inkt); min-width: 0; }
-.aanvraag.honing .aanvraag-form button { background: var(--honing); color: var(--inkt); border-color: var(--inkt); }
-.erbij-slot { font-family: var(--speels); font-weight: 500; font-size: 34px; line-height: 40px; margin: 2.4rem 0 0; transform: rotate(-1deg); }
-/* de brief van Melissa: ERBIJ-briefpapier */
-.brief { margin: 2.4rem 0; max-width: var(--maat); background: var(--papier); border: 1px solid var(--zand); border-top: 10px solid var(--honing); padding: 1.6rem 1.8rem 1.4rem; }
-.brief-hoofd { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-bottom: 1rem; margin-bottom: 1.2rem; background: var(--lijn) bottom left / 100% 8px no-repeat; }
-.brief-logo { width: 110px; height: auto; color: var(--honing); }
-.brief-adres { margin: 0; font-family: var(--sans); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); }
-.brief-tekst p { margin: 0 0 1rem; }
-.brief-ondertekening { display: flex; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem; }
-.handtekening { font-family: 'Pinyon Script', cursive; font-size: 44px; line-height: 1.1; transform: rotate(-3deg); display: inline-block; }
-.bijenvlucht { width: 160px; height: auto; }
-.brief-voet { margin: 1.2rem 0 0; font-family: var(--sans); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); }
-.brief-noot { margin: 0.6rem 0 0; font-size: 15px; line-height: 22px; color: var(--gedempt); }
-/* homepage en Samenwerken */
-.home-erbij { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 1.5rem; align-items: center; margin-top: 2.5rem; padding-top: 1.8rem; background: var(--lijn) top left / 100% 8px no-repeat; }
-.home-erbij .label { color: var(--gedempt); margin: 0 0 0.3rem; }
-.home-erbij .beschr { margin: 0.3rem 0 0; }
-.home-erbij-logo { display: block; color: var(--honing); }
-.home-erbij-logo svg { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) { .bestel { padding: 1.25rem; } }
+.foto.geplakt.rechts.wie-foto { width: min(44%, 19rem); transform: rotate(-2.4deg); }
+.foto.geplakt.rechts.wie-foto:hover { transform: rotate(-1deg); }
+@media (max-width: 700px) { .foto.geplakt.rechts.wie-foto { float: none; width: auto; margin: 0.5rem 0.5rem 1.5rem; } }
 .ook-van-mij { margin: 1.8rem 0 0; max-width: var(--maat); }
 .ook-van-mij .label { display: block; color: var(--gedempt); margin-bottom: 0.3rem; }
 .ook-van-mij a { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 22px; text-underline-offset: 5px; }
-.foto.geplakt.rechts.wie-foto { width: min(44%, 19rem); transform: rotate(-2.4deg); }
-.foto.geplakt.rechts.wie-foto:hover { transform: rotate(-1deg); }
-@media (max-width: 700px) {
-  .erbij-held { padding: 2rem 0 1.4rem; } .erbij-logo { width: 86%; } .raten { grid-template-columns: minmax(0, 1fr); }
-  .erbij-intro { font-size: 22px; line-height: 33px; } .bestel { padding: 1.25rem; } .brief { padding: 1.2rem; }
-  .home-erbij { grid-template-columns: 110px minmax(0, 1fr); gap: 1rem; } .foto.geplakt.rechts.wie-foto { float: none; width: auto; margin: 0.5rem 0.5rem 1.5rem; }
-}
-@media (prefers-reduced-motion: reduce) { .wie-foto { transition: none; } }
+.home-erbij { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 1.5rem; align-items: center; margin-top: 2.5rem; padding-top: 1.8rem; background: var(--lijn) top left / 100% 8px no-repeat; }
+.home-erbij .label { color: var(--gedempt); margin: 0 0 0.3rem; }
+.home-erbij .beschr { margin: 0.3rem 0 0; }
+.mini-logo { display: block; padding: 0.4rem 0; }
+.mini-logo svg { width: 100%; height: auto; fill: var(--honing); display: block; }
+@media (max-width: 700px) { .home-erbij { grid-template-columns: 90px minmax(0, 1fr); gap: 1rem; } }
+:root { --honing: #f7ac2e; }
+.erbij-held { position: relative; padding: 3.2rem 0 3rem; margin: 0 0 2rem; isolation: isolate; }
+.erbij-held > * { position: relative; z-index: 1; }
+.erbij-held::before { z-index: 0; }
+.erbij-held::before { content: ''; position: absolute; inset: -2rem -4rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cpath d='M66.0 25.0 L66.0 55.0 L40.0 70.0 L14.0 55.0 L14.0 25.0 L40.0 10.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M151.1 41.0 L151.1 63.0 L132.0 74.0 L112.9 63.0 L112.9 41.0 L132.0 30.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='0.9' stroke-linejoin='round'/%3E%3Cpath d='M218.9 22.0 L218.9 38.0 L205.0 46.0 L191.1 38.0 L191.1 22.0 L205.0 14.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M100.8 116.0 L100.8 140.0 L80.0 152.0 L59.2 140.0 L59.2 116.0 L80.0 104.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='1.2' stroke-linejoin='round'/%3E%3Cpath d='M205.4 123.0 L205.4 157.0 L176.0 174.0 L146.6 157.0 L146.6 123.0 L176.0 106.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='2.0' stroke-linejoin='round'/%3E%3Cpath d='M45.6 191.0 L45.6 209.0 L30.0 218.0 L14.4 209.0 L14.4 191.0 L30.0 182.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='0.8' stroke-linejoin='round'/%3E%3Cpath d='M130.1 207.0 L130.1 221.0 L118.0 228.0 L105.9 221.0 L105.9 207.0 L118.0 200.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M248.5 213.0 L248.5 239.0 L226.0 252.0 L203.5 239.0 L203.5 213.0 L226.0 200.0 Z' fill='none' stroke='%23d9c3a3' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size: 260px 260px; opacity: 0.9; -webkit-mask-image: radial-gradient(ellipse 55% 50% at 40% 50%, #000 40%, transparent 100%); mask-image: radial-gradient(ellipse 55% 50% at 40% 50%, #000 40%, transparent 100%); pointer-events: none; }
+.erbij-logo { display: block; width: min(68%, 26rem); height: auto; fill: var(--honing); position: relative; }
+.erbij-tag { position: relative; font-family: var(--speels); font-weight: 500; font-size: 36px; line-height: 40px; margin: 0.9rem 0 0; color: var(--inkt); transform: rotate(-1.5deg); transform-origin: left; }
+.erbij-pagina .erbij-tekst { margin-top: 0; }
+.erbij-intro { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 26px; line-height: 38px; }
+.raten { counter-reset: raat; list-style: none; padding: 0; margin: 1.2rem 0 1.6rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: none !important; }
+.raten li { position: relative; counter-increment: raat; display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 0 1rem; align-items: start; padding: 0.2rem 0; }
+.raten li::before { content: counter(raat); grid-row: span 2; width: 58px; height: 66px; display: grid; place-items: center; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 66'%3E%3Cpath d='M29 3 L54 17.5 L54.5 47 L29.5 62.5 L4 48 L3.5 18 Z' fill='none' stroke='%23f7ac2e' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 600; font-size: 24px; color: var(--honing); }
+.raten li:nth-child(2)::before { transform: rotate(6deg); } .raten li:nth-child(3)::before { transform: rotate(-5deg); } .raten li:nth-child(4)::before { transform: rotate(3deg); }
+.raten strong { display: block; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 500; font-size: 21px; line-height: 28px; }
+.raten span { display: block; margin-top: 0.25rem; font-size: 17px; line-height: 27px; }
+.erbij-weetje { margin: 2rem 0; padding: 1.2rem 1.4rem; border-left: 4px solid var(--honing); max-width: var(--maat); font-size: 17px; line-height: 28px; }
+.erbij-weetje .label { color: var(--gedempt); margin: 0 0 0.3rem; }
+.erbij-weetje p { margin: 0; }
+.erbij-pagina .bestel { border-color: var(--honing); border-width: 2px; }
+.honing-knop { background: var(--honing) !important; color: var(--inkt) !important; border-color: var(--inkt) !important; }
+.erbij-slot { font-family: var(--speels); font-weight: 500; font-size: 34px; line-height: 40px; margin: 2.4rem 0 0; transform: rotate(-1deg); }
+@media (max-width: 700px) { .erbij-held { padding: 2.2rem 0 2.2rem; } .erbij-held::before { inset: -0.5rem -1rem; } .erbij-logo { width: 86%; } .raten { grid-template-columns: minmax(0, 1fr); } .erbij-intro { font-size: 22px; line-height: 33px; } }
+.melissa { position: relative; max-width: 34rem; margin: 2.6rem 0 2.8rem 0.6rem; padding: 1.6rem 2rem 1.3rem; background: #fffdf8; border-top: 6px solid var(--honing); box-shadow: 0 1px 2px rgba(63,59,57,.08), 0 14px 28px -16px rgba(63,59,57,.4); transform: rotate(-1.2deg); font-size: 18px; line-height: 29px; }
+.melissa-noot { max-width: 34rem; margin: -1.6rem 0 2.6rem 0.6rem; font-size: 16px; line-height: 26px; color: var(--gedempt); font-style: italic; }
+.briefhoofd { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 0.9rem; margin-bottom: 1.1rem; border-bottom: 1px solid color-mix(in srgb, var(--honing) 45%, transparent); }
+.briefhoofd-logo { width: 96px; height: auto; fill: var(--honing); display: block; }
+.briefhoofd-adres { margin: 0 !important; text-align: right; font-family: var(--sans); font-size: 11px; line-height: 16px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); }
+.briefvoet { margin: 1.3rem 0 0 !important; padding-top: 0.7rem; border-top: 1px solid color-mix(in srgb, var(--honing) 45%, transparent); text-align: center; font-family: var(--sans); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--honing); }
+.melissa .label { color: var(--gedempt); margin: 0 0 0.6rem; }
+.melissa p { margin: 0 0 0.8rem; }
+.melissa .groet { margin: 1.2rem 0 0; }
+.melissa .naam { position: relative; display: flex; align-items: center; gap: 0.2rem; margin: 0.4rem 0 0.2rem; }
+.melissa .naam-tekst { font-family: 'Pinyon Script', cursive; font-size: 44px; line-height: 52px; color: var(--inkt); transform: rotate(-3deg); transform-origin: left; white-space: nowrap; }
+.bijenvlucht { width: 170px; height: 70px; margin: -1.4rem 0 0 -0.4rem; flex: none; }
+@media (max-width: 700px) { .melissa .naam { flex-wrap: wrap; } .melissa .naam-tekst { font-size: 38px; } .bijenvlucht { width: 130px; height: 54px; margin-top: -0.6rem; } }
+.melissa .functie { font-family: var(--sans); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); margin: 0; }
+.veld select { font: inherit; font-size: 17px; padding: 0.6rem 0.75rem; background: var(--creme); color: var(--inkt); border: 1px solid var(--inkt); min-width: 0; }
+.aanvraag.honing .aanvraag-form button { background: var(--honing); color: var(--inkt); border-color: var(--inkt); }
+.melissa a { color: inherit; }
+.erbij-pagina { overflow-x: clip; }

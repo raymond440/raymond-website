@@ -102,3 +102,5 @@ Overgenomen uit het goedgekeurde prototype (vault: `projecten/Website raymondklo
 ## ERBIJ
 
 Eigen merk binnen de site: logo `ErbijLogo.astro` in honinggeel `#F7AC2E` (`--honing`), zonder vlak of kader. Honinggeel alleen als accent: zeshoeken, het lijntje bij "Op het etiket", de rand van het bestelblok en de bestelknop (inkt als tekst). Kop met een heel lichte honingraat in zand (`Honingraat.astro`), geen gele achtergrond. De vier punten hebben een open honinggele zeshoek met het nummer, licht gedraaid. Briefpapier van Melissa: honinggele rand bovenaan, handtekening in Pinyon Script.
+
+**Afwijking:** de brief van Melissa is een papieren briefje (licht gedraaid, met een zachte schaduw), zoals in het prototype. Dat is de enige schaduw op de site.
