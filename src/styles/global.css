@@ -497,3 +497,19 @@ body { overflow-wrap: break-word; }
   .erbij-pagina .raten { gap: 1.2rem; }
   .uitgelicht { overflow-wrap: anywhere; }
 }
+
+/* hamburgermenu op een smal scherm */
+.menu-knop { display: none; }
+@media (max-width: 700px) {
+  html.js header.site { position: relative; flex-wrap: wrap; row-gap: 0; }
+  html.js .menu-knop { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; width: 48px; height: 48px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer; color: var(--inkt); }
+  html.js .menu-streep { display: block; width: 26px; height: 2px; background: currentColor; transition: transform 0.2s ease, opacity 0.2s ease; transform-origin: center; }
+  html.js.menu-open .menu-streep:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  html.js.menu-open .menu-streep:nth-child(2) { opacity: 0; }
+  html.js.menu-open .menu-streep:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  html.js header.site nav { display: none; flex-basis: 100%; flex-direction: column; gap: 0; padding: 0.4rem 0 1rem; background: var(--lijn) top left / 100% 8px no-repeat; margin-top: 0.4rem; padding-top: 0.8rem; }
+  html.js.menu-open header.site nav { display: flex; }
+  html.js header.site nav a { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 25px; line-height: 36px; letter-spacing: 0; text-transform: none; padding-block: 0.6rem; text-decoration: none; }
+  html.js header.site nav a[aria-current="page"] { text-decoration: underline 2px var(--zand); text-underline-offset: 6px; text-decoration-skip-ink: none; }
+}
+@media (prefers-reduced-motion: reduce) { .menu-streep { transition: none; } }

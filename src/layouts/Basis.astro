@@ -55,15 +55,44 @@ const menu = [
     <Analytics />
   </head>
   <body>
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <div class:list={['buiten', { breed }]}>
       <header class="site">
         <a href="/" aria-label="Naar de homepage"><img src="/logo.png" alt="Raymond Klompsma" width="120" height="68" /></a>
-        <nav aria-label="Hoofdmenu">
+        <button class="menu-knop" type="button" aria-expanded="false" aria-controls="hoofdmenu" aria-label="Menu">
+          <span class="menu-streep" aria-hidden="true"></span>
+          <span class="menu-streep" aria-hidden="true"></span>
+          <span class="menu-streep" aria-hidden="true"></span>
+        </button>
+        <nav id="hoofdmenu" aria-label="Hoofdmenu">
           {menu.map((m) => <a href={m.href} aria-current={actief === m.id ? 'page' : undefined}>{m.label}</a>)}
         </nav>
       </header>
       <slot />
     </div>
     <Voet />
+    <script>
+      // hamburgermenu op een smal scherm: de links staan altijd in de pagina, zonder script blijven ze zichtbaar
+      const knop = document.querySelector<HTMLButtonElement>('.menu-knop');
+      const nav = document.getElementById('hoofdmenu');
+      const smal = matchMedia('(max-width: 700px)');
+      const zet = (open: boolean) => {
+        if (!knop || !nav) return;
+        knop.setAttribute('aria-expanded', String(open));
+        knop.setAttribute('aria-label', open ? 'Sluit menu' : 'Menu');
+        document.documentElement.classList.toggle('menu-open', open);
+      };
+      knop?.addEventListener('click', () => zet(knop.getAttribute('aria-expanded') !== 'true'));
+      nav?.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).closest('a')) zet(false);
+      });
+      addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && knop?.getAttribute('aria-expanded') === 'true') {
+          zet(false);
+          knop.focus();
+        }
+      });
+      smal.addEventListener('change', () => zet(false));
+    </script>
   </body>
 </html>
