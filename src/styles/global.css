@@ -513,3 +513,6 @@ body { overflow-wrap: break-word; }
   html.js header.site nav a[aria-current="page"] { text-decoration: underline 2px var(--zand); text-underline-offset: 6px; text-decoration-skip-ink: none; }
 }
 @media (prefers-reduced-motion: reduce) { .menu-streep { transition: none; } }
+/* korte lijst op de homepage: de naam van het deel, rechts uitgelijnd; smal eronder */
+.lijst.kort a.waar { white-space: normal; text-align: right; max-width: 15rem; line-height: 1.35; }
+@media (max-width: 700px) { .lijst.kort li { display: block; } .lijst.kort a.waar { display: inline-block; text-align: left; max-width: none; padding-block: 0.2rem 0.4rem; } }

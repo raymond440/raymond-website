@@ -14,7 +14,7 @@ const { items, plekken } = Astro.props;
     return (
       <li>
         <span><a class="titel" href={`/artikelen/${a.id}/`}>{a.data.titel}</a>{a.data.concept && <span class="concept"> · concept</span>}</span>
-        {plek && <a class="label meta waar" href={`/onbevangen/#${plek.onderdeelId}`}>Deel {plek.deel}</a>}
+        {plek && <a class="label meta waar" href={`/onbevangen/#${plek.onderdeelId}`} title={`Deel ${plek.deel} van de ode`}>{plek.deelTitel.replace(/\.$/, '')}</a>}
       </li>
     );
   })}
