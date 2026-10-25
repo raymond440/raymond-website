@@ -43,7 +43,7 @@ export function maakCheckout(env, aantal, origin) {
     cancel_url: `${origin}/erbij/#bestel`,
     line_items: [regel],
     payment_method_types: ['ideal', 'card'],
-    shipping_address_collection: { allowed_countries: (env.ERBIJ_LANDEN ?? 'NL').split(',') },
+    shipping_address_collection: { allowed_countries: (env.ERBIJ_LANDEN ?? 'NL,BE').split(',') },
     // optioneel telefoonnummer: een eigen veld, want phone_number_collection is bij Stripe altijd verplicht
     custom_fields: [{ key: 'telefoon', label: { type: 'custom', custom: 'Telefoon (mag leeg)' }, type: 'text', optional: true }],
     metadata: { product: 'erbij', aantal },
@@ -85,6 +85,8 @@ export function bestellingUitSessie(s) {
     aantal,
     totaal: (s.amount_total ?? 0) / 100,
     methode: methode === 'ideal' ? 'iDEAL' : methode === 'card' ? 'kaart' : methode,
+    postcode: adres.postal_code || '',
+    land: adres.country || 'NL',
     adresRegels: [adres.line1, adres.line2, [adres.postal_code, adres.city].filter(Boolean).join(' '), adres.country].filter(Boolean),
     piId: typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id,
     sessieId: s.id,

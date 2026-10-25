@@ -25,7 +25,7 @@ export async function odeEntry() {
 export const BEDRIJF = {
   naam: 'Saga BV',
   handelsnaam: 'ERBIJ',
-  kvk: null as string | null,
-  btw: null as string | null,
+  kvk: '76135179' as string | null,
+  btw: 'NL860519478B01' as string | null,
   adres: null as string | null,
 };

@@ -5,7 +5,7 @@ import { checkout, webhook, verzonden } from '../worker/erbij.js';
 import { controleerWebhook } from '../worker/stripe.js';
 import { bevestigingsMail, verzendMail, bestellingIntern } from '../worker/mail.js';
 
-const env = { STRIPE_SECRET_KEY: 'sk_test_x', STRIPE_WEBHOOK_SECRET: 'whsec_test', ERBIJ_TOKEN_SECRET: 'token-geheim', BREVO_API_KEY: 'brevo-x', TRACK_URL: 'https://track.example/{code}' };
+const env = { STRIPE_SECRET_KEY: 'sk_test_x', STRIPE_WEBHOOK_SECRET: 'whsec_test', ERBIJ_TOKEN_SECRET: 'token-geheim', BREVO_API_KEY: 'brevo-x', TRACK_URL: 'https://track.example/{code}/{postcode}/{land}' };
 
 // ---- token
 const tok = await maakToken(env.ERBIJ_TOKEN_SECRET, 'pi_1');
@@ -19,7 +19,7 @@ const stripeState = { intent: { id: 'pi_1', metadata: { product: 'erbij', aantal
 const sessie = {
   id: 'cs_test_1', payment_status: 'paid', amount_total: 5990, metadata: { product: 'erbij', aantal: '2' },
   customer_details: { name: 'Sanne de Vries', email: 'sanne@voorbeeld.nl', address: { country: 'NL' } },
-  collected_information: { shipping_details: { name: 'Sanne de Vries', address: { line1: 'Voorbeeldstraat 1', postal_code: '1234 AB', city: 'Groningen', country: 'NL' } } },
+  collected_information: { shipping_details: { name: 'Sanne de Vries', address: { line1: 'Voorbeeldstraat 1', postal_code: '1234 AB', city: 'Groningen', country: 'BE' } } },
   custom_fields: [{ key: 'telefoon', text: { value: '0612345678' } }],
   payment_intent: { id: 'pi_1', latest_charge: { payment_method_details: { type: 'ideal' } } },
 };
@@ -45,7 +45,7 @@ const b = stripeState.checkoutBody;
 assert.equal(b.get('mode'), 'payment'); assert.equal(b.get('line_items[0][quantity]'), '2');
 assert.equal(b.get('line_items[0][price_data][unit_amount]'), '2995'); assert.equal(b.get('line_items[0][price_data][currency]'), 'eur');
 assert.deepEqual([b.get('payment_method_types[0]'), b.get('payment_method_types[1]')], ['ideal', 'card']);
-assert.equal(b.get('shipping_address_collection[allowed_countries][0]'), 'NL');
+assert.equal(b.get('shipping_address_collection[allowed_countries][0]'), 'NL'); assert.equal(b.get('shipping_address_collection[allowed_countries][1]'), 'BE');
 assert.equal(b.get('custom_fields[0][optional]'), 'true');
 assert.equal(b.get('success_url'), 'https://raymondklompsma.nl/erbij/bedankt/');
 for (const slecht of ['0', '6', 'x', '1.5', '']) {
@@ -92,7 +92,7 @@ r = await verzonden(new Request('https://raymondklompsma.nl/api/erbij/verzonden?
 r = await verzonden(post('/api/erbij/verzonden', fd({ t: link.split('t=')[1], volgen: '3SABCD1234567' })), env);
 assert.equal(r.status, 200); assert.equal(stripeState.gemaild.length, 3);
 const verzend = stripeState.gemaild[2];
-assert.equal(verzend.subject, 'Je honing is onderweg.'); assert.match(verzend.htmlContent, /track\.example\/3SABCD1234567/);
+assert.equal(verzend.subject, 'Je honing is onderweg.'); assert.match(verzend.htmlContent, /track\.example\/3SABCD1234567\/1234AB\/BE/);
 assert.equal(stripeState.intent.metadata.verstuurd, 'ja'); assert.equal(stripeState.intent.metadata.trackingcode, '3SABCD1234567');
 r = await verzonden(post('/api/erbij/verzonden', fd({ t: link.split('t=')[1], volgen: '' })), env);
 assert.equal(stripeState.gemaild.length, 3, 'geen tweede verzendmail');
@@ -102,3 +102,14 @@ assert.doesNotMatch(verzendMail({ voornaam: 'Sanne' }).html, /volgen/);
 assert.match(verzendMail({ voornaam: 'Sanne', volgen: 'https://t.example/abc' }).html, /Je kunt ze hier volgen/);
 assert.match(bevestigingsMail({ voornaam: '<b>x</b>', aantal: 1 }).html, /&lt;b&gt;/, 'html wordt geëscaped');
 console.log('erbij: alles ok');
+
+// ---- Cloudflare Email Service als verstuurder
+{
+  const verstuurd = [];
+  const envCf = { EMAIL: { send: async (m) => { verstuurd.push(m); return { messageId: 'm1' }; } } };
+  const { verstuurMail } = await import('../worker/mail.js');
+  await verstuurMail(envCf, { naar: 'a@b.nl', naam: 'A B', mail: bevestigingsMail({ voornaam: 'A', aantal: 1 }) });
+  assert.equal(verstuurd[0].to.email, 'a@b.nl'); assert.equal(verstuurd[0].replyTo.email, 'hey-raymond@klompsma.nl'); assert.equal(verstuurd[0].subject, 'Je bent erbij.');
+  await assert.rejects(() => verstuurMail({}, { naar: 'a@b.nl', mail: bevestigingsMail({ voornaam: 'A', aantal: 1 }) }));
+  console.log('erbij (Cloudflare Email): ok');
+}

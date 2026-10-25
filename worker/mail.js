@@ -1,4 +1,4 @@
-// Klantmail via de transactionele API van Brevo (voorstel, zie AGENTS.md). Zonder BREVO_API_KEY wordt er niets verstuurd.
+// Klantmail via Cloudflare Email Service (voorkeur) of Brevo. Zonder mailverstuurder wordt er niets verstuurd.
 // De teksten zijn die van Raymond, letterlijk. Verander ze niet zonder zijn akkoord.
 
 export const AFZENDER = { name: 'Raymond Klompsma', email: 'bestelling@raymondklompsma.nl' };
@@ -50,12 +50,15 @@ Alles wat bestaat, is verbonden.
 }
 
 // volgen: een link of een trackingcode (mag leeg). Een code wordt een link als TRACK_URL (met {code}) is ingesteld.
-export function verzendMail({ voornaam, volgen = '', trackUrl = '' }) {
+// PostNL: https://postnl.nl/tracktrace/?B=<code>&P=<postcode>&D=<land>&T=C (formaat uit PostNL's eigen integratiegids, nog niet met een echte zending geprobeerd)
+export const POSTNL_URL = 'https://postnl.nl/tracktrace/?B={code}&P={postcode}&D={land}&T=C';
+
+export function verzendMail({ voornaam, volgen = '', trackUrl = POSTNL_URL, postcode = '', land = 'NL' }) {
   const naam = esc(voornaam || '');
   const v = volgen.trim();
   let link = '';
   if (/^https?:\/\//i.test(v)) link = v;
-  else if (v && trackUrl) link = trackUrl.replace('{code}', encodeURIComponent(v));
+  else if (v && trackUrl) link = trackUrl.replace('{code}', encodeURIComponent(v)).replace('{postcode}', encodeURIComponent(postcode.replace(/\s+/g, ''))).replace('{land}', encodeURIComponent(land));
   const volgZin = link ? ` Je kunt ze hier volgen: <a href="${esc(link)}" style="color:#3f3b39">${esc(link)}</a>.` : v ? ` Trackingcode: ${esc(v)}.` : '';
   const volgTekst = link ? ` Je kunt ze hier volgen: ${link}.` : v ? ` Trackingcode: ${v}.` : '';
   const onderwerp = 'Je honing is onderweg.';
@@ -112,13 +115,26 @@ Markeer als verstuurd: ${verzondenUrl}
   return { onderwerp: 'Nieuwe bestelling ERBIJ', html, tekst };
 }
 
+// Voorkeur: Cloudflare Email Service (binding EMAIL, geen extra account). Anders Brevo (BREVO_API_KEY).
 export async function verstuurMail(env, { naar, naam, mail }) {
-  if (!env.BREVO_API_KEY) throw new Error('BREVO_API_KEY ontbreekt');
+  const van = env.MAIL_FROM || AFZENDER.email;
+  if (env.EMAIL?.send) {
+    await env.EMAIL.send({
+      from: { email: van, name: AFZENDER.name },
+      to: naam ? { email: naar, name: naam } : naar,
+      replyTo: REPLY_TO,
+      subject: mail.onderwerp,
+      html: mail.html,
+      text: mail.tekst,
+    });
+    return;
+  }
+  if (!env.BREVO_API_KEY) throw new Error('Geen mailverstuurder ingesteld (binding EMAIL of BREVO_API_KEY)');
   const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
-      sender: { name: AFZENDER.name, email: env.MAIL_FROM || AFZENDER.email },
+      sender: { name: AFZENDER.name, email: van },
       to: [{ email: naar, ...(naam ? { name: naam } : {}) }],
       replyTo: REPLY_TO,
       subject: mail.onderwerp,

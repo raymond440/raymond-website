@@ -112,7 +112,7 @@ export async function verzonden(request, env) {
   if (intent.metadata?.verstuurd === 'ja') return html(pagina('<h1 style="font-weight:500">Al verstuurd.</h1><p>Deze bestelling was al gemarkeerd. Er is geen tweede mail uitgegaan.</p>'));
   const volgen = String(form.get('volgen') ?? '').trim().slice(0, 300);
   try {
-    if (b.email) await verstuurMail(env, { naar: b.email, naam: b.naam, mail: verzendMail({ voornaam: b.voornaam, volgen, trackUrl: env.TRACK_URL }) });
+    if (b.email) await verstuurMail(env, { naar: b.email, naam: b.naam, mail: verzendMail({ voornaam: b.voornaam, volgen, trackUrl: env.TRACK_URL || undefined, postcode: b.postcode, land: b.land }) });
     await zetIntentMetadata(env, pi, { verstuurd: 'ja', verstuurd_op: new Date().toISOString().slice(0, 10), ...(volgen ? { trackingcode: volgen.slice(0, 450) } : {}) });
   } catch (e) {
     console.error('Verzendmail mislukt', e);
