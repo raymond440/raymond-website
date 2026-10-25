@@ -568,3 +568,16 @@ body { overflow-wrap: break-word; }
   .stepper output { min-width: 1.5rem; }
   .product-koop .knop { padding: 0 0.7rem; font-size: 12.5px; letter-spacing: 0.9px; min-width: 0; }
 }
+
+/* herroepen */
+.herroepen .intro { margin-bottom: 1.4rem; }
+.herroep-form { max-width: 34rem; }
+.knop-herroep { font-family: var(--sans); font-size: 13.68px; letter-spacing: 1.2312px; text-transform: uppercase; font-weight: 700; padding: 0.8rem 1.3rem; border: 1px solid var(--inkt); cursor: pointer; background: var(--honing); color: var(--inkt); min-height: 44px; justify-self: start; grid-column: 1 / -1; }
+.knop-stil { font-family: var(--sans); font-size: 13.68px; letter-spacing: 1.2312px; text-transform: uppercase; padding: 0.8rem 1.1rem; border: 1px solid var(--inkt); background: none; color: var(--inkt); cursor: pointer; min-height: 44px; }
+.herroep-knoppen { display: flex; gap: 0.7rem; flex-wrap: wrap; margin: 1rem 0; }
+.herroep-samenvatting { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 0.4rem 1rem; margin: 0.6rem 0 1rem; max-width: 34rem; }
+.herroep-samenvatting dt { font-family: var(--sans); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); padding-top: 0.3rem; }
+.herroep-samenvatting dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.herroepen .kop-klein { font-size: 25px; line-height: 36px; margin: 1.5rem 0 0.4rem; }
+.herroepen .fout { margin: 0.8rem 0; padding: 0.6rem 0.8rem; border-left: 3px solid var(--koraal-inkt); max-width: 34rem; }
+.herroepen .klein { margin-top: 2rem; font-size: 16px; line-height: 26px; color: var(--gedempt); max-width: var(--maat); }

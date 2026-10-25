@@ -28,7 +28,7 @@ Ik pak elke set zelf in en verstuur hem met PostNL. De levering is gepland voor 
 
 ## Herroepen.
 
-Je mag je bestelling binnen 14 dagen na ontvangst herroepen, zonder reden. Mail daarvoor hey-raymond@klompsma.nl met je naam en wat je wilt terugsturen. Je krijgt het bedrag terug zodra ik de potjes terug heb of je bewijs van verzending hebt gestuurd. De kosten van het terugsturen zijn voor jou.
+Je mag je bestelling binnen 14 dagen na ontvangst herroepen, zonder reden. Gebruik daarvoor de knop op de pagina [Herroepen](/erbij/herroepen/), of mail hey-raymond@klompsma.nl met je naam en wat je wilt terugsturen. Je krijgt direct een bevestiging per mail. Je krijgt het bedrag terug zodra ik de potjes terug heb of je bewijs van verzending hebt gestuurd. De kosten van het terugsturen zijn voor jou.
 
 Een potje waarvan je het zegel hebt verbroken mag je om redenen van hygiëne en gezondheid niet terugsturen. Dat potje kun je dus niet herroepen. Een ongeopend potje wel.
 

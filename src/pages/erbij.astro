@@ -105,9 +105,7 @@ const punten = [
           </form>
           <p class="product-klein">Nog niet in de winkel, alleen hier. Meer dan vijf sets? Mail <a href="mailto:hey-raymond@klompsma.nl">hey-raymond@klompsma.nl</a>.</p>
           <p class="product-klein">Honing kan van nature kristalliseren. Geef geen honing aan kinderen onder één jaar.</p>
-          {voorwaarden.length > 0 && (
-            <p class="product-klein">{voorwaarden.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.label}</a></>)}</p>
-          )}
+          <p class="product-klein">{[...voorwaarden, { label: 'Herroepen', href: '/erbij/herroepen/' }].map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.label}</a></>)}</p>
         </div>
       </section>
 

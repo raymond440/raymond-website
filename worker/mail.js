@@ -14,7 +14,7 @@ function kader(inhoudHtml, { intern = false } = {}) {
 <div style="max-width:560px;margin:0 auto;padding:28px 22px;background:#fef9f3;color:#3f3b39;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:27px">
 ${logo}${inhoudHtml}
 <p style="margin:28px 0 0;padding-top:12px;border-top:1px solid ${HONING};text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${HONING}">Alles wat bestaat, is verbonden.</p>
-${intern ? '' : `<p style="margin:14px 0 0;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#7a736d"><a href="${SITE}/erbij/voorwaarden/" style="color:#7a736d">Algemene voorwaarden</a> · <a href="${SITE}/erbij/privacy/" style="color:#7a736d">Privacy bij ERBIJ</a></p>`}
+${intern ? '' : `<p style="margin:14px 0 0;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#7a736d"><a href="${SITE}/erbij/voorwaarden/" style="color:#7a736d">Algemene voorwaarden</a> · <a href="${SITE}/erbij/privacy/" style="color:#7a736d">Privacy bij ERBIJ</a> · <a href="${SITE}/erbij/herroepen/" style="color:#7a736d">Herroepen</a></p>`}
 </div></body></html>`;
 }
 const p = (t, stijl = '') => `<p style="margin:0 0 16px;${stijl}">${t}</p>`;
@@ -49,6 +49,7 @@ Alles wat bestaat, is verbonden.
 
 Algemene voorwaarden: ${SITE}/erbij/voorwaarden/
 Privacy bij ERBIJ: ${SITE}/erbij/privacy/
+Herroepen: ${SITE}/erbij/herroepen/
 `;
   return { onderwerp, html, tekst };
 }
@@ -87,8 +88,61 @@ Alles wat bestaat, is verbonden.
 
 Algemene voorwaarden: ${SITE}/erbij/voorwaarden/
 Privacy bij ERBIJ: ${SITE}/erbij/privacy/
+Herroepen: ${SITE}/erbij/herroepen/
 `;
   return { onderwerp, html, tekst };
+}
+
+// Herroeping: bevestiging aan de klant (op een duurzame drager, met datum en tijd) en melding aan Raymond.
+export function herroepingKlant({ naam, bestelling, ontvangen }) {
+  const voornaam = (naam || '').trim().split(/\s+/)[0];
+  const onderwerp = 'Je herroeping is ontvangen.';
+  const html = kader(
+    p(`Hoi ${esc(voornaam)},`) +
+      p(`Je herroeping is ontvangen op ${esc(ontvangen)}.`) +
+      p(`Dit heb je doorgegeven: ${esc(bestelling).replace(/\n/g, '<br>')}`) +
+      p('Ik neem zo snel mogelijk contact met je op over het terugsturen van de potjes en de terugbetaling.') +
+      p('Vragen? Beantwoord deze mail gewoon. Ik lees alles en antwoord zelf.') +
+      p('Raymond'),
+  );
+  const tekst = `Hoi ${voornaam},
+
+Je herroeping is ontvangen op ${ontvangen}.
+
+Dit heb je doorgegeven: ${bestelling}
+
+Ik neem zo snel mogelijk contact met je op over het terugsturen van de potjes en de terugbetaling.
+
+Vragen? Beantwoord deze mail gewoon. Ik lees alles en antwoord zelf.
+
+Raymond
+
+Alles wat bestaat, is verbonden.
+
+Algemene voorwaarden: ${SITE}/erbij/voorwaarden/
+Privacy bij ERBIJ: ${SITE}/erbij/privacy/
+Herroepen: ${SITE}/erbij/herroepen/
+`;
+  return { onderwerp, html, tekst };
+}
+
+export function herroepingIntern({ naam, email, bestelling, ontvangen }) {
+  const html = kader(
+    p(`<strong>Herroeping ERBIJ</strong>, ontvangen op ${esc(ontvangen)}.`) +
+      p(`Naam: ${esc(naam)}<br>E-mail: ${esc(email)}`) +
+      p(`Bestelling: ${esc(bestelling).replace(/\n/g, '<br>')}`) +
+      p('Beantwoord deze mail om de klant te antwoorden. De klant heeft een bevestiging gekregen.'),
+    { intern: true },
+  );
+  const tekst = `Herroeping ERBIJ, ontvangen op ${ontvangen}.
+
+Naam: ${naam}
+E-mail: ${email}
+Bestelling: ${bestelling}
+
+Beantwoord deze mail om de klant te antwoorden. De klant heeft een bevestiging gekregen.
+`;
+  return { onderwerp: `Herroeping ERBIJ: ${naam}`, html, tekst };
 }
 
 export function bestellingIntern(b, verzondenUrl) {
@@ -126,10 +180,10 @@ Markeer als verstuurd: ${verzondenUrl}
 export const devPostbus = [];
 
 // Voorkeur: Cloudflare Email Service (binding EMAIL, geen extra account). Anders Brevo (BREVO_API_KEY).
-export async function verstuurMail(env, { naar, naam, mail }) {
+export async function verstuurMail(env, { naar, naam, mail, replyTo = REPLY_TO }) {
   const van = env.MAIL_FROM || AFZENDER.email;
   if (env.MAIL_DRY_RUN === '1') {
-    devPostbus.push({ van, naar, naam, onderwerp: mail.onderwerp, html: mail.html, tekst: mail.tekst });
+    devPostbus.push({ van, naar, naam, replyTo, onderwerp: mail.onderwerp, html: mail.html, tekst: mail.tekst });
     console.log(`[dry-run] mail aan ${naar}: ${mail.onderwerp}`);
     return;
   }
@@ -137,7 +191,7 @@ export async function verstuurMail(env, { naar, naam, mail }) {
     await env.EMAIL.send({
       from: { email: van, name: AFZENDER.name },
       to: naam ? { email: naar, name: naam } : naar,
-      replyTo: REPLY_TO,
+      replyTo,
       subject: mail.onderwerp,
       html: mail.html,
       text: mail.tekst,
@@ -151,7 +205,7 @@ export async function verstuurMail(env, { naar, naam, mail }) {
     body: JSON.stringify({
       sender: { name: AFZENDER.name, email: van },
       to: [{ email: naar, ...(naam ? { name: naam } : {}) }],
-      replyTo: REPLY_TO,
+      replyTo,
       subject: mail.onderwerp,
       htmlContent: mail.html,
       textContent: mail.tekst,

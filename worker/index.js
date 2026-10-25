@@ -1,6 +1,6 @@
 import { EmailMessage } from 'cloudflare:email';
 import { verwerk } from './aanvraag.js';
-import { checkout, webhook, verzonden } from './erbij.js';
+import { checkout, webhook, verzonden, herroepen } from './erbij.js';
 import { devPostbus, esc } from './mail.js';
 
 // De site zelf is statisch (./dist). Dit Worker-script handelt alleen /api/* af; de rest komt direct uit de assets.
@@ -11,6 +11,7 @@ export default {
     if (url.pathname === '/api/erbij/checkout') return checkout(request, env);
     if (url.pathname === '/api/erbij/webhook') return webhook(request, env);
     if (url.pathname === '/api/erbij/verzonden') return verzonden(request, env);
+    if (url.pathname === '/api/erbij/herroepen') return herroepen(request, env);
     // alleen lokaal, met MAIL_DRY_RUN=1: bekijk de mails die anders zouden zijn verstuurd
     if (url.pathname === '/api/erbij/dev-mails' && env.MAIL_DRY_RUN === '1') {
       const n = url.searchParams.get('n');

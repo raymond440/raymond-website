@@ -1,7 +1,7 @@
 // Draai met: node scripts/test-erbij.mjs   (Stripe en Brevo worden nagebootst, er gaat niets echt weg)
 import assert from 'node:assert/strict';
 import { hmacHex, maakToken, leesToken } from '../worker/crypto.js';
-import { checkout, webhook, verzonden } from '../worker/erbij.js';
+import { checkout, webhook, verzonden, herroepen } from '../worker/erbij.js';
 import { controleerWebhook } from '../worker/stripe.js';
 import { bevestigingsMail, verzendMail, bestellingIntern } from '../worker/mail.js';
 
@@ -119,3 +119,21 @@ assert.match(bevestigingsMail({ voornaam: 'A', aantal: 1 }).html, /erbij\/voorwa
 assert.match(verzendMail({ voornaam: 'A' }).tekst, /erbij\/privacy/);
 assert.doesNotMatch(bestellingIntern({ naam: 'A', aantal: 1, adresRegels: [], email: '', totaal: 29.95, methode: 'iDEAL', piId: 'pi' }, 'https://x').html, /voorwaarden/);
 console.log('erbij (links in mails): ok');
+
+// ---- herroepen
+{
+  const verstuurd = [];
+  const envH = { MAIL_DRY_RUN: '0', EMAIL: { send: async (m) => { verstuurd.push(m); return { messageId: 'h' }; } } };
+  const h = (o, headers = {}) => herroepen(post('/api/erbij/herroepen', fd(o), { Origin: 'https://raymondklompsma.nl', ...headers }), envH);
+  const goed = { naam: 'Piet Pieters', mail: 'piet@voorbeeld.nl', bestelling: 'Mijn bestelling van 2 sets.', website: '' };
+  let r = await h(goed); const j = await r.json();
+  assert.equal(r.status, 200); assert.equal(j.ok, true); assert.match(j.ontvangen, /20\d\d/);
+  assert.equal(verstuurd.length, 2);
+  assert.equal(verstuurd[0].to, 'hey-raymond@klompsma.nl'); assert.match(verstuurd[0].subject, /Herroeping ERBIJ/); assert.equal(verstuurd[0].replyTo.email, 'piet@voorbeeld.nl');
+  assert.equal(verstuurd[1].to.email, 'piet@voorbeeld.nl'); assert.equal(verstuurd[1].subject, 'Je herroeping is ontvangen.'); assert.match(verstuurd[1].text, /ontvangen op/);
+  assert.equal((await h({ ...goed, website: 'bot' })).status, 200); assert.equal(verstuurd.length, 2, 'honeypot');
+  assert.equal((await h({ ...goed, mail: 'x' })).status, 400);
+  assert.equal((await h({ ...goed, bestelling: '' })).status, 400);
+  assert.equal((await h(goed, { Origin: 'https://boos.example' })).status, 403);
+  console.log('erbij (herroepen): ok');
+}
