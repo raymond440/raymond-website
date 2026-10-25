@@ -6,7 +6,7 @@ import { artikelen, odeEntry } from '../site';
 
 export type Tak = { id: string; titel: string; omschrijving: string; kantlijn: string; bij: string };
 export type Onderdeel = { id: string; titel: string; takken: Tak[] };
-export type Deel = { nr: number; id: string; titel: string; html: string; onderdelen: Onderdeel[]; takken: Tak[] };
+export type Deel = { nr: number; id: string; titel: string; html: string; onderdelen: Onderdeel[]; deelTakken: Tak[]; takken: Tak[] };
 export type Ode = {
   titel: string;
   beschrijving: string;
@@ -49,34 +49,45 @@ export async function laadOde(): Promise<Ode | undefined> {
       takken: [],
     }));
 
+    const deelId = `deel-${nr}`;
+    const deelTakken: Tak[] = [];
     for (const a of alleTakken) {
+      // een tak hangt aan een onderdeel (###) of, als het deel geen kopjes heeft, aan het deel zelf (deel-N)
       const onderdeel = onderdelen.find((o) => o.id === a.data.hoort_bij);
-      if (!onderdeel) continue;
+      if (!onderdeel && a.data.hoort_bij !== deelId) continue;
       const tak: Tak = {
         id: a.id,
         titel: a.data.titel,
         omschrijving: a.data.beschrijving,
         kantlijn: a.data.kantlijn ?? a.data.beschrijving,
-        bij: onderdeel.id,
+        bij: a.data.hoort_bij!,
       };
-      onderdeel.takken.push(tak);
+      (onderdeel ? onderdeel.takken : deelTakken).push(tak);
 
       if (!a.data.brug) throw new Error(`Artikel ${a.id} heeft hoort_bij maar geen brug.`);
-      // de brug moet in het onderdeel zelf staan, niet ergens anders in het deel
-      const begin = deelHtml.indexOf(`<h3 id="${onderdeel.id}">`);
-      const einde = deelHtml.indexOf('<h3 id="', begin + 1);
-      const sectie = deelHtml.slice(begin, einde === -1 ? undefined : einde);
-      const plek = sectie.indexOf(`<p>${esc(a.data.brug)}`);
-      if (plek === -1) throw new Error(`Brug van ${a.id} niet gevonden in "${onderdeel.titel}": ${a.data.brug}`);
+      // de brug moet in het onderdeel zelf staan (of in het deel, bij een tak aan het deel)
+      let begin = 0;
+      let einde = deelHtml.length;
+      if (onderdeel) {
+        begin = deelHtml.indexOf(`<h3 id="${onderdeel.id}">`);
+        const volgende = deelHtml.indexOf('<h3 id="', begin + 1);
+        if (volgende !== -1) einde = volgende;
+      }
+      const sectie = deelHtml.slice(begin, einde);
+      const plek = sectie.indexOf(esc(a.data.brug));
+      if (plek === -1) throw new Error(`Brug van ${a.id} niet gevonden in "${onderdeel?.titel ?? titel}": ${a.data.brug}`);
+      // de verwijzing komt voor de alinea waarin de brugzin staat
+      const alinea = sectie.lastIndexOf('<p>', plek);
+      if (alinea === -1) throw new Error(`Brug van ${a.id} staat niet in een alinea.`);
       const aside =
         `<aside class="takken kant"><p class="label">Hier schreef ik verder over</p>` +
         `<a class="tak-titel" href="/artikelen/${a.id}/">${esc(tak.titel)}</a>` +
         `<span class="tak-beschr">${esc(tak.kantlijn)}</span></aside>`;
-      const abs = begin + plek;
+      const abs = begin + alinea;
       deelHtml = deelHtml.slice(0, abs) + aside + deelHtml.slice(abs);
     }
 
-    delen.push({ nr, id: `deel-${nr}`, titel: m[2], html: deelHtml, onderdelen, takken: onderdelen.flatMap((o) => o.takken) });
+    delen.push({ nr, id: deelId, titel: m[2], html: deelHtml, onderdelen, deelTakken, takken: [...onderdelen.flatMap((o) => o.takken), ...deelTakken] });
   }
   if (delen.length === 0) throw new Error('Geen delen gevonden in de ode.');
 
@@ -102,6 +113,7 @@ export async function plekken(): Promise<Map<string, Plek>> {
   for (const d of ode.delen)
     for (const o of d.onderdelen)
       for (const t of o.takken) kaart.set(t.id, { deel: d.nr, deelTitel: d.titel, onderdeel: o.titel, onderdeelId: o.id });
+  for (const d of ode.delen) for (const t of d.deelTakken) kaart.set(t.id, { deel: d.nr, deelTitel: d.titel, onderdeel: '', onderdeelId: d.id });
   return kaart;
 }
 

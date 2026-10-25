@@ -3,33 +3,41 @@ import { CONTACT_EMAIL } from '../site';
 interface Veld {
   naam: string;
   label: string;
-  type?: 'text' | 'email' | 'textarea';
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  opties?: string[];
   verplicht?: boolean;
   breed?: boolean;
   placeholder?: string;
   autocomplete?: string;
 }
 interface Props {
-  soort: 'keynote' | 'mentor' | 'stip';
+  soort: 'keynote' | 'mentor' | 'stip' | 'erbij';
+  klas?: string;
+  bevestiging?: string;
   kop: string;
   intro: string;
   knop: string;
   velden: Veld[];
 }
-const { soort, kop, intro, knop, velden } = Astro.props;
+const { soort, kop, intro, knop, velden, klas = '', bevestiging = 'Dank je. Je bericht is bij me aangekomen. Ik antwoord zelf, meestal binnen een paar dagen.' } = Astro.props;
 const id = `aanvraag-${soort}`;
 const api = true; // Worker en Email Routing staan (zie worker/)
 const mailAan = CONTACT_EMAIL;
 ---
-<section class="aanvraag" id="aanvraag" aria-labelledby={`${id}-kop`} data-soort={soort} data-api={api ? '1' : '0'} data-mail={mailAan}>
+<section class:list={['aanvraag', klas]} id="aanvraag" aria-labelledby={`${id}-kop`} data-soort={soort} data-api={api ? '1' : '0'} data-mail={mailAan} data-bevestiging={bevestiging}>
   <h3 id={`${id}-kop`}>{kop}</h3>
+  <slot name="prijs" />
   <p>{intro}</p>
   <form class="aanvraag-form" method="post" action="/api/aanvraag" novalidate={false}>
     <input type="hidden" name="soort" value={soort} />
     {velden.map((v) => (
       <div class:list={['veld', { breed: v.breed }]}>
         <label for={`${id}-${v.naam}`}>{v.label}</label>
-        {v.type === 'textarea' ? (
+        {v.type === 'select' ? (
+          <select id={`${id}-${v.naam}`} name={v.naam} required={v.verplicht}>
+            {v.opties?.map((o) => <option value={o}>{o}</option>)}
+          </select>
+        ) : v.type === 'textarea' ? (
           <textarea id={`${id}-${v.naam}`} name={v.naam} rows="4" placeholder={v.placeholder} required={v.verplicht} />
         ) : (
           <input
@@ -49,6 +57,7 @@ const mailAan = CONTACT_EMAIL;
     </div>
     <button type="submit">{knop}</button>
   </form>
+  <slot />
   <p class="klaar" role="status" aria-live="polite" hidden></p>
   <p class="fout" role="alert" hidden></p>
 </section>
@@ -66,7 +75,7 @@ const mailAan = CONTACT_EMAIL;
       if (blok.dataset.api !== '1') {
         // zonder Worker: open het mailprogramma met de ingevulde gegevens
         const d = new FormData(form);
-        const regels = ['naam', 'mail', 'organisatie', 'wanneer', 'bericht'].filter((k) => d.get(k)).map((k) => `${k}: ${d.get(k)}`);
+        const regels = ['naam', 'mail', 'organisatie', 'wanneer', 'aantal', 'telefoon', 'adres', 'postcode', 'plaats', 'bericht'].filter((k) => d.get(k)).map((k) => `${k}: ${d.get(k)}`);
         const onderwerp = encodeURIComponent(`Aanvraag ${blok.dataset.soort}`);
         location.href = `mailto:${blok.dataset.mail}?subject=${onderwerp}&body=${encodeURIComponent(regels.join('\n'))}`;
         return;
@@ -76,7 +85,7 @@ const mailAan = CONTACT_EMAIL;
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!res.ok) throw new Error(String(res.status));
         form.hidden = true;
-        klaar.textContent = 'Dank je. Je bericht is bij me aangekomen. Ik antwoord zelf, meestal binnen een paar dagen.';
+        klaar.textContent = blok.dataset.bevestiging ?? '';
         klaar.hidden = false;
         (window as any).posthog?.capture('aanvraag_verstuurd', { soort: blok.dataset.soort });
       } catch {

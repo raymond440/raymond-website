@@ -18,6 +18,7 @@ const items = [
     id: d.id,
     nr: d.nr,
     titel: d.titel.replace(/\.$/, ''),
+    aantal: d.deelTakken.length,
     kinderen: d.onderdelen.map((o) => ({ id: o.id, titel: o.titel.replace(/\.$/, ''), aantal: o.takken.length })),
   })),
 ];

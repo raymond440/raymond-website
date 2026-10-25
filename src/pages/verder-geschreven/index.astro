@@ -52,6 +52,13 @@ const aantal = (n: number) => (n === 0 ? 'nog niets' : n === 1 ? '1 stuk' : `${n
                         </li>
                       )),
                     )}
+                    {d.deelTakken.map((t) => (
+                      <li>
+                        <a class="tak" href={`/artikelen/${t.id}/`}>{t.titel}</a>
+                        <p class="omschrijving">{t.omschrijving}</p>
+                        <p class="bij">Bij <a href={`/onbevangen/#${d.id}`}>{kleineLetter(d.titel)}</a></p>
+                      </li>
+                    ))}
                   </ul>
                 )}
               </div>

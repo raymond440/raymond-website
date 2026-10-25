@@ -145,7 +145,7 @@ Onbevangenheid krijgt voor mij pas betekenis als ik haar toelaat in wat ik doe. 
 
 Vrijgevigheid is daar een mooi voorbeeld van. Iets geven zonder plan en zonder verwachting, zonder dat het ergens toe hoeft te leiden. Geld, maar net zo goed tijd, aandacht of vertrouwen. Juist die kleine, onverklaarbare gebaren openen iets. Een hand op een schouder, of een knipoog zonder iets te zeggen, kan genoeg zijn om iemand te laten weten dat je aan hem denkt in een moeilijke periode.
 
-Het is een van de pijlers onder mijn nieuwe startup, waarmee ik onbevangen gedrag wil laten kruisbestuiven. Honing is het middel. Ik verkoop de potjes per twee en vraag je er één weg te geven aan iemand die het volgens jou verdient. Zonder er iets voor terug te vragen.
+Het is een van de pijlers onder mijn nieuwe startup [ERBIJ](/erbij/), waarmee ik onbevangen gedrag wil laten kruisbestuiven. Honing is het middel. Ik verkoop de potjes per twee en vraag je er één weg te geven aan iemand die het volgens jou verdient. Zonder er iets voor terug te vragen.
 
 Hetzelfde zie ik bij beginnen. Veel van wat voor mij betekenis kreeg, begon zonder concept. Met een idee dat ik nog nauwelijks onder woorden kon brengen, en een richting die ik vooral voelde. Door te starten ontstaat er iets om op te reageren. Beweging brengt scherpte. Gaandeweg wordt duidelijk wat mag blijven en wat weer mag verdwijnen.
 
