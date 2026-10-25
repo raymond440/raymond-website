@@ -1,0 +1,8 @@
+{
+  // Alleen voor lokaal testen met scripts/dev-erbij.sh: zelfde Worker, zonder de binding die Cloudflare nodig heeft.
+  "name": "raymond-website-dev",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-20",
+  "assets": { "directory": "./dist", "binding": "ASSETS", "not_found_handling": "404-page", "run_worker_first": ["/api/*"] },
+  "send_email": [{ "name": "MAIL", "destination_address": "raymond@klompsma.nl" }]
+}

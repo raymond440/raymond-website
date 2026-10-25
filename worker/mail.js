@@ -115,9 +115,17 @@ Markeer als verstuurd: ${verzondenUrl}
   return { onderwerp: 'Nieuwe bestelling ERBIJ', html, tekst };
 }
 
+// Alleen voor lokaal testen (MAIL_DRY_RUN=1): mails worden niet verstuurd maar bewaard, zie /api/erbij/dev-mails.
+export const devPostbus = [];
+
 // Voorkeur: Cloudflare Email Service (binding EMAIL, geen extra account). Anders Brevo (BREVO_API_KEY).
 export async function verstuurMail(env, { naar, naam, mail }) {
   const van = env.MAIL_FROM || AFZENDER.email;
+  if (env.MAIL_DRY_RUN === '1') {
+    devPostbus.push({ van, naar, naam, onderwerp: mail.onderwerp, html: mail.html, tekst: mail.tekst });
+    console.log(`[dry-run] mail aan ${naar}: ${mail.onderwerp}`);
+    return;
+  }
   if (env.EMAIL?.send) {
     await env.EMAIL.send({
       from: { email: van, name: AFZENDER.name },

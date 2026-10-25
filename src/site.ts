@@ -27,5 +27,5 @@ export const BEDRIJF = {
   handelsnaam: 'ERBIJ',
   kvk: '76135179' as string | null,
   btw: 'NL860519478B01' as string | null,
-  adres: null as string | null,
+  adres: 'De Bugel 8, 8567 KA Oudemirdum' as string | null,
 };
