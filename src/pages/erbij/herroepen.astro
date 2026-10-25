@@ -1,0 +1,106 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Kruimel from '../../components/Kruimel.astro';
+---
+<Basis titel="Herroepen" beschrijving="Je bestelling van ERBIJ herroepen, binnen 14 dagen na ontvangst." noindex={false}>
+  <main class="pagina smal herroepen">
+    <Kruimel items={[{ label: 'ERBIJ', href: '/erbij/' }, { label: 'Herroepen' }]} />
+    <h1>Herroepen.</h1>
+    <p class="intro">Je mag je bestelling binnen 14 dagen na ontvangst herroepen, zonder reden. Je hoeft geen account te maken.</p>
+
+    <div id="stap-invullen">
+      <form class="aanvraag-form herroep-form" method="post" action="/api/erbij/herroepen" novalidate>
+        <div class="veld">
+          <label for="h-naam">Je naam</label>
+          <input id="h-naam" name="naam" type="text" autocomplete="name" required />
+        </div>
+        <div class="veld">
+          <label for="h-mail">E-mail, voor de bevestiging</label>
+          <input id="h-mail" name="mail" type="email" autocomplete="email" required />
+        </div>
+        <div class="veld breed">
+          <label for="h-bestelling">Welke bestelling herroep je?</label>
+          <textarea id="h-bestelling" name="bestelling" rows="4" required placeholder="Bijvoorbeeld: mijn bestelling van 2 sets, besteld op naam van ... rond ... Zet erbij welke sets je herroept."></textarea>
+        </div>
+        <div class="vh" aria-hidden="true">
+          <label for="h-website">Laat dit veld leeg</label>
+          <input id="h-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <button type="submit" class="honing-knop knop-herroep">Overeenkomst herroepen</button>
+      </form>
+      <p class="fout" role="alert" hidden></p>
+    </div>
+
+    <section id="stap-bevestigen" hidden aria-labelledby="bevestig-kop">
+      <h2 id="bevestig-kop" class="kop-klein">Controleer en bevestig.</h2>
+      <dl class="herroep-samenvatting">
+        <dt>Naam</dt><dd id="s-naam"></dd>
+        <dt>E-mail</dt><dd id="s-mail"></dd>
+        <dt>Bestelling</dt><dd id="s-bestelling"></dd>
+      </dl>
+      <div class="herroep-knoppen">
+        <button type="button" id="bevestig" class="honing-knop knop-herroep">Bevestig herroeping</button>
+        <button type="button" id="terug" class="knop-stil">Terug</button>
+      </div>
+      <p class="fout" role="alert" hidden></p>
+    </section>
+
+    <section id="stap-klaar" hidden aria-live="polite">
+      <h2 class="kop-klein">Je herroeping is ontvangen.</h2>
+      <p id="klaar-tekst"></p>
+      <p>Je krijgt een bevestiging per mail. Ik neem zo snel mogelijk contact met je op over het terugsturen van de potjes en de terugbetaling.</p>
+    </section>
+
+    <p class="klein">Een potje waarvan je het zegel hebt verbroken kun je om redenen van hygiëne en gezondheid niet herroepen. Zie de <a href="/erbij/voorwaarden/">algemene voorwaarden</a>. Mailen kan ook: <a href="mailto:hey-raymond@klompsma.nl">hey-raymond@klompsma.nl</a>.</p>
+  </main>
+</Basis>
+
+<script>
+  // Stap 1: invullen. Stap 2: controleren en bevestigen. Pas bij "Bevestig herroeping" gaat er iets naar de server.
+  const form = document.querySelector<HTMLFormElement>('.herroep-form')!;
+  const invullen = document.getElementById('stap-invullen')!;
+  const bevestigen = document.getElementById('stap-bevestigen')!;
+  const klaar = document.getElementById('stap-klaar')!;
+  const fout = [...document.querySelectorAll<HTMLElement>('.fout')];
+  const zet = (el: HTMLElement, tekst: string) => { el.textContent = tekst; el.hidden = !tekst; };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    fout.forEach((f) => zet(f, ''));
+    if (!form.checkValidity()) {
+      zet(fout[0], 'Vul je naam, e-mailadres en bestelling in.');
+      form.reportValidity();
+      return;
+    }
+    const d = new FormData(form);
+    document.getElementById('s-naam')!.textContent = String(d.get('naam'));
+    document.getElementById('s-mail')!.textContent = String(d.get('mail'));
+    document.getElementById('s-bestelling')!.textContent = String(d.get('bestelling'));
+    invullen.hidden = true;
+    bevestigen.hidden = false;
+    bevestigen.scrollIntoView({ block: 'start' });
+  });
+
+  document.getElementById('terug')!.addEventListener('click', () => {
+    bevestigen.hidden = true;
+    invullen.hidden = false;
+  });
+
+  document.getElementById('bevestig')!.addEventListener('click', async (e) => {
+    const knop = e.currentTarget as HTMLButtonElement;
+    knop.disabled = true;
+    zet(fout[1], '');
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.fout || String(res.status));
+      bevestigen.hidden = true;
+      document.getElementById('klaar-tekst')!.textContent = data.ontvangen ? `Ontvangen op ${data.ontvangen}.` : '';
+      klaar.hidden = false;
+      klaar.scrollIntoView({ block: 'start' });
+    } catch {
+      zet(fout[1], 'Het versturen lukte niet. Mail je herroeping gerust naar hey-raymond@klompsma.nl, dan geldt de datum van die mail.');
+      knop.disabled = false;
+    }
+  });
+</script>

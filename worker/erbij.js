@@ -1,7 +1,7 @@
 // ERBIJ: afrekenen met Stripe, bestelmails en de link "Markeer als verstuurd".
 import { maakToken, leesToken } from './crypto.js';
 import { maakCheckout, controleerWebhook, haalSessie, haalIntent, zetIntentMetadata, vindSessieVoorIntent, bestellingUitSessie, MAX_SETS } from './stripe.js';
-import { bevestigingsMail, bestellingIntern, verzendMail, verstuurMail, esc } from './mail.js';
+import { bevestigingsMail, bestellingIntern, verzendMail, herroepingKlant, herroepingIntern, verstuurMail, esc } from './mail.js';
 
 const INTERN = 'hey-raymond@klompsma.nl';
 const geen404 = { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' };
@@ -119,4 +119,38 @@ export async function verzonden(request, env) {
     return html(pagina('<h1 style="font-weight:500">Niet gelukt.</h1><p>De verzendmail is niet verstuurd. Ga terug en probeer het opnieuw.</p>'), 502);
   }
   return html(pagina(`<h1 style="font-weight:500;font-size:30px;line-height:38px;margin:.2rem 0 1rem">Verstuurd.</h1><p>${esc(b.voornaam || b.naam)} heeft de verzendmail gekregen en de bestelling staat als verstuurd in Stripe.</p>`));
+}
+
+// 4. Herroepen: een tweestapsformulier op de site (invullen, bevestigen). Hier komt de bevestigde herroeping binnen.
+const jsonAntwoord = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...geen404 } });
+const nlTijd = (d) => new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Amsterdam' }).format(d);
+
+export async function herroepen(request, env) {
+  if (request.method !== 'POST') return jsonAntwoord({ ok: false, fout: 'Alleen POST.' }, 405);
+  const herkomst = request.headers.get('Origin');
+  const origin = new URL(request.url).origin;
+  if (herkomst && herkomst !== origin) return jsonAntwoord({ ok: false, fout: 'Niet toegestaan.' }, 403);
+  let form;
+  try {
+    form = await request.formData();
+  } catch {
+    return jsonAntwoord({ ok: false, fout: 'Geen geldig formulier.' }, 400);
+  }
+  if (String(form.get('website') ?? '').trim() !== '') return jsonAntwoord({ ok: true }); // honeypot
+  const naam = String(form.get('naam') ?? '').trim();
+  const email = String(form.get('mail') ?? '').trim();
+  const bestelling = String(form.get('bestelling') ?? '').trim();
+  if (!naam || !bestelling || naam.length > 120 || bestelling.length > 2000 || email.length > 200) return jsonAntwoord({ ok: false, fout: 'Niet alles is ingevuld.' }, 400);
+  if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)) return jsonAntwoord({ ok: false, fout: 'Dat e-mailadres klopt niet.' }, 400);
+
+  const ontvangen = nlTijd(new Date());
+  try {
+    // eerst de melding aan Raymond, daarna de bevestiging aan de klant
+    await verstuurMail(env, { naar: INTERN, mail: herroepingIntern({ naam, email, bestelling, ontvangen }), replyTo: { email, name: naam.replace(/[<>",]/g, '') } });
+    await verstuurMail(env, { naar: email, naam, mail: herroepingKlant({ naam, bestelling, ontvangen }) });
+  } catch (e) {
+    console.error('Herroeping versturen mislukt', e);
+    return jsonAntwoord({ ok: false, fout: 'Versturen mislukt.' }, 502);
+  }
+  return jsonAntwoord({ ok: true, ontvangen });
 }
