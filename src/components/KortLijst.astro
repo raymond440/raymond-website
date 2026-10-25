@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Plek } from '../lib/ode';
+
+interface Props {
+  items: CollectionEntry<'artikelen'>[];
+  plekken: Map<string, Plek>;
+}
+const { items, plekken } = Astro.props;
+---
+<ul class="lijst kort">
+  {items.map((a) => {
+    const plek = plekken.get(a.id);
+    return (
+      <li>
+        <span><a class="titel" href={`/artikelen/${a.id}/`}>{a.data.titel}</a>{a.data.concept && <span class="concept"> · concept</span>}</span>
+        {plek && <a class="label meta waar" href={`/onbevangen/#${plek.onderdeelId}`}>Deel {plek.deel}</a>}
+      </li>
+    );
+  })}
+</ul>

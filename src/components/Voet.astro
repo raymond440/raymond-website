@@ -1,0 +1,102 @@
+---
+import Tekening from './Tekening.astro';
+import { CONTACT_EMAIL } from '../site';
+
+const actie = import.meta.env.PUBLIC_NEWSLETTER_FORM_URL ?? '';
+---
+<footer class="voet">
+  <div class="voet-binnen">
+    <div class="voet-schrijf inschrijven" data-actie={actie}>
+      <div class="voet-zon" aria-hidden="true"><Tekening naam="zon" breedte={70} /></div>
+      <h2 class="voet-hand" data-ab="kop">Ik schrijf als er iets is.</h2>
+      <p>Over vastzitten en toch beginnen. Geen schema, geen trucjes. Het komt in je inbox, en je kunt altijd terugmailen.</p>
+      <form>
+        <label class="vh" for="voet-mail">E-mailadres</label>
+        <input id="voet-mail" type="email" name="email" placeholder="je@adres.nl" required autocomplete="email" />
+        <button type="submit" data-ab="knop">Schrijf me in</button>
+      </form>
+      <p class="klaar status" role="status" aria-live="polite"></p>
+    </div>
+    <div class="voet-reageer">
+      <p class="label">Reageren</p>
+      <p class="voet-groot">Schrijf terug. Ik lees alles en antwoord zelf.</p>
+      <div class="voet-mail">
+        <a class="adres" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        <button type="button" class="kopieer" data-adres={CONTACT_EMAIL}>Kopieer</button>
+      </div>
+    </div>
+  </div>
+  <div class="voet-onder">
+    <a href="/" aria-label="Naar de homepage"><img src="/logo.png" alt="Raymond Klompsma" class="voet-logo" width="70" height="40" /></a>
+    <nav aria-label="Voetmenu">
+      <a href="/onbevangen/">Onbevangen</a>
+      <a href="/verder-geschreven/">Verder geschreven</a>
+      <a href="/samenwerken/">Samenwerken</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+    <span class="voet-waar">Raymond Klompsma · Friesland</span>
+  </div>
+</footer>
+
+<script>
+  const ph = () => (window as any).posthog;
+
+  document.querySelectorAll<HTMLElement>('.inschrijven').forEach((blok) => {
+    const form = blok.querySelector('form')!;
+    const status = blok.querySelector<HTMLElement>('.status')!;
+    const actie = blok.dataset.actie;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!actie) {
+        status.textContent = 'Het formulier is nog niet gekoppeld.';
+        return;
+      }
+      const email = new FormData(form).get('email') as string;
+      status.textContent = 'Bezig...';
+      try {
+        await fetch(actie, {
+          method: 'POST',
+          mode: 'no-cors', // de nieuwsbriefdienst antwoordt zonder CORS-headers, de inschrijving komt wel aan
+          body: new URLSearchParams({ email, embed: '1' }),
+        });
+        ph()?.capture('nieuwsbrief_aangemeld', { plek: location.pathname });
+        form.hidden = true;
+        status.textContent = 'Gelukt. Check je inbox voor de bevestiging.';
+      } catch {
+        status.textContent = 'Er ging iets mis. Probeer het straks nog eens.';
+      }
+    });
+  });
+
+  // A/B-test op kop en knop. Werkt zodra er in PostHog een experiment "inschrijf-kop" staat (nu slapend).
+  const varianten: Record<string, { kop: string; knop: string }> = {
+    kort: { kop: 'Mail van mij, als er iets is.', knop: 'Ja, graag' },
+    vraag: { kop: 'Wil je meedenken? Schrijf je in en mail terug.', knop: 'Ik doe mee' },
+  };
+  ph()?.onFeatureFlags?.(() => {
+    const v = varianten[ph().getFeatureFlag('inschrijf-kop') as string];
+    if (!v) return;
+    document.querySelectorAll('[data-ab=kop]').forEach((el) => (el.textContent = v.kop));
+    document.querySelectorAll('[data-ab=knop]').forEach((el) => (el.textContent = v.knop));
+  });
+
+  // mailadres kopiëren
+  document.querySelectorAll<HTMLButtonElement>('.kopieer').forEach((knop) => {
+    knop.addEventListener('click', async () => {
+      const adres = knop.dataset.adres ?? '';
+      try {
+        await navigator.clipboard.writeText(adres);
+        knop.textContent = 'Gekopieerd';
+      } catch {
+        const r = document.createRange();
+        r.selectNodeContents(knop.previousElementSibling!);
+        const s = getSelection();
+        s?.removeAllRanges();
+        s?.addRange(r);
+        knop.textContent = 'Selecteer en kopieer';
+      }
+      setTimeout(() => (knop.textContent = 'Kopieer'), 2500);
+    });
+  });
+</script>

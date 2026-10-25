@@ -1,25 +1,46 @@
 ---
 import { render } from 'astro:content';
 import Basis from '../../layouts/Basis.astro';
-import Inschrijven from '../../components/Inschrijven.astro';
+import Inhoud from '../../components/Inhoud.astro';
+import Kruimel from '../../components/Kruimel.astro';
 import Reageren from '../../components/Reageren.astro';
-import Tekening from '../../components/Tekening.astro';
-import { artikelen, datum } from '../../site';
+import { artikelen } from '../../site';
+import { plekken, kleineLetter } from '../../lib/ode';
 
 export async function getStaticPaths() {
   return (await artikelen()).map((a) => ({ params: { id: a.id }, props: { a } }));
 }
 const { a } = Astro.props;
-const { Content } = await render(a);
+const { Content, headings } = await render(a);
+const plek = (await plekken()).get(a.id);
+// een artikel met minstens twee subtitels krijgt een inhoudsopgave
+const subtitels = headings.filter((h) => h.depth === 2);
+const metToc = subtitels.length >= 2;
+const items = subtitels.map((h) => ({ id: h.slug, titel: h.text.replace(/\.$/, '') }));
 ---
-<Basis titel={a.data.titel} beschrijving={a.data.beschrijving} ogId={a.id}>
-  <article>
-    {a.data.tekening && <Tekening naam={a.data.tekening} breedte={110} />}
-    <h1>{a.data.titel}</h1>
-    <p class="ondertitel-artikel">{a.data.beschrijving}</p>
-    <p class="meta">{datum(a.data.datum)}{a.data.concept && <span class="concept"> · concept</span>}</p>
-    <div class="prose"><Content /></div>
-    <Reageren titel={a.data.titel} />
-  </article>
-  <Inschrijven plek={`artikel:${a.id}`} />
+<Basis titel={a.data.titel.replace(/\.$/, '')} beschrijving={a.data.beschrijving} ogId={a.id} actief="verder" type="article">
+  <div class:list={['sub', { 'met-toc': metToc }]}>
+    <div class:list={{ master: metToc }}>
+      {metToc && <Inhoud items={items} beginLabel="Begin" />}
+      <article class:list={{ artikel: metToc }}>
+        <Kruimel items={[{ label: 'Verder geschreven', href: '/verder-geschreven/' }, { label: a.data.titel }]} />
+        {plek && (
+          <a class="hoort-bij" href={`/onbevangen/#${plek.onderdeelId}`}>
+            <span class="label">Hoort bij</span>
+            <span>Een ode aan onbevangenheid <span class="pijl">›</span> Deel {plek.deel} <span class="pijl">›</span> {plek.onderdeel.replace(/\.$/, '')}</span>
+          </a>
+        )}
+        <h1>{a.data.titel}{a.data.concept && <span class="concept"> · concept</span>}</h1>
+        <p class="intro">{a.data.beschrijving}</p>
+        <div class="prose"><Content /></div>
+        <Reageren titel={a.data.titel} />
+        {plek && (
+          <a class="terug-naar-master" href={`/onbevangen/#${plek.onderdeelId}`}>
+            <span class="label">Verder in de ode</span>
+            <span class="tt">Terug naar {kleineLetter(plek.onderdeel)}, waar dit stuk uit voortkomt.</span>
+          </a>
+        )}
+      </article>
+    </div>
+  </div>
 </Basis>

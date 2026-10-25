@@ -3,6 +3,9 @@ titel: "Ik kocht liever dan dat ik vroeg."
 datum: 2026-09-20
 beschrijving: "Over kopen in plaats van vragen, en de stem die vindt dat het nooit genoeg is."
 tekening: deur
+hoort_bij: de-stille-rol-van-schaamte
+brug: "Bij mij ging het nog een stap verder."
+kantlijn: "Over kopen in plaats van vragen, en de stem die vindt dat het nooit genoeg is."
 concept: false
 ---
 
@@ -19,3 +22,5 @@ Jarenlang probeerde ik die stem te verslaan. Mijn coach zei het al lang geleden:
 Op een ochtend stond ik op de weegschaal. Ik zag dat ik weer was afgevallen, en meteen was het niet genoeg. Vroeger liep ik daar een dag onder gebukt. Nu zag ik het gebeuren, zoals je iemand een kamer ziet binnenkomen, en ik deed er niets mee. Voor het eerst viel ik er niet in.
 
 De stem is niet weg. Hij praat gewoon door. Ik luister er alleen anders naar.
+
+Dat kijken is voor mij ook onbevangenheid. Het raam gaat open, ook als de stem roept dat het tocht.

@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  bijschrift?: string;
+  // groot: bovenaan een pagina. klein: naast de tekst op Samenwerken. rechts: drijft rechts naast de tekst. mini: in een collage.
+  variant?: 'groot' | 'klein' | 'rechts' | 'mini';
+  draai?: string;
+  sizes?: string;
+  laden?: 'eager' | 'lazy';
+}
+const { src, alt, bijschrift, variant = 'groot', draai, sizes = '(min-width: 700px) 720px, 100vw', laden = 'lazy' } = Astro.props;
+const klassen = {
+  groot: ['foto', 'groot', 'geplakt'],
+  klein: ['foto', 'groot', 'geplakt', 'klein'],
+  rechts: ['foto', 'geplakt', 'rechts'],
+  mini: ['foto', 'geplakt', 'mini'],
+}[variant];
+---
+<figure class:list={klassen} style={draai ? `--draai:${draai}` : undefined}>
+  <Image src={src} alt={alt} widths={[400, 700, 1000, 1400]} sizes={sizes} loading={laden} decoding="async" />
+  {bijschrift && <figcaption>{bijschrift}</figcaption>}
+</figure>

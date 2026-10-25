@@ -85,3 +85,16 @@ Markdown in `src/content/artikelen/`. `concept: true` toont het alleen lokaal. Z
 ## Lockbestand
 
 Cloudflare bouwt met npm 10, de Mac heeft npm 11. Npm 11 laat twee `@emnapi`-pakketten uit het lockbestand, en dan faalt `npm ci` op Cloudflare. Na elke `npm install` of `npm uninstall`: draai `npm run lock` en commit `package-lock.json`.
+
+## Opzet oktober 2026 (afwijkingen en toevoegingen)
+
+Overgenomen uit het goedgekeurde prototype (vault: `projecten/Website raymondklompsma.nl/prototype/`).
+
+- **Getekende zandlijn (`--lijn`)** voor alle scheidingen (voet, delen, kaders, "Verder in de ode"), een SVG als data-URI, met opzet niet recht. Dit vervangt de rechte 1px-lijnen.
+- **Afwijking: Vooraf als callout** in de ode (lijn boven en onder, cursief, met de hand ondertekend). Dit is een noot van de schrijver, geen citaatvorm.
+- **Afwijking: lijnen tussen de delen** op Verder geschreven, met het cijfer van elk deel groot ernaast.
+- **Geplakte foto's** (`Foto.astro`): papierrand, lichte rotatie, twee stukjes zandkleurige tape, onderschrift in Caveat; collages van drie. Geen schaduw.
+- **Kantlijn:** vanaf 1240px staat een tak rechts op de hoogte van de brugzin; smaller komt "Verder lezen bij deel N" aan het eind van het deel.
+- **Voet:** links aanmelden (de enige koraalknop van de pagina), rechts reageren; formulierknoppen elders zijn inkt.
+- **Newsreader** met optische as (`opsz.css`, ook cursief) zoals in het prototype.
+- Componenten: `Voet`, `Kruimel`, `Inhoud`, `Foto`, `Aanvraag`, `KortLijst`. Weg: `Inschrijven`, `Lijst`.

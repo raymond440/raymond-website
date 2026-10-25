@@ -1,0 +1,73 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import Tekening from '../../components/Tekening.astro';
+import { artikelen } from '../../site';
+import { laadOde, kleineLetter } from '../../lib/ode';
+
+const ode = await laadOde();
+const lijst = await artikelen();
+const aantal = (n: number) => (n === 0 ? 'nog niets' : n === 1 ? '1 stuk' : `${n} stukken`);
+---
+<Basis titel="Verder geschreven" beschrijving="Alles wat ik schreef naar aanleiding van de ode aan onbevangenheid, per deel, met de plek waar het begon." actief="verder">
+  <main class="pagina smal verder">
+    <Kruimel items={[{ label: 'Verder geschreven' }]} />
+    <h1>Verder geschreven.</h1>
+    <div class="uitleg">
+      <p>Alles wat ik hier schrijf, komt voort uit één lang stuk: een ode aan onbevangenheid. Dat stuk heeft zes delen. Schrijf ik later verder over een gedachte uit de ode, dan komt dat nieuwe stuk hieronder bij dat deel te staan. In de ode zelf staat het in de kantlijn, naast de zin waar het begon.</p>
+      <p>Er staan geen data bij. Deze stukken zijn niet gebonden aan een moment, en ik pas ze aan zodra ze niet meer kloppen.</p>
+      <p>Je kunt dus op twee manieren lezen. Van begin tot eind, door de ode. Of hier, per deel, en dan terug naar de plek waar het vandaan komt.</p>
+    </div>
+
+    {ode ? (
+      <>
+        <div class="stam">
+          <div class="stam-tekening" aria-hidden="true"><Tekening naam="zon" breedte={64} /></div>
+          <div>
+            <p class="label">Begin hier</p>
+            <a class="stam-titel" href="/onbevangen/">{ode.titel}</a>
+            <p class="label meta" style="margin-top:0.5rem">{ode.minuten} minuten · zes delen</p>
+          </div>
+        </div>
+
+        <div class="perdelen">
+          {ode.delen.map((d) => (
+            <section class:list={['perdeel', { 'leeg-deel': d.takken.length === 0 }]}>
+              <div class="perdeel-nr" aria-hidden="true">{d.nr}</div>
+              <div class="perdeel-inhoud">
+                <a class="perdeel-kop" href={`/onbevangen/#${d.id}`}>
+                  <span class="label">Deel {d.nr} · {aantal(d.takken.length)}</span>
+                  <span class="perdeel-titel">{d.titel}</span>
+                </a>
+                {d.takken.length === 0 ? (
+                  <p class="leeg">Hier schreef ik nog niet verder.</p>
+                ) : (
+                  <ul class="takjes">
+                    {d.onderdelen.flatMap((o) =>
+                      o.takken.map((t) => (
+                        <li>
+                          <a class="tak" href={`/artikelen/${t.id}/`}>{t.titel}</a>
+                          <p class="omschrijving">{t.omschrijving}</p>
+                          <p class="bij">Bij <a href={`/onbevangen/#${o.id}`}>{kleineLetter(o.titel)}</a></p>
+                        </li>
+                      )),
+                    )}
+                  </ul>
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+      </>
+    ) : (
+      <ul class="takjes">
+        {lijst.map((a) => (
+          <li>
+            <a class="tak" href={`/artikelen/${a.id}/`}>{a.data.titel}</a>
+            <p class="omschrijving">{a.data.beschrijving}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</Basis>

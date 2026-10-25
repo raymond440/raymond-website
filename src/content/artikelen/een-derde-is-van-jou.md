@@ -3,6 +3,9 @@ titel: "Een derde is van jou."
 datum: 2026-09-20T17:52:35+02:00
 beschrijving: "Succes is een derde talent, een derde inzet en een derde geluk. Over wat jij daarvan in de hand hebt."
 tekening: trap
+hoort_bij: ego-als-beschermlaag
+brug: "Ik geloof niet in dat verhaal."
+kantlijn: "Succes is een derde talent, een derde inzet en een derde geluk. Over wat jij daarvan in de hand hebt."
 concept: false
 ---
 
@@ -15,6 +18,8 @@ De halve boekenkast zegt het tegenovergestelde. Jij kunt alles, als je het maar 
 Maar het andere uiterste klopt net zo min. Er zijn mensen die alles meekregen en er niets mee deden, en mensen die met bijna niets begonnen en toch in beweging kwamen. "Ik kan er toch niks aan doen" is dezelfde denkfout, alleen omgekeerd. Wie zo denkt, laat zijn eigen deel liggen.
 
 Een derde is wél van jou, en het is precies het derde waar het op aankomt. Zonder inzet blijven talent en geluk liggen, ongebruikt.
+
+Daar zit voor mij ook onbevangenheid. Je weet niet wat talent en geluk gaan doen, dus wachten op zekerheid heeft geen zin. Je begint met je eigen derde.
 
 <aside class="uitgelicht"><span class="markeer">De wieg opent de deur. Lopen moet je zelf.</span></aside>
 

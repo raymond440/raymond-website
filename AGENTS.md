@@ -4,6 +4,20 @@ Dit is het project voor de persoonlijke website van Raymond Klompsma: https://ra
 
 Dit project is ontstaan uit één lange sessie (september 2026). Alles wat daar is besloten, gebouwd en geleerd staat hieronder. Wat hier staat is leidend boven wat je zelf zou verzinnen.
 
+## 0. Nieuwe opzet (live sinds 25 oktober 2026)
+
+Dit hoofdstuk gaat voor op de rest waar het botst. De site hangt aan één groot stuk, **"Een ode aan onbevangenheid."** (zes delen), met een Samenwerken-sectie ernaast.
+
+- **Routes:** `/` · `/onbevangen` (de ode, sticky inhoudsopgave, takken in de kantlijn) · `/verder-geschreven` (alle artikelen per deel) · `/artikelen/<slug>` · `/samenwerken` · `/samenwerken/keynote|mentor|stip` (met aanvraagformulier). `/over` en `/artikelen` zijn redirects (`astro.config.mjs` en `public/_redirects`). Menu: Onbevangen · Verder geschreven · Samenwerken. Kruimelpad op elke pagina behalve home.
+- **Ode:** `src/content/ode/onbevangen.md` (collectie `ode`), bron `atelier/drafts/Een ode aan onbevangenheid - versie 2.md` in de vault. `## Vooraf` en `## Deel N. Titel.` met `###` onderdelen; het anker van een onderdeel is de slug van de kop. `bijgewerkt` is de enige datum op de site. `src/lib/ode.ts` splitst de gerenderde HTML in delen en zet de kantlijnverwijzingen.
+- **Datamodel artikelen:** `hoort_bij` (slug van een `###` in de ode), `brug` (begin van de zin in de ode waar de tak aan vastzit; de build faalt als die zin niet gevonden wordt), `kantlijn` (korte zin voor de kantlijn). `datum` bepaalt alleen de volgorde (lijsten, RSS) en wordt **nergens getoond**: artikelen zijn tijdloos. Met twee of meer `##` subtitels krijgt een artikel een inhoudsopgave.
+- **Aanbod:** er is nu wel aanbod op Samenwerken (keynote, mentor, de stip). Dit **vervangt het besluit "geen aanbod"**. Het besluit "geen doelgroep" blijft: de artikelen zijn nog steeds een reflectie van Raymond. Geen prijzen op de site.
+- **Concepten bekijken:** `npm run dev`, of `CONCEPTEN=1 npm run build && npm run preview`. Een gewone build laat concepten weg; de ode zelf is `concept: true` (open vraag over de honing/ERBIJ-alinea), dus `/onbevangen` bestaat dan niet.
+- **Formulieren:** posten naar `/api/aanvraag` (`worker/index.js`, `worker/aanvraag.js`, getest met `node scripts/test-aanvraag.mjs`). Mail naar raymond@klompsma.nl (Raymonds keuze, 25 okt) via de `send_email`-binding (voorstel voor `wrangler.jsonc`: `"main": "worker/index.js"`, `assets.binding "ASSETS"`, `assets.run_worker_first ["/api/*"]`, `send_email [{name MAIL, destination_address raymond@klompsma.nl}]`). **Staat nog UIT** (live: mailto-terugval, zet `PUBLIC_AANVRAAG_API=1` als build-variabele om de Worker te gebruiken). Vereist** Email Routing op raymondklompsma.nl en raymond@klompsma.nl als geverifieerd bestemmingsadres; zonder dat kan de deploy falen. Eerst Email Routing instellen, dan de wrangler-config toevoegen.
+- **Voet op elke pagina** (`Voet.astro`): aanmelden (enige koraal) en reageren met kopieerknop. Dit verving `Inschrijven.astro`. De dormant PostHog-code zit daarin.
+- **Besloten op 25 okt:** Hotel Wonderland was door corona acht maanden dicht; persoonlijke passages in de drie artikelen mogen; honing-alinea in de ode mag; extra zinnen in de twee live artikelen akkoord; reviews keynote zoals getoond; "Ik begin niet meer op maandag." blijft voorlopig weg. Gepubliceerd op 25 okt 2026 ("publiceer dit"): ode en zes nieuwe artikelen.
+- **Nog open:** reviews op de mentorpagina (sectie is verborgen tot ze er zijn, zie `reviews` in `mentor.astro`), review Toerisme Oost-Vlaanderen op de keynotepagina (weggelaten), mentorvormen afstemmen op Accio, menunaam Samenwerken of Samen beginnen, persoonlijke passages in "Geen verbod, wel lijnen." (voetbalverbod), "Een toets is een stipje." (IJsselmeer) en "Ik verveel me te weinig." (meditatie), en of de twee live artikelen de extra zin uit het prototype krijgen.
+
 ## 1. Waar dit project voor is
 
 - **Doel:** in contact komen met mensen, omdat Raymond dat leuk vindt. Een nieuwsbrief, artikelen en reageren per mail. Geen scoreboard, geen groeitargets.
@@ -54,7 +68,7 @@ Een stuk gaat alleen live als Raymond dat expliciet zegt, per stuk ("publiceer d
 
 1. **Voorwaarden:** geen open `[!fb]` of `[!vraag]` in het concept. Privacycheck uit § 7 gedaan. Raymond heeft de definitieve tekst gelezen.
 2. **Datum:** draai `date` en gebruik een volledige tijd (`datum: 2026-10-03T14:05:00+02:00`). Twee stukken op dezelfde dag sorteren anders niet goed: de lijst toont nieuwste bovenaan.
-3. **Maak `src/content/artikelen/<slug>.md`** uit het concept met het script hieronder. Frontmatter:
+3. **Maak `src/content/artikelen/<slug>.md`** (voor een tak van de ode ook `hoort_bij`, `brug`, `kantlijn`; zie § 0) uit het concept met het script hieronder. Frontmatter:
    - `titel`: eindigt met een punt (tenzij het een vraag is)
    - `datum`: zie stap 2
    - `beschrijving`: één zin, concreet. Wordt ook de meta-beschrijving, de RSS-tekst en komt in de lijst

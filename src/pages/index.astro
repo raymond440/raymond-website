@@ -1,19 +1,41 @@
 ---
 import Basis from '../layouts/Basis.astro';
-import Inschrijven from '../components/Inschrijven.astro';
-import Lijst from '../components/Lijst.astro';
-import { artikelen, CONTACT_EMAIL } from '../site';
+import KortLijst from '../components/KortLijst.astro';
+import Tekening from '../components/Tekening.astro';
+import { artikelen, datum } from '../site';
+import { laadOde, plekken } from '../lib/ode';
 
-const recent = (await artikelen()).slice(0, 5);
+const recent = (await artikelen()).slice(0, 3);
+const ode = await laadOde();
+const plek = await plekken();
 ---
 <Basis>
-  <h1><span class="markeer">Wat als het wel kan?</span></h1>
-  <p>Die vraag stel ik mezelf al zolang ik me kan herinneren. In bedrijven die ik bouwde, in hoe ik vader ben, in wat ik van mezelf leer. Ik noem het onbevangen: beginnen voor je het zeker weet.</p>
-  <p>Hier schrijf ik op wat ik onderweg tegenkom. Soms ging het goed, soms ging het mis, en ook daarover schrijf ik. <a href={`mailto:${CONTACT_EMAIL}`}>Reageren</a> kan altijd, ik lees alles en antwoord zelf.</p>
+  <main class="pagina smal">
+    <h1><span class="markeer">Wat als het wel kan?</span></h1>
+    <p>Die vraag stel ik mezelf al zolang ik me kan herinneren. In bedrijven die ik bouwde, in hoe ik vader ben, in wat ik van mezelf leer. Ik noem het {ode ? <a href="/onbevangen/">onbevangen</a> : 'onbevangen'}: open blijven, ook als je al beter weet.</p>
+    <p>Hier schrijf ik op wat ik onderweg tegenkom. Soms ging het goed, soms ging het mis, en ook daarover schrijf ik. Reageren kan altijd, ik lees alles en antwoord zelf.</p>
 
-  <h2 class="kop-groot">Laatste artikelen</h2>
-  <p class="ondertitel">Ik schrijf al acht jaar bijna elke dag. Dit deel ik.</p>
-  <Lijst items={recent} />
+    {ode && (
+      <div class="stam">
+        <div class="stam-tekening" aria-hidden="true"><Tekening naam="zon" breedte={64} /></div>
+        <div>
+          <p class="label">Begin hier</p>
+          <a class="stam-titel" href="/onbevangen/">{ode.titel}</a>
+          <p class="beschr">Het langste stuk dat ik schreef, en het begin van alles wat ik hier schrijf.</p>
+          <p class="label meta">{ode.minuten} minuten{ode.aantalTakken > 0 && ` · ${ode.aantalTakken} ${ode.aantalTakken === 1 ? 'artikel gaat' : 'artikelen gaan'} erop verder`} · laatst bijgewerkt {datum(ode.bijgewerkt)}</p>
+        </div>
+      </div>
+    )}
 
-  <Inschrijven plek="home" />
+    <h2 class="kop-groot vervolg">Verder geschreven.</h2>
+    <p class="ondertitel">Elk stuk gaat verder op een plek in de ode, en bij elk stuk zie je waar.</p>
+    <KortLijst items={recent} plekken={plek} />
+    <p class="alle"><a href="/verder-geschreven/">Alles wat ik verder schreef</a></p>
+
+    <section class="wie" aria-labelledby="wie-kop">
+      <p class="label" id="wie-kop">Wie hier schrijft</p>
+      <p>Ik ben Raymond Klompsma. Vader, ondernemer, spreker en mentor van ondernemers. Op mijn negentiende begon ik mijn eerste bedrijf, met vrienden en zonder plan. Sindsdien is dat het patroon gebleven: iets zien, denken "wat als het wel kan", en beginnen voor ik het zeker weet. Nu bouw ik aan nieuwe merken en help ik ondernemers die vastzitten weer in beweging te komen.</p>
+      <p class="alle"><a href="/samenwerken/">Meer over mij, en samenwerken</a></p>
+    </section>
+  </main>
 </Basis>
