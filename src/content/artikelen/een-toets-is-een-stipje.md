@@ -5,7 +5,7 @@ beschrijving: "Over cijfers, toetsdruk en waarom het om de lijn gaat, niet om he
 hoort_bij: wat-we-meten-bepaalt-wat-telt
 brug: "Voor mij is een toets een stipje."
 kantlijn: "Over cijfers, toetsdruk en waarom het om de lijn gaat, niet om het punt."
-concept: true
+concept: false
 ---
 
 Soms lijkt het of het elke week eindexamen is, zo bezig zijn mijn kinderen met toetsen en cijfers. Ik herken dat niet van mijn eigen tijd op de havo. Ik was vast weleens zenuwachtig, en ik heb er vast van gebaald. Maar het aantal toetsen dat ze nu krijgen, is bizar.

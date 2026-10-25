@@ -5,7 +5,7 @@ beschrijving: "Een brief aan mijn kinderen over grenzen, vrijheid en wanneer de 
 hoort_bij: een-speelveld-met-lijnen
 brug: "Ik schreef het ze ook eens in een brief."
 kantlijn: "Een brief aan mijn kinderen over grenzen, vrijheid en wanneer de bal uit is."
-concept: true
+concept: false
 ---
 
 Hey kids,

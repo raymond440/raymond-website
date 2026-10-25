@@ -5,7 +5,7 @@ beschrijving: "Over de extra stap die niemand van je vraagt, en waarom veilig bi
 hoort_bij: wanneer-het-systeem-belangrijker-wordt-dan-wat-het-mogelijk-maakt
 brug: "Bij srprs.me merkte ik dat zelf."
 kantlijn: "Over de extra stap die niemand van je vraagt, en waarom veilig bijna altijd middelmatig is."
-concept: true
+concept: false
 ---
 
 Ik gaf toen al veel keynotes. Die dag stond ik voor een grote zaal en vertelde over srprs.me, het nieuwe concept waar ik net mee bezig was. Reizen waarbij je pas op het laatste moment hoort waar je heen gaat.

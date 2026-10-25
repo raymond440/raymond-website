@@ -5,7 +5,7 @@ beschrijving: "Over omakase, en waarom vertrouwen iets anders is dan een product
 hoort_bij: ramen-die-lucht-geven
 brug: "Voor mij is dat omakase."
 kantlijn: "Over omakase, en waarom vertrouwen iets anders is dan een product."
-concept: true
+concept: false
 ---
 
 In een Japans restaurant kun je één woord zeggen: omakase. Dan kiest de kok. Wij zouden het een verrassingsdiner noemen, en voor veel mensen is dat al spannend genoeg.

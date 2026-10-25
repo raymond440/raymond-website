@@ -25,7 +25,7 @@ let verstuurd;
 const env = { MAIL: { send: async (m) => { verstuurd = m; } } };
 const req = (o, headers = {}) => new Request('https://raymondklompsma.nl/api/aanvraag', { method: 'POST', body: f(o), headers });
 let r = await verwerk(req(goed, { Origin: 'https://raymondklompsma.nl' }), env, (a, b, raw) => ({ a, b, raw }));
-assert.equal(r.status, 200); assert.equal(verstuurd.b, 'hey-raymond@klompsma.nl');
+assert.equal(r.status, 200); assert.equal(verstuurd.b, 'raymond@klompsma.nl');
 verstuurd = undefined;
 r = await verwerk(req(goed, { Origin: 'https://boos.example' }), env, (a, b, raw) => ({ a, b, raw }));
 assert.equal(r.status, 403); assert.equal(verstuurd, undefined);

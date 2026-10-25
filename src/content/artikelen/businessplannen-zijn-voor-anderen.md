@@ -5,7 +5,7 @@ beschrijving: "Over plannen die nooit uitkomen, en waarom je ze toch maakt."
 hoort_bij: beginnen-voor-het-weten
 brug: "Een businessplan helpt daar niet bij."
 kantlijn: "Over plannen die nooit uitkomen, en waarom je ze toch maakt."
-concept: true
+concept: false
 ---
 
 Op school is het een van de eerste dingen die je bij ondernemerschap leert: een businessplan schrijven. Een dik document, ingebonden bij de drukker, vol plannen voor je nieuwe bedrijf.

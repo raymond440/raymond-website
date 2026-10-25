@@ -5,7 +5,7 @@ beschrijving: "Over niets doen, en waarom de beste ideeën pas dan komen."
 hoort_bij: deel-waarom-je-iets-doet
 brug: "Ik zeg het makkelijk, maar zelf verveel ik me veel te weinig."
 kantlijn: "Over niets doen, en waarom de beste ideeën pas dan komen."
-concept: true
+concept: false
 ---
 
 Ik geloof dat je je moet vervelen. En ik zeg er meteen bij: ik doe het zelf veel te weinig.

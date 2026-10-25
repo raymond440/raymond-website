@@ -1,7 +1,7 @@
 // Aanvraagformulieren (keynote, mentor, stip): valideren en omzetten naar een mail aan Raymond.
 // Los van `cloudflare:email` gehouden, zodat dit in Node te testen is (zie scripts/test-aanvraag.mjs).
 
-export const ONTVANGER = 'hey-raymond@klompsma.nl';
+export const ONTVANGER = 'raymond@klompsma.nl';
 export const AFZENDER = 'aanvraag@raymondklompsma.nl';
 const TOEGESTANE_HERKOMST = ['https://raymondklompsma.nl'];
 

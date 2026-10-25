@@ -2,7 +2,7 @@
 titel: "Een ode aan onbevangenheid."
 beschrijving: "Over open blijven als je al beter weet, wat we ons gaandeweg afleren, en wat dat betekent voor opvoeden, school en werk."
 bijgewerkt: 2026-10-25
-concept: true
+concept: false
 ---
 
 ## Vooraf

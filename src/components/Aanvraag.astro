@@ -1,4 +1,5 @@
 ---
+import { CONTACT_EMAIL } from '../site';
 interface Veld {
   naam: string;
   label: string;
@@ -17,8 +18,10 @@ interface Props {
 }
 const { soort, kop, intro, knop, velden } = Astro.props;
 const id = `aanvraag-${soort}`;
+const api = import.meta.env.PUBLIC_AANVRAAG_API === '1'; // pas aan zodra de Worker en Email Routing staan
+const mailAan = CONTACT_EMAIL;
 ---
-<section class="aanvraag" id="aanvraag" aria-labelledby={`${id}-kop`} data-soort={soort}>
+<section class="aanvraag" id="aanvraag" aria-labelledby={`${id}-kop`} data-soort={soort} data-api={api ? '1' : '0'} data-mail={mailAan}>
   <h3 id={`${id}-kop`}>{kop}</h3>
   <p>{intro}</p>
   <form class="aanvraag-form" method="post" action="/api/aanvraag" novalidate={false}>
@@ -60,6 +63,14 @@ const id = `aanvraag-${soort}`;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       fout.hidden = true;
+      if (blok.dataset.api !== '1') {
+        // zonder Worker: open het mailprogramma met de ingevulde gegevens
+        const d = new FormData(form);
+        const regels = ['naam', 'mail', 'organisatie', 'wanneer', 'bericht'].filter((k) => d.get(k)).map((k) => `${k}: ${d.get(k)}`);
+        const onderwerp = encodeURIComponent(`Aanvraag ${blok.dataset.soort}`);
+        location.href = `mailto:${blok.dataset.mail}?subject=${onderwerp}&body=${encodeURIComponent(regels.join('\n'))}`;
+        return;
+      }
       knop.disabled = true;
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
