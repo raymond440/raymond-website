@@ -9,5 +9,6 @@ export default defineConfig({
   redirects: {
     '/over': '/samenwerken/',
     '/artikelen': '/verder-geschreven/',
+    '/artikelen/mag-middelmatigheid-alsjeblieft-sterven': '/artikelen/middelmatig-mag-in-je-werk-niet/',
   },
 });

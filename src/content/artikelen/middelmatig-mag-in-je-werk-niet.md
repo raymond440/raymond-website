@@ -1,5 +1,5 @@
 ---
-titel: "Mag middelmatigheid alsjeblieft sterven?"
+titel: "Middelmatig mag, in je werk niet."
 datum: 2026-10-25T13:30:00+01:00
 beschrijving: "Over de extra stap die niemand van je vraagt, en waarom veilig bijna altijd middelmatig is."
 hoort_bij: wanneer-het-systeem-belangrijker-wordt-dan-wat-het-mogelijk-maakt
@@ -66,4 +66,4 @@ En als je het dan deelt, gebeurt er wat. Mensen voelen dat iets met liefde gemaa
 
 Middelmatig mag. Op de bank, op een dinsdagavond. Niet in het werk waar je je leven in stopt.
 
-Daar mag het sterven.
+Daar mag het niet.
