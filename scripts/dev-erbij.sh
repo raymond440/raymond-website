@@ -5,11 +5,15 @@ set -e
 cd "$(dirname "$0")/.."
 export PATH="$HOME/.local/bin:$PATH"
 command -v stripe >/dev/null || { echo "De Stripe CLI is niet gevonden."; exit 1; }
-CONFIG="$HOME/.config/stripe/config.toml"
-[ -f "$CONFIG" ] || { echo "Log eerst in met: stripe login"; exit 1; }
-# De testsleutel van de CLI wordt alleen naar .dev.vars geschreven (staat in .gitignore) en nooit getoond.
-KEY=$(sed -n 's/^test_mode_api_key *= *["'\'']\(.*\)["'\'']/\1/p' "$CONFIG" | head -1)
-[ -n "$KEY" ] || { echo "Geen testsleutel gevonden. Log opnieuw in met: stripe login"; exit 1; }
+# De sleutel typ of plak je zelf in deze terminal (je ziet hem niet). Hij gaat alleen naar .dev.vars (staat in .gitignore).
+# Dashboard: zet Stripe in testmodus, Developers, API keys, "Secret key" (sk_test_...).
+echo -n "Plak je Stripe TESTsleutel (sk_test_...) en druk op Enter: "
+read -rs KEY
+echo ""
+case "$KEY" in
+  sk_test_*|rk_test_*) ;;
+  *) echo "Dat is geen testsleutel. Gebruik hier nooit een live-sleutel."; exit 1 ;;
+esac
 WHSEC=$(stripe listen --print-secret --api-key "$KEY")
 umask 077
 cat > .dev.vars <<VARS
