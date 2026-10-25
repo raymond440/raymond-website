@@ -26,12 +26,12 @@ ERBIJ_TOKEN_SECRET=$(openssl rand -hex 24)
 MAIL_DRY_RUN=1
 VARS
 CONCEPTEN=1 npm run build
-stripe listen --api-key "$KEY" --forward-to localhost:8787/api/erbij/webhook >/tmp/stripe-listen.log 2>&1 &
+stripe listen --api-key "$KEY" --events checkout.session.completed,checkout.session.async_payment_succeeded --forward-to localhost:8787/api/erbij/webhook >/tmp/stripe-listen.log 2>&1 &
 LISTEN=$!
-trap 'kill $LISTEN 2>/dev/null; rm -f .dev.vars' EXIT INT TERM
+trap 'kill $LISTEN 2>/dev/null' EXIT INT TERM
 echo ""
 echo "Klaar. Open http://localhost:8787/erbij/ en bestel met testkaart 4242 4242 4242 4242 (elke toekomstige datum, elke cvc),"
 echo "of kies iDEAL en daarna 'Authorize test payment'. De testmails staan op http://localhost:8787/api/erbij/dev-mails"
-echo "Stoppen: Ctrl+C. Dan wordt .dev.vars ook weer verwijderd."
+echo "Stoppen: Ctrl+C. .dev.vars blijft staan (gitignored); verwijder het als je klaar bent."
 echo ""
 npx wrangler dev --config wrangler.dev.jsonc --port 8787

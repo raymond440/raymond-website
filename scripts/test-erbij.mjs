@@ -44,7 +44,7 @@ assert.equal(r.status, 303); assert.equal(r.headers.get('Location'), 'https://ch
 const b = stripeState.checkoutBody;
 assert.equal(b.get('mode'), 'payment'); assert.equal(b.get('line_items[0][quantity]'), '2');
 assert.equal(b.get('line_items[0][price_data][unit_amount]'), '2995'); assert.equal(b.get('line_items[0][price_data][currency]'), 'eur');
-assert.deepEqual([b.get('payment_method_types[0]'), b.get('payment_method_types[1]')], ['ideal', 'card']);
+assert.equal(b.get('payment_method_types[0]'), null, 'betaalmethoden komen uit het dashboard');
 assert.equal(b.get('shipping_address_collection[allowed_countries][0]'), 'NL'); assert.equal(b.get('shipping_address_collection[allowed_countries][1]'), 'BE');
 assert.equal(b.get('custom_fields[0][optional]'), 'true');
 assert.equal(b.get('success_url'), 'https://raymondklompsma.nl/erbij/bedankt/');

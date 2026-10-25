@@ -42,7 +42,7 @@ export function maakCheckout(env, aantal, origin) {
     success_url: `${origin}/erbij/bedankt/`,
     cancel_url: `${origin}/erbij/#bestel`,
     line_items: [regel],
-    payment_method_types: ['ideal', 'card'],
+    // betaalmethoden (iDEAL en kaart) staan aan in het Stripe-dashboard onder Instellingen, Betaalmethoden; de API-parameter bestaat niet meer
     shipping_address_collection: { allowed_countries: (env.ERBIJ_LANDEN ?? 'NL,BE').split(',') },
     // optioneel telefoonnummer: een eigen veld, want phone_number_collection is bij Stripe altijd verplicht
     custom_fields: [{ key: 'telefoon', label: { type: 'custom', custom: 'Telefoon (mag leeg)' }, type: 'text', optional: true }],
