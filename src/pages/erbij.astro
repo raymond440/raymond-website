@@ -2,9 +2,16 @@
 import '@fontsource/pinyon-script/400.css';
 import Basis from '../layouts/Basis.astro';
 import Kruimel from '../components/Kruimel.astro';
-import Aanvraag from '../components/Aanvraag.astro';
 import ErbijLogo from '../components/ErbijLogo.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import potje from '../assets/erbij-potje.png';
 
+// ?fout=... komt terug van /api/erbij/checkout als afrekenen niet lukte
+const fouten = { aantal: 'Kies een aantal van 1 tot en met 5 sets.', betalen: 'Afrekenen lukt nu niet. Probeer het zo nog eens, of mail me.', formulier: 'Er ging iets mis met het formulier. Probeer het nog eens.' };
+const fout = fouten[Astro.url.searchParams.get('fout') ?? ''];
+// links naar voorwaarden en privacy verschijnen zodra die pagina's bestaan (zie src/content/pagina)
+const voorwaarden = (await getCollection('pagina', (p) => import.meta.env.DEV || import.meta.env.CONCEPTEN === '1' || !p.data.concept)).map((p) => ({ label: p.data.titel.replace(/\.$/, ''), href: `/erbij/${p.id}/` }));
 const punten = [
   { kop: 'Honing is het middel.', tekst: 'Tastbaar en deelbaar. Je kunt het vasthouden en weggeven zonder iets uit te leggen.' },
   { kop: 'Kruisbestuiving is de beweging.', tekst: 'Iets kleins wat iemands dag omgooit. Een gebaar, niet af te dwingen.' },
@@ -64,29 +71,45 @@ const punten = [
       <p class="melissa-noot">Voor de duidelijkheid: Melissa bestaat niet echt. Ze is de koningin van de bijenkast, en we schuiven haar naar voren als eigenaar ervan.</p>
 
       <h3>Waar het nu staat.</h3>
-      <p>ERBIJ is nog een prototype. Aan het etiket, het potje en de verpakking werk ik nog. De eerste potjes staan bij mij thuis. Ik bouw het rustig op, en ik deel onderweg wat goed gaat en wat niet. Juist dat hoort erbij.</p>
+      <p>ERBIJ is nog een prototype. Je vindt het niet in de winkel, alleen hier. Aan het etiket, het potje en de verpakking werk ik nog. De eerste potjes staan bij mij thuis. Ik bouw het rustig op, en ik deel onderweg wat goed gaat en wat niet. Juist dat hoort erbij.</p>
 
-      <Aanvraag
-        soort="erbij"
-        klas="bestel honing"
-        kop="Wil je erbij horen?"
-        intro="Voor nu neem ik bestellingen met de hand aan. Laat hieronder weten hoeveel sets je wilt en waar ze heen mogen. Je krijgt een Tikkie van me, en daarna komt de honing naar je toe."
-        knop="Bestel ERBIJ"
-        bevestiging="Dank je. Je bestelling is bij me aangekomen. Ik stuur je een Tikkie, en daarna komt de honing naar je toe."
-        velden={[
-          { naam: 'naam', label: 'Je naam', verplicht: true, autocomplete: 'name' },
-          { naam: 'mail', label: 'E-mail', type: 'email', verplicht: true, autocomplete: 'email' },
-          { naam: 'aantal', label: 'Aantal sets van twee potjes', type: 'select', opties: ['1', '2', '3', '4', '5', 'Meer, ik mail je'], verplicht: true },
-          { naam: 'telefoon', label: 'Telefoon, voor het Tikkie', type: 'tel', autocomplete: 'tel' },
-          { naam: 'adres', label: 'Straat en huisnummer', verplicht: true, breed: true, autocomplete: 'street-address' },
-          { naam: 'postcode', label: 'Postcode', verplicht: true, autocomplete: 'postal-code' },
-          { naam: 'plaats', label: 'Plaats', verplicht: true, autocomplete: 'address-level2' },
-          { naam: 'bericht', label: 'Nog iets?', type: 'textarea', breed: true, placeholder: 'Een ander bezorgadres, of een vraag.' },
-        ]}
-      >
-        <Fragment slot="prijs"><p class="prijs">Twee potjes, € 29,95.</p><p class="label prijs-noot">Inclusief verzending</p></Fragment>
-        <p class="klein">250 gram pure honing uit Groningen per potje. Honing kan van nature kristalliseren. Geef geen honing aan kinderen onder één jaar.</p>
-      </Aanvraag>
+      <section class="product" id="bestel" aria-labelledby="bestel-kop">
+        <div class="product-beeld" aria-hidden="true">
+          <Image class="pot pot-achter" src={potje} alt="" widths={[240, 400]} sizes="(min-width: 700px) 220px, 50vw" loading="lazy" />
+          <Image class="pot pot-voor" src={potje} alt="" widths={[240, 400]} sizes="(min-width: 700px) 220px, 50vw" loading="lazy" />
+          <span class="product-tag">2 × 250 gram</span>
+        </div>
+        <div class="product-info">
+          <p class="label">Wil je erbij horen?</p>
+          <h3 id="bestel-kop">ERBIJ, twee potjes.</h3>
+          <p class="product-prijs">€ 29,95</p>
+          <ul class="product-feiten">
+            <li>Pure honing uit Groningen</li>
+            <li>Eén voor jezelf, één om weg te geven</li>
+            <li>Inclusief verzending</li>
+            <li>Levering eind november</li>
+          </ul>
+          {fout && <p class="fout" role="alert">{fout}</p>}
+          <form class="product-form" method="post" action="/api/erbij/checkout">
+            <div class="product-koop">
+              <div class="stepper" role="group" aria-label="Aantal sets" hidden>
+                <button type="button" id="e-min" aria-label="Eén minder">−</button>
+                <output id="e-aantal-uit" aria-live="polite">1</output>
+                <button type="button" id="e-plus" aria-label="Eén meer">+</button>
+              </div>
+              <label class="zonder-js" for="e-aantal">Aantal sets
+                <select id="e-aantal" name="aantal">{[1, 2, 3, 4, 5].map((n) => <option value={n}>{n}</option>)}</select>
+              </label>
+              <button type="submit" class="knop honing-knop">Afrekenen&nbsp;·&nbsp;<span id="e-totaal">€ 29,95</span></button>
+            </div>
+          </form>
+          <p class="product-klein">Nog niet in de winkel, alleen hier. Meer dan vijf sets? Mail <a href="mailto:hey-raymond@klompsma.nl">hey-raymond@klompsma.nl</a>.</p>
+          <p class="product-klein">Honing kan van nature kristalliseren. Geef geen honing aan kinderen onder één jaar.</p>
+          {voorwaarden.length > 0 && (
+            <p class="product-klein">{voorwaarden.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.label}</a></>)}</p>
+          )}
+        </div>
+      </section>
 
       <p class="erbij-slot">Alles wat bestaat, is verbonden.</p>
 
@@ -94,3 +117,28 @@ const punten = [
     </section>
   </main>
 </Basis>
+
+<script>
+  // aantalknop met min en plus (1 t/m 5); het totaal rekent mee. Zonder script blijft de keuzelijst staan.
+  const select = document.getElementById('e-aantal') as HTMLSelectElement | null;
+  const stepper = document.querySelector<HTMLElement>('.stepper');
+  if (select && stepper) {
+    const uit = document.getElementById('e-aantal-uit')!;
+    const totaal = document.getElementById('e-totaal')!;
+    const min = document.getElementById('e-min') as HTMLButtonElement;
+    const plus = document.getElementById('e-plus') as HTMLButtonElement;
+    const zet = (n: number) => {
+      n = Math.min(5, Math.max(1, n));
+      select.value = String(n);
+      uit.textContent = String(n);
+      totaal.textContent = `€ ${(n * 29.95).toFixed(2).replace('.', ',')}`;
+      min.disabled = n === 1;
+      plus.disabled = n === 5;
+    };
+    stepper.hidden = false;
+    select.closest('label')!.hidden = true;
+    min.addEventListener('click', () => zet(Number(select.value) - 1));
+    plus.addEventListener('click', () => zet(Number(select.value) + 1));
+    zet(Number(select.value));
+  }
+</script>

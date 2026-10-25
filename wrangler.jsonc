@@ -11,5 +11,9 @@
   },
   // Aanvragen via de formulieren op Samenwerken. Email Routing staat aan op raymondklompsma.nl en
   // raymond@klompsma.nl is daar geverifieerd als bestemming.
-  "send_email": [{ "name": "MAIL", "destination_address": "raymond@klompsma.nl" }]
+  "send_email": [
+    { "name": "MAIL", "destination_address": "raymond@klompsma.nl" },
+    // Cloudflare Email Service (verzenden naar klanten); vereist Workers Paid en een geonboard verzenddomein
+    { "name": "EMAIL", "remote": true }
+  ]
 }

@@ -16,6 +16,7 @@ interface Props {
   // de ode heeft een bredere kolom (inhoudsopgave, tekst en kantlijn)
   breed?: boolean;
   type?: 'website' | 'article';
+  noindex?: boolean;
 }
 const {
   titel,
@@ -24,6 +25,7 @@ const {
   actief,
   breed = false,
   type = 'website',
+  noindex = false,
 } = Astro.props;
 const paginaTitel = titel ? `${titel} · Raymond Klompsma` : 'Raymond Klompsma';
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -41,6 +43,7 @@ const menu = [
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{paginaTitel}</title>
     <meta name="description" content={beschrijving} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={paginaTitel} />
     <meta property="og:description" content={beschrijving} />
