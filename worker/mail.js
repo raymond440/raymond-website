@@ -14,6 +14,7 @@ function kader(inhoudHtml, { intern = false } = {}) {
 <div style="max-width:560px;margin:0 auto;padding:28px 22px;background:#fef9f3;color:#3f3b39;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:27px">
 ${logo}${inhoudHtml}
 <p style="margin:28px 0 0;padding-top:12px;border-top:1px solid ${HONING};text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${HONING}">Alles wat bestaat, is verbonden.</p>
+${intern ? '' : `<p style="margin:14px 0 0;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#7a736d"><a href="${SITE}/erbij/voorwaarden/" style="color:#7a736d">Algemene voorwaarden</a> · <a href="${SITE}/erbij/privacy/" style="color:#7a736d">Privacy bij ERBIJ</a></p>`}
 </div></body></html>`;
 }
 const p = (t, stijl = '') => `<p style="margin:0 0 16px;${stijl}">${t}</p>`;
@@ -45,6 +46,9 @@ Raymond
 P.S. Melissa, de koningin van bijenkast 31G11, laat weten dat ze trots is. Ze zegt het niet vaak.
 
 Alles wat bestaat, is verbonden.
+
+Algemene voorwaarden: ${SITE}/erbij/voorwaarden/
+Privacy bij ERBIJ: ${SITE}/erbij/privacy/
 `;
   return { onderwerp, html, tekst };
 }
@@ -80,6 +84,9 @@ En vergeet het tweede potje niet. Je weet vast al voor wie hij is.
 Raymond
 
 Alles wat bestaat, is verbonden.
+
+Algemene voorwaarden: ${SITE}/erbij/voorwaarden/
+Privacy bij ERBIJ: ${SITE}/erbij/privacy/
 `;
   return { onderwerp, html, tekst };
 }

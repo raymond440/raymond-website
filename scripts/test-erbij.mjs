@@ -113,3 +113,9 @@ console.log('erbij: alles ok');
   await assert.rejects(() => verstuurMail({}, { naar: 'a@b.nl', mail: bevestigingsMail({ voornaam: 'A', aantal: 1 }) }));
   console.log('erbij (Cloudflare Email): ok');
 }
+
+// links naar voorwaarden en privacy in de klantmails, niet in de interne mail
+assert.match(bevestigingsMail({ voornaam: 'A', aantal: 1 }).html, /erbij\/voorwaarden/);
+assert.match(verzendMail({ voornaam: 'A' }).tekst, /erbij\/privacy/);
+assert.doesNotMatch(bestellingIntern({ naam: 'A', aantal: 1, adresRegels: [], email: '', totaal: 29.95, methode: 'iDEAL', piId: 'pi' }, 'https://x').html, /voorwaarden/);
+console.log('erbij (links in mails): ok');

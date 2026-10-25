@@ -1,7 +1,7 @@
 ---
 titel: "Algemene voorwaarden."
 beschrijving: "De voorwaarden voor bestellingen van ERBIJ."
-concept: true
+concept: false
 ---
 
 Dit zijn de voorwaarden voor bestellingen van ERBIJ op raymondklompsma.nl. Ze zijn kort gehouden. Staat er iets niet in wat je wilt weten, mail me dan.

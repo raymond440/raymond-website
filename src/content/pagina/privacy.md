@@ -1,7 +1,7 @@
 ---
 titel: "Privacy bij ERBIJ."
 beschrijving: "Wat er met je gegevens gebeurt als je ERBIJ bestelt."
-concept: true
+concept: false
 ---
 
 Als je ERBIJ bestelt, heb ik een paar gegevens van je nodig. Hier staat welke, waarvoor, en wie erbij kan.
