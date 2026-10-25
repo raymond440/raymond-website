@@ -64,8 +64,20 @@ const { items, beginLabel, eersteActief = false, legenda = false } = Astro.props
     zetOpen(false);
     smal.addEventListener('change', () => zetOpen(false));
     knop.addEventListener('click', () => zetOpen(knop.getAttribute('aria-expanded') !== 'true'));
+    // Smal: de lijst verdwijnt bij een tik. De sprong doen we zelf, want de browser slaat de scroll over
+    // als het aangetikte element tegelijk wegvalt.
     lijst.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).closest('a') && smal.matches) zetOpen(false);
+      const a = (e.target as HTMLElement).closest('a');
+      if (!a || !smal.matches) return;
+      const doel = document.getElementById((a.getAttribute('href') ?? '').slice(1));
+      if (!doel) return;
+      e.preventDefault();
+      zetOpen(false);
+      setTimeout(() => {
+        doel.scrollIntoView({ block: 'start' });
+        history.replaceState(null, '', a.getAttribute('href'));
+        markeer();
+      }, 0);
     });
     addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && smal.matches && knop.getAttribute('aria-expanded') === 'true') {
@@ -80,7 +92,7 @@ const { items, beginLabel, eersteActief = false, legenda = false } = Astro.props
     const koppen = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
     const eerste = toc.dataset.eerste === '1';
 
-    const markeer = () => {
+    function markeer() {
       const grens = 140;
       let actief: HTMLElement | undefined = eerste ? koppen[0] : undefined;
       for (const k of koppen) if (k.getBoundingClientRect().top - grens <= 0) actief = k;
@@ -88,7 +100,7 @@ const { items, beginLabel, eersteActief = false, legenda = false } = Astro.props
       const a = actief && links.get(actief.id);
       if (a) a.setAttribute('aria-current', 'true');
       nu.textContent = a ? (a.textContent ?? '').replace(/^\d+/, '').replace(/\d+$/, '').trim() || begin : begin;
-    };
+    }
     let wacht = false;
     addEventListener(
       'scroll',

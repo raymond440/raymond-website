@@ -469,3 +469,31 @@ h1 .markeer { background-size: 100% 60%; background-position: center 66%; }
 .aanvraag.honing .aanvraag-form button { background: var(--honing); color: var(--inkt); border-color: var(--inkt); }
 .melissa a { color: inherit; }
 .erbij-pagina { overflow-x: clip; }
+
+/* mobiel: ankers niet onder de meelopende inhoudsbalk, grotere klikdoelen, geen afbrekende uitschieters */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-wrap: break-word; }
+@media (max-width: 1000px) {
+  html { scroll-padding-top: 4.5rem; }
+  .toc-knop { min-height: 44px; align-items: center; }
+  .toc-lijst a { display: inline-block; padding-block: 0.35rem; }
+  .toc-deel ul { gap: 0; }
+}
+@media (max-width: 700px) {
+  header.site { padding-top: 1.25rem; }
+  header.site nav { gap: 0 1.25rem; }
+  nav a { display: inline-block; padding-block: 0.7rem; }
+  .kruimel a { display: inline-block; padding-block: 0.5rem; }
+  .voet-onder nav { gap: 0 1.25rem; }
+  .voet-onder nav a { display: inline-block; padding-block: 0.7rem; }
+  .kopieer { padding: 0.7rem 0.9rem; }
+  .lijst.kort li { padding: 0.45rem 0; }
+  .lijst.kort a.waar { padding-block: 0.4rem; }
+  .takjes a.tak { display: inline-block; padding-block: 0.2rem; }
+  .takjes .bij a, .hoort-bij > span:last-child { display: inline-block; padding-block: 0.2rem; }
+  .terug-naar-master .tt, .naar-ode a { display: inline-block; padding-block: 0.25rem; }
+  .toc-lijst { border-bottom: 1px solid var(--zand); }
+  input, select, textarea, .aanvraag-form button, .voet form button { min-height: 44px; }
+  .erbij-pagina .raten { gap: 1.2rem; }
+  .uitgelicht { overflow-wrap: anywhere; }
+}
