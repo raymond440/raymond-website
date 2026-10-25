@@ -407,3 +407,57 @@ h1 .markeer { background-size: 100% 60%; background-position: center 66%; }
 .voet-reageer .adres-rij { display: contents; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .klaar:empty { display: none; }
+
+/* ERBIJ: eigen merk binnen de site. Honinggeel alleen als accent, verder de gewone huisstijl. */
+:root { --honing: #f7ac2e; }
+.erbij-held { position: relative; margin: 0.5rem 0 2.2rem; padding: 3rem 0 2.2rem; isolation: isolate; }
+.honingraat { position: absolute; inset: -1rem -2rem; width: calc(100% + 4rem); height: calc(100% + 2rem); z-index: -1; opacity: 0.55; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 62% 70% at 38% 50%, #000 15%, transparent 78%); mask-image: radial-gradient(ellipse 62% 70% at 38% 50%, #000 15%, transparent 78%); }
+.erbij-logo { display: block; width: min(68%, 26rem); height: auto; color: var(--honing); }
+.erbij-tag { font-family: var(--speels); font-weight: 500; font-size: 36px; line-height: 40px; margin: 0.9rem 0 0; transform: rotate(-1.5deg); transform-origin: left; }
+.erbij-intro { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 26px; line-height: 38px; }
+.raten { list-style: none; padding: 0; margin: 1.4rem 0 1.8rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1.8rem; max-width: none !important; }
+.raten li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 0.9rem; align-items: start; }
+.raat-nr { position: relative; width: 52px; height: 60px; display: grid; place-items: center; transform: rotate(var(--draai, 0deg)); }
+.raat-nr svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.raat-nr b { position: relative; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 500; font-size: 24px; }
+.raten strong { display: block; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 500; font-size: 21px; line-height: 28px; }
+.raten li span:not(.raat-nr) { display: block; margin-top: 0.25rem; font-size: 17px; line-height: 27px; }
+.erbij-weetje { margin: 2rem 0; padding: 0.2rem 0 0.2rem 1.2rem; max-width: var(--maat); font-size: 17px; line-height: 28px; background: linear-gradient(var(--honing), var(--honing)) left / 3px 100% no-repeat; }
+.erbij-weetje .label { color: var(--gedempt); margin: 0 0 0.3rem; }
+.erbij-weetje p { margin: 0; }
+.erbij-pagina .bestel { border: 2px solid var(--honing); }
+.bestel { margin-top: 2.5rem; padding: 1.75rem; max-width: 44rem; }
+.bestel .prijs { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 31px; line-height: 38px; margin: 0.2rem 0 0.8rem; }
+.bestel .klein { font-size: 16px; line-height: 26px; color: var(--gedempt); margin: 1rem 0 0; }
+.veld select { font: inherit; font-size: 17px; padding: 0.6rem 0.75rem; background: var(--creme); color: var(--inkt); border: 1px solid var(--inkt); min-width: 0; }
+.aanvraag.honing .aanvraag-form button { background: var(--honing); color: var(--inkt); border-color: var(--inkt); }
+.erbij-slot { font-family: var(--speels); font-weight: 500; font-size: 34px; line-height: 40px; margin: 2.4rem 0 0; transform: rotate(-1deg); }
+/* de brief van Melissa: ERBIJ-briefpapier */
+.brief { margin: 2.4rem 0; max-width: var(--maat); background: var(--papier); border: 1px solid var(--zand); border-top: 10px solid var(--honing); padding: 1.6rem 1.8rem 1.4rem; }
+.brief-hoofd { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-bottom: 1rem; margin-bottom: 1.2rem; background: var(--lijn) bottom left / 100% 8px no-repeat; }
+.brief-logo { width: 110px; height: auto; color: var(--honing); }
+.brief-adres { margin: 0; font-family: var(--sans); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); }
+.brief-tekst p { margin: 0 0 1rem; }
+.brief-ondertekening { display: flex; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem; }
+.handtekening { font-family: 'Pinyon Script', cursive; font-size: 44px; line-height: 1.1; transform: rotate(-3deg); display: inline-block; }
+.bijenvlucht { width: 160px; height: auto; }
+.brief-voet { margin: 1.2rem 0 0; font-family: var(--sans); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); }
+.brief-noot { margin: 0.6rem 0 0; font-size: 15px; line-height: 22px; color: var(--gedempt); }
+/* homepage en Samenwerken */
+.home-erbij { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 1.5rem; align-items: center; margin-top: 2.5rem; padding-top: 1.8rem; background: var(--lijn) top left / 100% 8px no-repeat; }
+.home-erbij .label { color: var(--gedempt); margin: 0 0 0.3rem; }
+.home-erbij .beschr { margin: 0.3rem 0 0; }
+.home-erbij-logo { display: block; color: var(--honing); }
+.home-erbij-logo svg { display: block; width: 100%; height: auto; }
+.ook-van-mij { margin: 1.8rem 0 0; max-width: var(--maat); }
+.ook-van-mij .label { display: block; color: var(--gedempt); margin-bottom: 0.3rem; }
+.ook-van-mij a { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 22px; text-underline-offset: 5px; }
+.foto.geplakt.rechts.wie-foto { width: min(44%, 19rem); transform: rotate(-2.4deg); }
+.foto.geplakt.rechts.wie-foto:hover { transform: rotate(-1deg); }
+@media (max-width: 700px) {
+  .erbij-held { padding: 2rem 0 1.4rem; } .erbij-logo { width: 86%; } .raten { grid-template-columns: minmax(0, 1fr); }
+  .erbij-intro { font-size: 22px; line-height: 33px; } .bestel { padding: 1.25rem; } .brief { padding: 1.2rem; }
+  .home-erbij { grid-template-columns: 110px minmax(0, 1fr); gap: 1rem; } .foto.geplakt.rechts.wie-foto { float: none; width: auto; margin: 0.5rem 0.5rem 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .wie-foto { transition: none; } }

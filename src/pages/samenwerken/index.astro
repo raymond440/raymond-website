@@ -3,6 +3,7 @@ import Basis from '../../layouts/Basis.astro';
 import Foto from '../../components/Foto.astro';
 import Kruimel from '../../components/Kruimel.astro';
 import podium from '../../assets/keynote/podium.jpg';
+import anniek from '../../assets/ray-en-anniek.jpg';
 ---
 <Basis titel="Samenwerken" beschrijving="Vader, ondernemer, spreker en mentor van ondernemers. Waarmee ik je kan helpen: een keynote, meedenken als mentor, of eerst een stip." actief="samenwerken" ogId="samenwerken">
   <main class="pagina samen">
@@ -13,6 +14,7 @@ import podium from '../../assets/keynote/podium.jpg';
     <section class="samen-wie">
       <div>
         <p class="label">Wie ik ben</p>
+        <Foto src={anniek} variant="rechts" klas="wie-foto" alt="Raymond, met zijn wang tegen die van zijn vrouw, die breed lacht." bijschrift="Met mijn vrouw." sizes="(min-width: 700px) 300px, 100vw" />
         <p>Op mijn negentiende begon ik mijn eerste bedrijf, met vrienden en zonder plan. Dat werd Concept7, een digitaal bureau in Groningen. We schreven er een boek bij, "Zo kan het ook", dat op scholen als lesmateriaal werd gebruikt.</p>
         <p>Daarna kwam srprs.me: verrassingsreizen, waarbij je pas op het laatste moment hoorde waar je heen ging. Tienduizenden mensen stapten zo in het vliegtuig. Daarna bouwde ik Hotel Wonderland, het eerste immersive theater van Nederland. Dat moest door corona acht maanden dicht.</p>
         <p>Wat al die bedrijven delen, is wat ik in de ode <a href="/onbevangen/">onbevangenheid</a> noem. Iets zien, denken "wat als het wel kan", en beginnen. Ik woon met mijn gezin in Friesland.</p>
@@ -26,6 +28,7 @@ import podium from '../../assets/keynote/podium.jpg';
         <li><a href="/samenwerken/mentor/" class="aanbod-titel">Meedenken als mentor.</a><p>Voor founders die groeien en daarbij niet kwijt willen raken waarom ze begonnen.</p></li>
         <li><a href="/samenwerken/stip/" class="aanbod-titel">De stip.</a><p>Waar je over vijf jaar staat, met de route ernaartoe. En daarna je merk en je cultuur erop laten aansluiten.</p></li>
       </ol>
+      <p class="ook-van-mij"><span class="label">Ook van mij</span><a href="/erbij/">ERBIJ, honing om te delen.</a> Twee potjes: één voor jezelf, één om weg te geven.</p>
     </section>
 
     <section class="keynote-kort" aria-labelledby="kk-kop">

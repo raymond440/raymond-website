@@ -98,3 +98,7 @@ Overgenomen uit het goedgekeurde prototype (vault: `projecten/Website raymondklo
 - **Voet:** links aanmelden (de enige koraalknop van de pagina), rechts reageren; formulierknoppen elders zijn inkt.
 - **Newsreader** met optische as (`opsz.css`, ook cursief) zoals in het prototype.
 - Componenten: `Voet`, `Kruimel`, `Inhoud`, `Foto`, `Aanvraag`, `KortLijst`. Weg: `Inschrijven`, `Lijst`.
+
+## ERBIJ
+
+Eigen merk binnen de site: logo `ErbijLogo.astro` in honinggeel `#F7AC2E` (`--honing`), zonder vlak of kader. Honinggeel alleen als accent: zeshoeken, het lijntje bij "Op het etiket", de rand van het bestelblok en de bestelknop (inkt als tekst). Kop met een heel lichte honingraat in zand (`Honingraat.astro`), geen gele achtergrond. De vier punten hebben een open honinggele zeshoek met het nummer, licht gedraaid. Briefpapier van Melissa: honinggele rand bovenaan, handtekening in Pinyon Script.

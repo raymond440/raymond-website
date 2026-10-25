@@ -1,0 +1,28 @@
+---
+// Een heel lichte honingraat: losse zeshoeken in verschillende maten en lijndiktes, in zand,
+// die naar de randen vervagen. Vast patroon (geen random), zodat de build altijd hetzelfde geeft.
+const hex = (cx: number, cy: number, r: number, draai: number) =>
+  Array.from({ length: 6 }, (_, i) => {
+    const a = ((60 * i + 30 + draai) * Math.PI) / 180;
+    return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`;
+  }).join(' ');
+const vormen: { cx: number; cy: number; r: number; w: number; d: number }[] = [];
+const z = (n: number) => Math.abs(Math.sin(n * 12.9898) * 43758.5453) % 1;
+for (let rij = 0; rij < 6; rij++) {
+  for (let kol = 0; kol < 14; kol++) {
+    const n = rij * 14 + kol;
+    if (z(n) < 0.18) continue;
+    const r = 16 + z(n + 3) * 22;
+    vormen.push({
+      cx: kol * 62 + (rij % 2) * 31 + (z(n + 5) - 0.5) * 18,
+      cy: rij * 56 + (z(n + 7) - 0.5) * 14,
+      r,
+      w: 0.8 + z(n + 11) * 1.4,
+      d: z(n + 13) * 60,
+    });
+  }
+}
+---
+<svg class="honingraat" viewBox="0 0 860 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+  {vormen.map((v) => <polygon points={hex(v.cx, v.cy, v.r, v.d)} fill="none" stroke="var(--zand)" stroke-width={v.w} stroke-linejoin="round" />)}
+</svg>

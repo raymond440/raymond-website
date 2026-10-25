@@ -2,6 +2,7 @@
 import Basis from '../layouts/Basis.astro';
 import KortLijst from '../components/KortLijst.astro';
 import Tekening from '../components/Tekening.astro';
+import ErbijLogo from '../components/ErbijLogo.astro';
 import { artikelen, datum } from '../site';
 import { laadOde, plekken } from '../lib/ode';
 
@@ -36,6 +37,15 @@ const plek = await plekken();
       <p class="label" id="wie-kop">Wie hier schrijft</p>
       <p>Ik ben Raymond Klompsma. Vader, ondernemer, spreker en mentor van ondernemers. Op mijn negentiende begon ik mijn eerste bedrijf, met vrienden en zonder plan. Sindsdien is dat het patroon gebleven: iets zien, denken "wat als het wel kan", en beginnen voor ik het zeker weet. Nu bouw ik aan nieuwe merken en help ik ondernemers die vastzitten weer in beweging te komen.</p>
       <p class="alle"><a href="/samenwerken/">Meer over mij, en samenwerken</a></p>
+    </section>
+
+    <section class="home-erbij" aria-labelledby="erbij-home-kop">
+      <a href="/erbij/" class="home-erbij-logo" aria-label="ERBIJ" tabindex="-1"><ErbijLogo label="" /></a>
+      <div>
+        <p class="label" id="erbij-home-kop">Ook van mij</p>
+        <a class="stam-titel" href="/erbij/">ERBIJ, honing om te delen.</a>
+        <p class="beschr">Twee potjes: één voor jezelf, één om weg te geven aan iemand die het verdient.</p>
+      </div>
     </section>
   </main>
 </Basis>
