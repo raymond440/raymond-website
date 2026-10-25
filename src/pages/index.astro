@@ -6,7 +6,7 @@ import ErbijLogo from '../components/ErbijLogo.astro';
 import { artikelen, datum } from '../site';
 import { laadOde, plekken } from '../lib/ode';
 
-const recent = (await artikelen()).slice(0, 3);
+const recent = (await artikelen()).slice(0, 5);
 const ode = await laadOde();
 const plek = await plekken();
 ---
