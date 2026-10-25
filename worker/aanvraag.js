@@ -9,18 +9,12 @@ const SOORTEN = {
   keynote: 'Keynote',
   mentor: 'Mentor',
   stip: 'De stip',
-  erbij: 'Bestelling ERBIJ',
 };
 const VELDEN = [
   ['naam', 'Naam', 120],
   ['mail', 'E-mail', 200],
   ['organisatie', 'Organisatie of bedrijf', 200],
   ['wanneer', 'Wanneer, ongeveer', 200],
-  ['aantal', 'Aantal sets van twee potjes', 20],
-  ['telefoon', 'Telefoon, voor het Tikkie', 40],
-  ['adres', 'Straat en huisnummer', 200],
-  ['postcode', 'Postcode', 20],
-  ['plaats', 'Plaats', 120],
   ['bericht', 'Bericht', 5000],
 ];
 // verplichte velden per soort
@@ -28,7 +22,6 @@ const VERPLICHT = {
   keynote: ['naam', 'bericht'],
   mentor: ['naam', 'bericht'],
   stip: ['naam', 'bericht'],
-  erbij: ['naam', 'aantal', 'adres', 'postcode', 'plaats'],
 };
 
 const json = (data, status = 200) =>
@@ -70,9 +63,9 @@ export function leesFormulier(form) {
 }
 
 export function bouwMail(data, nu = new Date(), id = crypto.randomUUID()) {
-  const onderwerp = `${SOORTEN[data.soort]}: ${enkeleRegel(data.naam)}${data.organisatie ? `, ${enkeleRegel(data.organisatie)}` : ''}${data.soort === 'erbij' && data.aantal ? `, ${enkeleRegel(data.aantal)} set(s)` : ''}`;
+  const onderwerp = `${SOORTEN[data.soort]}: ${enkeleRegel(data.naam)}${data.organisatie ? `, ${enkeleRegel(data.organisatie)}` : ''}`;
   const lijst = VELDEN.filter(([n]) => data[n]).map(([n, label]) => `${label}: ${data[n]}`);
-  const tekst = `${data.soort === 'erbij' ? 'Nieuwe bestelling' : 'Nieuwe aanvraag'} via raymondklompsma.nl (${SOORTEN[data.soort]}).\r\n\r\n${lijst.join('\r\n')}\r\n\r\nAntwoord op deze mail om direct bij ${enkeleRegel(data.naam)} uit te komen.\r\n`;
+  const tekst = `Nieuwe aanvraag via raymondklompsma.nl (${SOORTEN[data.soort]}).\r\n\r\n${lijst.join('\r\n')}\r\n\r\nAntwoord op deze mail om direct bij ${enkeleRegel(data.naam)} uit te komen.\r\n`;
   const kop = [
     `From: Website Raymond Klompsma <${AFZENDER}>`,
     `To: ${ONTVANGER}`,

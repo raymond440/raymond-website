@@ -1,0 +1,16 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import ErbijLogo from '../../components/ErbijLogo.astro';
+---
+<Basis titel="Dank je wel" beschrijving="Je bestelling van ERBIJ is binnen." noindex ogId="erbij">
+  <main class="pagina samen erbij-pagina">
+    <Kruimel items={[{ label: 'ERBIJ', href: '/erbij/' }, { label: 'Bedankt' }]} />
+    <section class="keynote">
+      <ErbijLogo class="erbij-logo dank-logo" label="ERBIJ" />
+      <h1 class="erbij-h1">Dank je wel, je bent erbij.</h1>
+      <p class="erbij-intro">Je krijgt zo een bevestiging per mail, en eind november komt de honing naar je toe. Eén potje is voor jou. Het andere mag je weggeven aan iemand die het verdient.</p>
+      <p class="naar-ode"><a href="/erbij/">Terug naar ERBIJ</a></p>
+    </section>
+  </main>
+</Basis>

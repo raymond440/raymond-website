@@ -32,4 +32,14 @@ const ode = defineCollection({
   }),
 });
 
-export const collections = { artikelen, ode };
+// Losse pagina's bij ERBIJ: voorwaarden en privacy. De tekst komt van Raymond; tot dan staat concept op true.
+const pagina = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pagina' }),
+  schema: z.object({
+    titel: z.string(),
+    beschrijving: z.string(),
+    concept: z.boolean().default(true),
+  }),
+});
+
+export const collections = { artikelen, ode, pagina };

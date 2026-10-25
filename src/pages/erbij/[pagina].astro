@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import Kruimel from '../../components/Kruimel.astro';
+import { BEDRIJF, toonConcepten } from '../../site';
+
+export async function getStaticPaths() {
+  const alle = await getCollection('pagina', (p) => toonConcepten || !p.data.concept);
+  // een voorwaardenpagina zonder bedrijfsnummers mag niet live
+  if (alle.some((p) => !p.data.concept) && (!BEDRIJF.kvk || !BEDRIJF.btw)) {
+    throw new Error('KvK- en btw-nummer van Saga BV ontbreken in src/site.ts (BEDRIJF). Vraag ze aan Raymond.');
+  }
+  return alle.map((p) => ({ params: { pagina: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+---
+<Basis titel={p.data.titel.replace(/\.$/, '')} beschrijving={p.data.beschrijving} noindex={p.data.concept}>
+  <main class="pagina smal">
+    <Kruimel items={[{ label: 'ERBIJ', href: '/erbij/' }, { label: p.data.titel.replace(/\.$/, '') }]} />
+    <h1>{p.data.titel}{p.data.concept && <span class="concept"> · concept</span>}</h1>
+    <div class="prose"><Content /></div>
+    {BEDRIJF.kvk && BEDRIJF.btw && (
+      <p class="klein bedrijf">{BEDRIJF.naam}, handelsnaam {BEDRIJF.handelsnaam}{BEDRIJF.adres && `, ${BEDRIJF.adres}`}. KvK {BEDRIJF.kvk}, btw {BEDRIJF.btw}.</p>
+    )}
+  </main>
+</Basis>

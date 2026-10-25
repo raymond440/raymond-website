@@ -12,14 +12,6 @@ assert.ok(leesFormulier(f({ ...goed, mail: 'geen-mail' })).fout);
 assert.ok(leesFormulier(f({ ...goed, bericht: '' })).fout);
 assert.ok(leesFormulier(f({ ...goed, bericht: 'x'.repeat(5001) })).fout);
 
-// bestelling ERBIJ: geen bericht nodig, wel adres
-const bestel = { soort: 'erbij', naam: 'Jan', mail: 'jan@voorbeeld.nl', aantal: '2', telefoon: '0612345678', adres: 'Straat 1', postcode: '9711 AA', plaats: 'Groningen', bericht: '', website: '' };
-assert.ok(leesFormulier(f(bestel)).data);
-assert.ok(leesFormulier(f({ ...bestel, adres: '' })).fout);
-const bm = bouwMail(leesFormulier(f(bestel)).data, new Date('2026-10-25T12:00:00Z'), 'id2');
-assert.match(bm.split('\r\n\r\n')[0], /Subject: Bestelling ERBIJ: Jan, 2 set\(s\)/);
-assert.match(Buffer.from(bm.split('\r\n\r\n').slice(1).join('').replace(/\r\n/g, ''), 'base64').toString('utf8'), /Postcode: 9711 AA/);
-
 // regeleinden in de naam mogen geen extra header opleveren
 const mail = bouwMail(leesFormulier(f({ ...goed, naam: 'Piet\r\nBcc: boos@voorbeeld.nl' })).data, new Date('2026-10-25T12:00:00Z'), 'id1');
 const [kop, ...rest] = mail.split('\r\n\r\n');

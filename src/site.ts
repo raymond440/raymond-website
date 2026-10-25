@@ -20,3 +20,12 @@ export async function odeEntry() {
   if (!e || (e.data.concept && !toonConcepten)) return undefined;
   return e;
 }
+
+// Bedrijfsgegevens voor de webshop. ERBIJ is een handelsnaam van Saga BV. Nummers komen van Raymond: nooit zelf invullen.
+export const BEDRIJF = {
+  naam: 'Saga BV',
+  handelsnaam: 'ERBIJ',
+  kvk: null as string | null,
+  btw: null as string | null,
+  adres: null as string | null,
+};
