@@ -8,6 +8,7 @@ export default defineConfig({
   integrations: [sitemap()],
   redirects: {
     '/over': '/samenwerken/',
+    '/samenwerken/stip': '/samenwerken/',
     '/artikelen': '/verder-geschreven/',
     '/artikelen/mag-middelmatigheid-alsjeblieft-sterven': '/artikelen/middelmatig-mag-in-je-werk-niet/',
   },

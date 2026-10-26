@@ -67,7 +67,6 @@ export async function getStaticPaths() {
     { params: { id: 'erbij' }, props: { titel: 'ERBIJ, een cadeau om te delen.', onder: 'Raymond Klompsma', tekening: 'pakje' as Naam } },
     { params: { id: 'keynote' }, props: { titel: 'Ik vertel graag een verhaal.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'mentor' }, props: { titel: 'Ik denk graag met je mee.', onder: 'Raymond Klompsma', tekening: 'trap' as Naam } },
-    { params: { id: 'stip' }, props: { titel: 'Eerst een stip.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     ...lijst.map((a) => ({ params: { id: a.id }, props: { titel: a.data.titel, onder: 'Raymond Klompsma', tekening: (a.data.tekening ?? 'zon') as Naam } })),
   ];
 }
