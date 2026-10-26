@@ -11,3 +11,4 @@ screenshots/
 .dev.vars
 
 .wrangler/
+.DS_Store
