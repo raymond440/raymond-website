@@ -1,0 +1,84 @@
+<!doctype html><html><body style="margin:0;background:transparent">
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const W=1600,H=1600;
+const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+r.setSize(W,H);r.setPixelRatio(1);r.setClearColor(0x000000,0);
+r.shadowMap.enabled=true;r.shadowMap.type=THREE.PCFSoftShadowMap;
+r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.05;r.outputColorSpace=THREE.SRGBColorSpace;
+document.body.appendChild(r.domElement);
+const scene=new THREE.Scene();
+const pm=new THREE.PMREMGenerator(r);
+scene.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;
+scene.environmentIntensity=0.55;
+const cam=new THREE.PerspectiveCamera(26,1,1,200);
+cam.position.set(-15,38,38);cam.lookAt(0,1.2,0.8);
+const sun=new THREE.DirectionalLight(0xfff1dc,2.4);sun.position.set(-14,26,14);sun.castShadow=true;
+sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-22,right:22,top:22,bottom:-22,near:1,far:90});sun.target.position.set(0,0,0);scene.add(sun.target);
+sun.shadow.radius=6;sun.shadow.bias=-0.0004;scene.add(sun);
+const fill=new THREE.DirectionalLight(0xdfe8ff,0.5);fill.position.set(14,10,18);scene.add(fill);
+const load=u=>new Promise(res=>new THREE.TextureLoader().load(u,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=16;res(t)}));
+const [etiket,deksel]=await Promise.all([load('etiket.png'),load('deksel-rond.png')]);
+// papier/karton texturen
+function noiseTex(base,amp,w=512,fn){const c=document.createElement('canvas');c.width=c.height=w;const g=c.getContext('2d');g.fillStyle=base;g.fillRect(0,0,w,w);
+ const d=g.getImageData(0,0,w,w);for(let i=0;i<d.data.length;i+=4){const n=(Math.random()-.5)*amp;d.data[i]+=n;d.data[i+1]+=n;d.data[i+2]+=n}g.putImageData(d,0,0);fn&&fn(g,w);
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=16;return t}
+const kraft=noiseTex('#b99467',26,512,(g,w)=>{g.globalAlpha=.08;for(let i=0;i<260;i++){g.strokeStyle=Math.random()<.5?'#6b4e2c':'#e6c795';g.beginPath();const x=Math.random()*w,y=Math.random()*w;g.moveTo(x,y);g.lineTo(x+Math.random()*60-30,y+Math.random()*4-2);g.stroke()}});
+const inner=noiseTex('#cdb48d',18);
+// honingraat: zeshoeken van bovenaf
+const hex=noiseTex('#d8c19a',10,1024,(g,w)=>{const s=40,h=s*Math.sqrt(3)/2;g.strokeStyle='#8a6b3f';g.lineWidth=4;g.fillStyle='#a98a58';
+ for(let row=-1;row<w/h+1;row++)for(let col=-1;col<w/(1.5*s)+1;col++){const x=col*1.5*s,y=row*h*2+(col%2?h:0);g.beginPath();for(let k=0;k<6;k++){const a=Math.PI/3*k;g.lineTo(x+s*.82*Math.cos(a),y+s*.82*Math.sin(a))}g.closePath();g.fillStyle='rgba(70,48,24,.55)';g.fill();g.stroke()}});
+hex.repeat.set(1,1);
+const matK=new THREE.MeshStandardMaterial({map:kraft,roughness:.92});
+const matI=new THREE.MeshStandardMaterial({map:inner,roughness:.95});
+const box=(w,h,d,m,x,y,z)=>{const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);b.position.set(x,y,z);b.castShadow=b.receiveShadow=true;scene.add(b);return b};
+// kist
+const IW=10.6,ID=15.2,T=.45,WH=4.4;
+box(IW+2*T,.5,ID+2*T,matK,0,.25,0);
+box(IW+2*T,WH,T,matK,0,WH/2,-(ID/2+T/2)); box(IW+2*T,WH,T,matK,0,WH/2,ID/2+T/2);
+box(T,WH,ID,matK,-(IW/2+T/2),WH/2,0); box(T,WH,ID,matK,IW/2+T/2,WH/2,0);
+// afgeronde rand: lichte bovenrand
+const rim=m=>m; 
+// honingraat blokken (zijkant toont cellen via hex-textuur)
+function hc(w,h,d,x,y,z){const mats=[],tex=(rx,ry)=>{const t=hex.clone();t.needsUpdate=true;t.repeat.set(rx,ry);return new THREE.MeshStandardMaterial({map:t,roughness:.9})};
+ const m=[tex(d/6,h/6),tex(d/6,h/6),tex(w/6,d/6),tex(w/6,d/6),tex(w/6,h/6),tex(w/6,h/6)];
+ const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);b.position.set(x,y,z);b.castShadow=b.receiveShadow=true;scene.add(b)}
+const FL=.5,FH=.7; hc(IW,FH,ID,0,FL+FH/2-.0,0);           // bodemplaat
+const R=3.1,gap=.35; const zc=[-(R+gap/2+0.55),(R+gap/2+0.55)];
+const top=FL+FH, axis=top+R;
+const bh=axis-top+.1;
+hc(IW,bh,ID/2-zc[1]-R-.05,0,top+bh/2,(ID/2+zc[1]+R+.05)/2);   // voor
+hc(IW,bh,ID/2+zc[0]-R-.05,0,top+bh/2,-(ID/2-(ID/2+zc[0]-R-.05)/2));  // achter
+hc(IW,bh,(zc[1]-zc[0])-2*R+.02,0,top+bh/2,0);                  // midden
+// pot
+function jar(z,rot){const g=new THREE.Group();
+ const L=6.3;
+ const glass=new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.03,metalness:0,transmission:0,transparent:true,opacity:.16,clearcoat:1,clearcoatRoughness:.03,envMapIntensity:2.2,ior:1.5,depthWrite:false});
+ const honey=new THREE.MeshPhysicalMaterial({color:0xe0861a,roughness:.18,clearcoat:.6,emissive:0x7a3a00,emissiveIntensity:.35});
+ // profiel: lathe langs Y, straks naar X gedraaid
+ const pts=[[0,-L/2],[R-.35,-L/2],[R,-L/2+.35],[R,L/2-.5],[R-.25,L/2-.1],[R-.45,L/2+.35],[R-.45,L/2+.8],[0,L/2+.8]].map(p=>new THREE.Vector2(p[0],p[1]));
+ const body=new THREE.Mesh(new THREE.LatheGeometry(pts,96),glass);body.castShadow=false;
+ const honeyPts=pts.map(p=>new THREE.Vector2(Math.max(0,p.x-.12),Math.min(p.y,L/2-.1)));
+ const hn=new THREE.Mesh(new THREE.LatheGeometry(honeyPts,96),honey);hn.castShadow=true;
+ // label
+ const lab=new THREE.Mesh(new THREE.CylinderGeometry(R+.02,R+.02,L-1.3,96,1,true,-Math.PI*0.62,Math.PI*1.24),new THREE.MeshStandardMaterial({map:etiket,roughness:.5,side:THREE.DoubleSide}));
+ lab.position.y=-.35;
+ // deksel
+ const lidM=new THREE.MeshStandardMaterial({color:0x0d0e10,roughness:.38,metalness:.35});
+ const lid=new THREE.Mesh(new THREE.CylinderGeometry(R-.38,R-.38,1.55,96),lidM);lid.position.y=L/2+.8+.2;lid.castShadow=true;
+ const rimR=new THREE.Mesh(new THREE.TorusGeometry(R-.38,.06,16,96),lidM);rimR.rotation.x=Math.PI/2;rimR.position.y=L/2+.8+.2+.775;
+ const cap=new THREE.Mesh(new THREE.CircleGeometry(R-.44,96),new THREE.MeshStandardMaterial({map:deksel,roughness:.42,metalness:.1}));cap.rotation.x=-Math.PI/2;cap.position.y=L/2+.8+.2+.78;
+ g.add(body,hn,lab,lid,rimR,cap);
+ g.rotation.z=-Math.PI/2; // as langs x, deksel naar rechts
+ g.rotation.order='ZYX'; g.position.set(-1.25,axis,z);
+ g.rotateY(0); const o=new THREE.Group();o.add(g);o.rotation.y=rot;o.position.set(0,0,0);scene.add(o);
+ g.traverse(m=>{if(m.isMesh){m.castShadow=m!==body;}});
+ return g}
+// as langs X: lathe-Y -> X
+const j1=jar(zc[0],.04),j2=jar(zc[1],-.03);
+// vloer (alleen schaduw)
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(120,120),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.position.y=-.001;floor.receiveShadow=true;scene.add(floor);
+r.render(scene,cam);window.__klaar=true;
+</script></body></html>

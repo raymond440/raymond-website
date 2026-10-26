@@ -1,0 +1,1 @@
+Genereert src/assets/erbij-cadeau.png (3D-render, three.js). Gebruik: three@0.170.0 naast scene.html installeren, serveer de map, render met headless Chrome (swiftshader, transparante achtergrond), snij bij naar 1200x1200.
