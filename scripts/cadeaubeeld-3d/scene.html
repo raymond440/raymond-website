@@ -13,8 +13,8 @@ const scene=new THREE.Scene();
 const pm=new THREE.PMREMGenerator(r);
 scene.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;
 scene.environmentIntensity=0.55;
-const cam=new THREE.PerspectiveCamera(26,1,1,200);
-cam.position.set(-15,38,38);cam.lookAt(0,1.2,0.8);
+const cam=new THREE.PerspectiveCamera(23,1,1,200);
+cam.position.set(-18,46,46);cam.lookAt(0,1.2,0.8);
 const sun=new THREE.DirectionalLight(0xfff1dc,2.4);sun.position.set(-14,26,14);sun.castShadow=true;
 sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-22,right:22,top:22,bottom:-22,near:1,far:90});sun.target.position.set(0,0,0);scene.add(sun.target);
 sun.shadow.radius=6;sun.shadow.bias=-0.0004;scene.add(sun);
@@ -35,7 +35,7 @@ const matK=new THREE.MeshStandardMaterial({map:kraft,roughness:.92});
 const matI=new THREE.MeshStandardMaterial({map:inner,roughness:.95});
 const box=(w,h,d,m,x,y,z)=>{const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);b.position.set(x,y,z);b.castShadow=b.receiveShadow=true;scene.add(b);return b};
 // kist
-const IW=10.6,ID=15.2,T=.45,WH=4.4;
+const IW=14.6,ID=19.2,T=.45,WH=4.4;
 box(IW+2*T,.5,ID+2*T,matK,0,.25,0);
 box(IW+2*T,WH,T,matK,0,WH/2,-(ID/2+T/2)); box(IW+2*T,WH,T,matK,0,WH/2,ID/2+T/2);
 box(T,WH,ID,matK,-(IW/2+T/2),WH/2,0); box(T,WH,ID,matK,IW/2+T/2,WH/2,0);
@@ -43,15 +43,16 @@ box(T,WH,ID,matK,-(IW/2+T/2),WH/2,0); box(T,WH,ID,matK,IW/2+T/2,WH/2,0);
 const rim=m=>m; 
 // honingraat blokken (zijkant toont cellen via hex-textuur)
 function hc(w,h,d,x,y,z){const mats=[],tex=(rx,ry)=>{const t=hex.clone();t.needsUpdate=true;t.repeat.set(rx,ry);return new THREE.MeshStandardMaterial({map:t,roughness:.9})};
- const m=[tex(d/6,h/6),tex(d/6,h/6),tex(w/6,d/6),tex(w/6,d/6),tex(w/6,h/6),tex(w/6,h/6)];
+ const m=[tex(d/11,h/11),tex(d/11,h/11),tex(w/11,d/11),tex(w/11,d/11),tex(w/11,h/11),tex(w/11,h/11)];
  const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);b.position.set(x,y,z);b.castShadow=b.receiveShadow=true;scene.add(b)}
 const FL=.5,FH=.7; hc(IW,FH,ID,0,FL+FH/2-.0,0);           // bodemplaat
-const R=3.1,gap=.35; const zc=[-(R+gap/2+0.55),(R+gap/2+0.55)];
+const R=3.1,gap=.35; const zc=[-(R+gap/2+1.0),(R+gap/2+1.0)];
 const top=FL+FH, axis=top+R;
 const bh=axis-top+.1;
 hc(IW,bh,ID/2-zc[1]-R-.05,0,top+bh/2,(ID/2+zc[1]+R+.05)/2);   // voor
 hc(IW,bh,ID/2+zc[0]-R-.05,0,top+bh/2,-(ID/2-(ID/2+zc[0]-R-.05)/2));  // achter
 hc(IW,bh,(zc[1]-zc[0])-2*R+.02,0,top+bh/2,0);                  // midden
+hc(IW/2-4.5+0.0,bh,ID,-(IW/2+4.5)/2-0.0,top+bh/2,0);hc(IW/2-4.4,bh,ID,(IW/2+4.4)/2,top+bh/2,0);
 // pot
 function jar(z,rot){const g=new THREE.Group();
  const L=6.3;
