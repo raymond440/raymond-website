@@ -25,7 +25,7 @@ export function bevestigingsMail({ voornaam, aantal }) {
   const html = kader(
     p(`Hoi ${naam},`) +
       p(`Dank je wel. Je bestelling is binnen: ${esc(aantal)} keer twee potjes ERBIJ.`) +
-      p('Ik pak ze zelf in en stuur ze eind november naar je toe. Je hoort van me zodra ze onderweg zijn.') +
+      p('Ik pak ze zelf in en stuur ze in het eerste kwartaal van 2027 naar je toe. Je hoort van me zodra ze onderweg zijn.') +
       p('Eén potje is voor jou. Het andere mag je weggeven aan iemand die het volgens jou verdient. Zonder reden, zonder er iets voor terug te vragen.') +
       p('Vragen? Beantwoord deze mail gewoon. Ik lees alles en antwoord zelf.') +
       p('Raymond') +
@@ -35,7 +35,7 @@ export function bevestigingsMail({ voornaam, aantal }) {
 
 Dank je wel. Je bestelling is binnen: ${aantal} keer twee potjes ERBIJ.
 
-Ik pak ze zelf in en stuur ze eind november naar je toe. Je hoort van me zodra ze onderweg zijn.
+Ik pak ze zelf in en stuur ze in het eerste kwartaal van 2027 naar je toe. Je hoort van me zodra ze onderweg zijn.
 
 Eén potje is voor jou. Het andere mag je weggeven aan iemand die het volgens jou verdient. Zonder reden, zonder er iets voor terug te vragen.
 

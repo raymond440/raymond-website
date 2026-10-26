@@ -24,7 +24,7 @@ Je kiest het aantal sets en rekent af via Stripe. Je kunt betalen met iDEAL of k
 
 ## Levering.
 
-Ik pak elke set zelf in en verstuur hem met PostNL. De levering is gepland voor eind november. Zodra je pakket onderweg is, krijg je een mail, met een trackingcode als die er is. Kan ik het niet halen, dan laat ik dat zo snel mogelijk weten.
+Ik pak elke set zelf in en verstuur hem met PostNL. De levering is gepland voor het eerste kwartaal van 2027. Zodra je pakket onderweg is, krijg je een mail, met een trackingcode als die er is. Kan ik het niet halen, dan laat ik dat zo snel mogelijk weten.
 
 ## Herroepen.
 
