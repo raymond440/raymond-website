@@ -12,11 +12,11 @@ ERBIJ is een handelsnaam van Saga BV, ingeschreven bij de Kamer van Koophandel o
 
 ## Wat je koopt.
 
-Een set bestaat uit twee potjes pure honing uit Groningen van 250 gram. Eén potje is voor jou, het andere is bedoeld om weg te geven. Je kunt één tot en met vijf sets per bestelling kopen. Wil je meer, mail me dan.
+Een set is een cadeau voor twee: twee potjes pure honing uit Groningen van 250 gram, in een cadeauverpakking. Eén potje is voor jou, het andere is bedoeld om weg te geven. Je kunt één tot en met vijf sets per bestelling kopen. Wil je meer, mail me dan.
 
 ## Prijs.
 
-Een set kost € 29,95. Dat is inclusief 9% btw en inclusief verzending. Er komen geen kosten bij. Het totaalbedrag zie je voordat je betaalt.
+Een set kost € 59,50. Dat is inclusief 9% btw en inclusief verzending. Er komen geen kosten bij. Het totaalbedrag zie je voordat je betaalt.
 
 ## Bestellen en betalen.
 

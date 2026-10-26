@@ -581,3 +581,9 @@ body { overflow-wrap: break-word; }
 .herroepen .kop-klein { font-size: 25px; line-height: 36px; margin: 1.5rem 0 0.4rem; }
 .herroepen .fout { margin: 0.8rem 0; padding: 0.6rem 0.8rem; border-left: 3px solid var(--koraal-inkt); max-width: 34rem; }
 .herroepen .klein { margin-top: 2rem; font-size: 16px; line-height: 26px; color: var(--gedempt); max-width: var(--maat); }
+
+/* productafbeelding: de luxe cadeauverpakking (eigen illustratie, scripts/maak-cadeaubeeld.mjs) */
+.product-beeld.cadeau { background: none; border: 0; aspect-ratio: 1; overflow: visible; display: block; }
+.cadeau-beeld { display: block; width: 100%; height: 100%; object-fit: cover; }
+.product-beeld.cadeau .product-tag { left: 0.4rem; bottom: 0.2rem; }
+@media (max-width: 700px) { .product-beeld.cadeau { aspect-ratio: 1; } }

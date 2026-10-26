@@ -1,7 +1,7 @@
 // Stripe via de REST-API (geen SDK nodig). De sleutel is een Cloudflare-secret, nooit in de repo.
 import { hmacHex, gelijk } from './crypto.js';
 
-export const PRIJS_CENTEN = 2995; // € 29,95 per set van twee potjes, inclusief btw en verzending
+export const PRIJS_CENTEN = 5950; // € 59,50 per set (twee potjes in een cadeauverpakking), inclusief btw en verzending
 export const MAX_SETS = 5;
 
 function formulier(obj, voorvoegsel = '', uit = new URLSearchParams()) {
@@ -33,7 +33,7 @@ export function maakCheckout(env, aantal, origin) {
         price_data: {
           currency: 'eur',
           unit_amount: PRIJS_CENTEN,
-          product_data: { name: 'ERBIJ, twee potjes', description: 'Twee potjes honing van 250 gram. Inclusief verzending.' },
+          product_data: { name: 'ERBIJ, een cadeau voor twee', description: 'Twee potjes pure honing van 250 gram in een cadeauverpakking. Inclusief verzending.' },
         },
       };
   return stripe(env, 'POST', 'checkout/sessions', {
