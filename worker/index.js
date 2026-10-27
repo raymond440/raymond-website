@@ -1,5 +1,6 @@
 import { EmailMessage } from 'cloudflare:email';
 import { verwerk } from './aanvraag.js';
+import { verwerkZon } from './zon.js';
 import { checkout, webhook, verzonden, herroepen } from './erbij.js';
 import { devPostbus, esc } from './mail.js';
 
@@ -8,6 +9,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/api/aanvraag') return verwerk(request, env, (van, naar, raw) => new EmailMessage(van, naar, raw));
+    if (url.pathname === '/api/zon') return verwerkZon(request, env, (van, naar, raw) => new EmailMessage(van, naar, raw));
     if (url.pathname === '/api/erbij/checkout') return checkout(request, env);
     if (url.pathname === '/api/erbij/webhook') return webhook(request, env);
     if (url.pathname === '/api/erbij/verzonden') return verzonden(request, env);

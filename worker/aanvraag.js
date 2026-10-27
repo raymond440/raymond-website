@@ -22,13 +22,13 @@ const VERPLICHT = {
   mentor: ['naam', 'bericht'],
 };
 
-const json = (data, status = 200) =>
+export const json = (data, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
 
 // Geen regeleinden in headers: dat is hoe mailinjectie werkt.
-const enkeleRegel = (s) => s.replace(/[\r\n]+/g, ' ').trim();
+export const enkeleRegel = (s) => s.replace(/[\r\n]+/g, ' ').trim();
 
-function codeerKop(s) {
+export function codeerKop(s) {
   // RFC 2047, voor een onderwerp met accenten of andere tekens buiten ASCII
   if (/^[\x20-\x7e]*$/.test(s)) return s;
   const bytes = new TextEncoder().encode(s);
@@ -37,7 +37,7 @@ function codeerKop(s) {
   return `=?UTF-8?B?${btoa(bin)}?=`;
 }
 
-function base64Regels(tekst) {
+export function base64Regels(tekst) {
   const bytes = new TextEncoder().encode(tekst);
   let bin = '';
   for (const b of bytes) bin += String.fromCharCode(b);
@@ -78,14 +78,16 @@ export function bouwMail(data, nu = new Date(), id = crypto.randomUUID()) {
   return `${kop}\r\n\r\n${base64Regels(tekst)}\r\n`;
 }
 
+export function herkomstOk(request) {
+  const herkomst = request.headers.get('Origin');
+  return !herkomst || TOEGESTANE_HERKOMST.includes(herkomst) || /^https:\/\/[a-z0-9-]+\.raymond-c50\.workers\.dev$/.test(herkomst) || /^http:\/\/localhost(:\d+)?$/.test(herkomst);
+}
+
 // `maakBericht(van, naar, raw)` komt uit index.js (new EmailMessage), `env.MAIL` is de send_email-binding.
 export async function verwerk(request, env, maakBericht) {
   if (request.method !== 'POST') return json({ ok: false, fout: 'Alleen POST.' }, 405);
 
-  const herkomst = request.headers.get('Origin');
-  if (herkomst && !TOEGESTANE_HERKOMST.includes(herkomst) && !/^https:\/\/[a-z0-9-]+\.raymond-c50\.workers\.dev$/.test(herkomst) && !/^http:\/\/localhost(:\d+)?$/.test(herkomst)) {
-    return json({ ok: false, fout: 'Niet toegestaan.' }, 403);
-  }
+  if (!herkomstOk(request)) return json({ ok: false, fout: 'Niet toegestaan.' }, 403);
 
   let form;
   try {

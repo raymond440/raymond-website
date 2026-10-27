@@ -1,0 +1,144 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Kruimel from '../components/Kruimel.astro';
+import { CONTACT_EMAIL } from '../site';
+---
+<Basis titel="Wobbly Sun" beschrijving="Een teken dat een luikje openhoudt: een wiebelig zonnetje, getekend met een blauwe Bic. Teken je eigen zon." ogId="wobbly">
+  <main class="pagina samen wobbly-pagina">
+    <Kruimel items={[{ label: 'Wobbly Sun' }]} />
+    <section class="keynote">
+      <h1 class="vh">Wobbly Sun</h1>
+      <img class="ws-logo" src="/wobbly-sun-logo.svg" alt="Wobbly Sun" width="529" height="191" />
+
+      <p class="ws-intro">Als kind tekende je een zon in de hoek van je tekening. Niet rond, maar wiebelig. Soms groen, in de kleur die op dat moment voorhanden was. Hij klopte niet, maar hij voelde waar. Tot iemand zei dat een zon geel hoort te zijn, en rond.</p>
+      <p>Wobbly Sun gaat over die zon. Over het luikje in je hoofd dat toen nog wagenwijd openstond. We worden er allemaal mee geboren. Het kan op slot raken, maar het is nooit weg.</p>
+
+      <figure class="ws-manifest" lang="en">
+        <p class="ws-m-kop">Remember when the sun had a smile on <span class="ws-onder-boog">its face?</span></p>
+        <p>Trees could be blue and play the trumpet. People in drawings don’t need hips. Hips are optional. Everything is an OPTION. Then one day somebody tells you the sun can’t be green, or wobbly. “You’re <span class="ws-streep">not a kid</span> anymore, stop imagining. Make room for what <span class="ws-golf">really</span> matters.” Suddenly colours can be wrong. Hips become mandatory. 1 and 1 will never be <span class="ws-cirkel">11</span> again. But once in a while, someone reminds you of the green wobbly sun. That sense of wonder we all remember, but all too often let go. It opens your mind and possibilities feel <span class="ws-streep dubbel">endless</span> again.</p>
+        <p class="ws-m-slot">Cherish your green wobbly sun.</p>
+        <figcaption>Het manifest</figcaption>
+      </figure>
+
+      <h3>Wat het is.</h3>
+      <p>Wobbly Sun is geen bedrijf en geen methode. Het is een teken: een wiebelig zonnetje, getekend met een blauwe Bic. Je komt het tegen op een kaartje, een potje honing, een pet, krijt op de stoep. En als het goed is, gaat er dan heel even een luikje open.</p>
+      <p>Daar gaat het om. Niet om onbevangenheid teruggeven, alsof er iets kapot is. Wel om het luikje openhouden.</p>
+
+      <h3>Waarom blauw.</h3>
+      <p>Bic-pen blauw. Niet ontworpen, niet gekozen. Het is de kleur van: ik pakte wat er lag en begon. In het manifest is de zon groen. Dat mag. Elke zon mag een andere kleur hebben.</p>
+
+      <h3>Waar je hem tegenkomt.</h3>
+      <p>Op een kaartje in een hotelkamer, met de zon op de voorkant en één zin op de achterkant. Op een pet, of als krijt op de stoep. Op een potje honing van <a href="/erbij/">ERBIJ</a>. En ooit op een muur, ergens in Groningen. Je hoeft niet te weten wat het is. Als je even blijft staan, is het al gelukt.</p>
+
+      <h3>Wat het leent.</h3>
+      <p>Wobbly Sun is geen nieuw idee. Het leent van oude. De beginnersgeest uit het zen, die mijn woord onbevangenheid het dichtst benadert. Wabi-sabi, de schoonheid van wat onaf is. Mister Rogers, die dertig jaar lang zei dat ieder mens onverdeelde aandacht verdient. En omakase: loslaten wat je wilt, en iets beters terugkrijgen.</p>
+      <p>Ik bouwde srprs.me erop. Een reisbureau waar je pas op het vliegveld hoorde waar je heen ging. In vier jaar stapten 130.000 reizigers zo in het vliegtuig, zonder te weten waar ze uitkwamen. Dat is het luikje, op grote schaal.</p>
+      <p>De naam bestaat sinds 2018. Toen ik de eerste schetsen liet zien, zei een vriend: "100% Ray dit." Dat is het nog steeds.</p>
+
+      <h3>Teken je eigen zon.</h3>
+      <p>Andere merken verbieden namaak. Wobbly Sun vraagt erom. Hoe meer mensen hun eigen zon tekenen, hoe meer het bestaat. Probeer het maar, en stuur hem me op. Ik bewaar ze allemaal.</p>
+      <div class="ws-teken" id="ws-teken" hidden>
+        <canvas id="ws-canvas" width="1280" height="720" aria-label="Tekenvlak: teken hier je eigen wiebelige zon"></canvas>
+        <div class="ws-teken-knoppen"><span class="label">Teken met je muis of vinger</span><button type="button" id="ws-wis" class="kopieer">Opnieuw</button></div>
+        <form class="ws-insturen" id="ws-insturen" novalidate>
+          <input id="ws-naam" name="naam" type="text" maxlength="80" autocomplete="given-name" placeholder="Je voornaam (mag leeg)" aria-label="Je voornaam" />
+          <input id="ws-mail" name="mail" type="email" maxlength="200" autocomplete="email" placeholder="E-mail, als je antwoord wilt" aria-label="E-mail" />
+          <div class="vh" aria-hidden="true">
+            <label for="ws-website">Laat dit veld leeg</label>
+            <input id="ws-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <button type="submit" class="ws-knop" id="ws-knop">Stuur je zon in</button>
+        </form>
+        <p class="ws-status" id="ws-status" role="status" aria-live="polite"></p>
+        <p class="ws-dank" id="ws-dank" hidden><img id="ws-mini" alt="Jouw zon" /><span>Dank je wel. Je zon is onderweg naar mij.</span></p>
+      </div>
+
+      <h3>Wat er komt.</h3>
+      <p>Het eerste wat ik wil maken, is kleding. Een kleine reeks, geen collectie. Op elk stuk een zon, steeds net anders, want geen twee zonnen zijn gelijk. Het manifest aan de binnenkant, zodat je het bij je draagt zonder dat iemand het ziet.</p>
+      <p>Wanneer het er is, weet ik nog niet. Wil je het horen? <a href={`mailto:${CONTACT_EMAIL}?subject=Wobbly%20Sun`}>Schrijf me</a>.</p>
+
+      <p class="naar-ode"><span class="label">Waar het vandaan komt</span><a href="/onbevangen/#de-wiebelige-zon">De wiebelige zon staat ook in de ode aan onbevangenheid.</a></p>
+    </section>
+  </main>
+</Basis>
+
+<script>
+  const vel = document.getElementById('ws-canvas') as HTMLCanvasElement | null;
+  const blok = document.getElementById('ws-teken') as HTMLElement | null;
+  if (vel && blok) {
+    blok.hidden = false;
+    const cx = vel.getContext('2d')!;
+    const form = document.getElementById('ws-insturen') as HTMLFormElement;
+    const status = document.getElementById('ws-status')!;
+    const dank = document.getElementById('ws-dank')!;
+    const knop = document.getElementById('ws-knop') as HTMLButtonElement;
+    const BIC = 'rgba(18,38,170,0.85)';
+    let tekent = false, lx = 0, ly = 0, streken = 0;
+    cx.lineCap = 'round'; cx.lineJoin = 'round'; cx.strokeStyle = BIC;
+
+    // lijndikte in schermpixels, zodat de streep op een telefoon niet dunner oogt dan op een laptop
+    const schaal = () => vel.width / vel.getBoundingClientRect().width;
+    const pos = (e: PointerEvent) => {
+      const r = vel.getBoundingClientRect();
+      return [((e.clientX - r.left) * vel.width) / r.width, ((e.clientY - r.top) * vel.height) / r.height];
+    };
+    vel.addEventListener('pointerdown', (e) => {
+      tekent = true; streken++;
+      const [x, y] = pos(e); lx = x; ly = y;
+      vel.setPointerCapture(e.pointerId);
+      // ook een stip telt, zodat een tikje op een telefoon een punt achterlaat
+      cx.lineWidth = 3.2 * schaal(); cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x + 0.01, y); cx.stroke();
+      status.textContent = '';
+    });
+    vel.addEventListener('pointermove', (e) => {
+      if (!tekent) return;
+      const [x, y] = pos(e);
+      cx.lineWidth = (2.4 + Math.random() * 1.8) * schaal();
+      cx.beginPath(); cx.moveTo(lx, ly); cx.lineTo(x, y); cx.stroke();
+      lx = x; ly = y;
+    });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach((n) => vel.addEventListener(n, () => { tekent = false; }));
+
+    const wis = () => {
+      cx.clearRect(0, 0, vel.width, vel.height);
+      streken = 0; status.textContent = '';
+      form.hidden = false; dank.hidden = true; knop.disabled = false;
+    };
+    document.getElementById('ws-wis')!.addEventListener('click', wis);
+
+    // Het vel is wit, zodat de PNG in de mail niet doorzichtig is.
+    const naarPng = () => new Promise<Blob | null>((klaar) => {
+      const wit = document.createElement('canvas');
+      wit.width = vel.width; wit.height = vel.height;
+      const w = wit.getContext('2d')!;
+      w.fillStyle = '#fff'; w.fillRect(0, 0, wit.width, wit.height); w.drawImage(vel, 0, 0);
+      wit.toBlob(klaar, 'image/png');
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (streken < 3) {
+        status.textContent = 'Teken eerst een zon.';
+        vel.style.outline = '2px solid #1226aa';
+        setTimeout(() => { vel.style.outline = ''; }, 900);
+        return;
+      }
+      const png = await naarPng();
+      if (!png) { status.textContent = 'Er ging iets mis. Probeer het straks nog eens.'; return; }
+      const data = new FormData(form);
+      data.set('tekening', png, 'zon.png');
+      data.set('streken', String(streken));
+      knop.disabled = true; status.textContent = 'Bezig...';
+      try {
+        const res = await fetch('/api/zon', { method: 'POST', body: data });
+        const uit = await res.json().catch(() => ({}));
+        if (!res.ok || !uit.ok) throw new Error(uit.fout || 'mislukt');
+        (document.getElementById('ws-mini') as HTMLImageElement).src = vel.toDataURL('image/png');
+        form.hidden = true; status.textContent = ''; dank.hidden = false;
+      } catch {
+        knop.disabled = false;
+        status.textContent = 'Versturen lukte niet. Probeer het straks nog eens.';
+      }
+    });
+  }
+</script>
