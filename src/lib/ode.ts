@@ -87,7 +87,7 @@ export async function laadOde(): Promise<Ode | undefined> {
       deelHtml = deelHtml.slice(0, abs) + aside + deelHtml.slice(abs);
     }
 
-    delen.push({ nr, id: deelId, titel: m[2], html: deelHtml, onderdelen, deelTakken, takken: [...onderdelen.flatMap((o) => o.takken), ...deelTakken] });
+    delen.push({ nr, id: deelId, titel: m[2], html: deelHtml, onderdelen, deelTakken, takken: [...deelTakken, ...onderdelen.flatMap((o) => o.takken)] });
   }
   if (delen.length === 0) throw new Error('Geen delen gevonden in de ode.');
 
