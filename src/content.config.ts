@@ -10,12 +10,15 @@ const artikelen = defineCollection({
     datum: z.coerce.date(),
     beschrijving: z.string(),
     tekening: z.enum(['zon', 'deur', 'pakje', 'trap']).optional(),
-    // plek in de ode: de slug (anker) van de sectie waar dit stuk aan hangt
+    // plek in de ode: de slug (anker) van de sectie waar dit stuk aan hangt, of de slug van een ander artikel
+    // (dan hoort dit stuk bij dat artikel, zonder eigen plek in de ode)
     hoort_bij: z.string().optional(),
     // het begin van de zin in de ode waar de tak aan vastzit; daar komt de verwijzing in de kantlijn
     brug: z.string().optional(),
     // korte zin voor in de kantlijn
     kantlijn: z.string().optional(),
+    // een stuk dat eerder elders verscheen: de datum wordt dan getoond als "Verschenen op ..."
+    verschenen: z.coerce.date().optional(),
     concept: z.boolean().default(false),
   }),
 });

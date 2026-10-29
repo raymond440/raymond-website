@@ -626,3 +626,8 @@ body { overflow-wrap: break-word; }
   .ws-insturen { grid-template-columns: 1fr; }
 }
 .ook-van-mij.vervolg { margin-top: 1rem; }
+
+/* Eerder verschenen stukken (Verder geschreven, artikel) */
+.perdeel.eerder { grid-template-columns: minmax(0, 1fr); }
+.perdeel.eerder > .label { color: var(--gedempt); font-size: 12px; }
+.verschenen { color: var(--gedempt); margin: 0 0 1.5rem; }
