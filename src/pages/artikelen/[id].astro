@@ -4,7 +4,7 @@ import Basis from '../../layouts/Basis.astro';
 import Inhoud from '../../components/Inhoud.astro';
 import Kruimel from '../../components/Kruimel.astro';
 import Reageren from '../../components/Reageren.astro';
-import { artikelen } from '../../site';
+import { artikelen, datum } from '../../site';
 import { plekken, kleineLetter } from '../../lib/ode';
 
 export async function getStaticPaths() {
@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 const { a } = Astro.props;
 const { Content, headings } = await render(a);
 const plek = (await plekken()).get(a.id);
+const hoofd = a.data.hoort_bij ? (await artikelen()).find((x) => x.id === a.data.hoort_bij) : undefined;
 // een artikel met minstens twee subtitels krijgt een inhoudsopgave
 const subtitels = headings.filter((h) => h.depth === 2);
 const metToc = subtitels.length >= 2;
@@ -30,8 +31,15 @@ const items = subtitels.map((h) => ({ id: h.slug, titel: h.text.replace(/\.$/, '
             <span>Een ode aan onbevangenheid <span class="pijl">›</span> Deel {plek.deel} <span class="pijl">›</span> {(plek.onderdeel || plek.deelTitel).replace(/\.$/, '')}</span>
           </a>
         )}
+        {hoofd && (
+          <a class="hoort-bij" href={`/artikelen/${hoofd.id}/`}>
+            <span class="label">Hoort bij</span>
+            <span>{hoofd.data.titel}</span>
+          </a>
+        )}
         <h1>{a.data.titel}{a.data.concept && <span class="concept"> · concept</span>}</h1>
         <p class="intro">{a.data.beschrijving}</p>
+        {a.data.verschenen && <p class="label verschenen">Verschenen op {datum(a.data.verschenen)}</p>}
         <div class="prose"><Content /></div>
         <Reageren titel={a.data.titel} />
         {plek && (
