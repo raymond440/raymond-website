@@ -13,13 +13,22 @@ const VELDEN = [
   ['naam', 'Naam', 120],
   ['mail', 'E-mail', 200],
   ['organisatie', 'Organisatie of bedrijf', 200],
+  ['rol', 'Rol', 200],
+  ['link', 'Website of LinkedIn', 300],
+  ['plaats', 'Waar zit je ongeveer', 200],
   ['wanneer', 'Wanneer, ongeveer', 200],
+  ['bedrijfsinfo', 'Wat het bedrijf doet en hoe groot het is', 3000],
   ['bericht', 'Bericht', 5000],
+  ['wens', 'Wat er over een half jaar anders moet zijn', 3000],
+  ['vorm', 'Welke vorm past', 200],
+  ['herkomst', 'Hoe diegene bij mij terechtkwam', 300],
 ];
+// bij de intake voor mentor heeft het berichtveld een eigen vraag
+const LABELS = { mentor: { bericht: 'Wat speelt er' } };
 // verplichte velden per soort
 const VERPLICHT = {
   keynote: ['naam', 'bericht'],
-  mentor: ['naam', 'bericht'],
+  mentor: ['naam', 'organisatie', 'bedrijfsinfo', 'bericht'],
 };
 
 export const json = (data, status = 200) =>
@@ -62,8 +71,8 @@ export function leesFormulier(form) {
 
 export function bouwMail(data, nu = new Date(), id = crypto.randomUUID()) {
   const onderwerp = `${SOORTEN[data.soort]}: ${enkeleRegel(data.naam)}${data.organisatie ? `, ${enkeleRegel(data.organisatie)}` : ''}`;
-  const lijst = VELDEN.filter(([n]) => data[n]).map(([n, label]) => `${label}: ${data[n]}`);
-  const tekst = `Nieuwe aanvraag via raymondklompsma.nl (${SOORTEN[data.soort]}).\r\n\r\n${lijst.join('\r\n')}\r\n\r\nAntwoord op deze mail om direct bij ${enkeleRegel(data.naam)} uit te komen.\r\n`;
+  const lijst = VELDEN.filter(([n]) => data[n]).map(([n, label]) => `${LABELS[data.soort]?.[n] ?? label}: ${data[n]}`);
+  const tekst = `${data.soort === 'mentor' ? 'Nieuwe intake' : 'Nieuwe aanvraag'} via raymondklompsma.nl (${SOORTEN[data.soort]}).\r\n\r\n${lijst.join('\r\n')}\r\n\r\nAntwoord op deze mail om direct bij ${enkeleRegel(data.naam)} uit te komen.\r\n`;
   const kop = [
     `From: Website Raymond Klompsma <${AFZENDER}>`,
     `To: ${ONTVANGER}`,
