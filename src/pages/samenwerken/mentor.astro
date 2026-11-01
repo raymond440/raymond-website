@@ -48,10 +48,13 @@ const reviews: { tekst: string; wie: string }[] = [
       {reviews.length > 0 && (
         <>
           <h3>Wat anderen zeggen.</h3>
-          <div class="reviews">
-            {reviews.map((r) => <blockquote class="review"><p>{r.tekst}</p><footer>{r.wie}</footer></blockquote>)}
+          <div class="reviews rustig">
+            {reviews.map((r) => {
+              const [naam, ...rol] = r.wie.split(', ');
+              return <blockquote class="review"><p>{r.tekst}</p><footer><span class="naam">{naam}</span><span class="functie">{rol.join(', ')}</span></footer></blockquote>;
+            })}
           </div>
-          <p class="review-woorden">In één woord: <em>verrijkend</em>, <em>hart</em>, <em>betrokken</em>, <em>coach</em>, <em>bevlogenheid</em>.</p>
+          <p class="review-woorden"><span class="label">In één woord</span><em>verrijkend</em><em>hart</em><em>betrokken</em><em>coach</em><em>bevlogenheid</em></p>
           <p class="review-grap">En omdat ik het ze ook vroeg, hun favoriete tandpasta: Sensodyne, Prodent (die ene met de héél scherpe mint), Elmex Classic ("ongeëvenaard"), cool mint ("natuurlijk!") en bolognese.</p>
         </>
       )}

@@ -633,5 +633,12 @@ body { overflow-wrap: break-word; }
 .verschenen { color: var(--gedempt); margin: 0 0 1.5rem; }
 
 /* Mentorpagina: onder de reviews */
-.review-woorden { margin: 1.75rem 0 0; }
-.review-grap { margin: 0.75rem 0 0; font-size: 19px; line-height: 28px; color: var(--gedempt); }
+.reviews.rustig { gap: 2.75rem 3rem; }
+.rustig .review p { font-size: 19px; line-height: 29px; margin: 0 0 0.9rem; }
+.rustig .review footer { display: flex; flex-direction: column; gap: 0.1rem; }
+.rustig .review .naam { text-transform: none; letter-spacing: 0; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 500; font-size: 17px; line-height: 24px; color: var(--inkt); }
+.rustig .review .functie { font-family: var(--sans); font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--gedempt); line-height: 18px; }
+.review-woorden { margin: 3rem 0 0; padding-top: 1.5rem; border-top: 1px solid var(--zand); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1.1rem; font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 22px; line-height: 30px; }
+.review-woorden .label { font-family: var(--sans); font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--gedempt); width: 100%; }
+.review-woorden em { font-style: normal; }
+.review-grap { margin: 1rem 0 0; font-size: 19px; line-height: 28px; color: var(--gedempt); }
