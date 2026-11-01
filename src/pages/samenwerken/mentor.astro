@@ -4,12 +4,14 @@ import Kruimel from '../../components/Kruimel.astro';
 import Aanvraag from '../../components/Aanvraag.astro';
 
 // Wat anderen zeggen: letterlijk uit atelier/gepubliceerd/2026-10-25 - Meedenken als mentor (pagina).md.
-// Aanhalingstekens komen uit de CSS. Chris van Zanden en Egan van Doorn staan nog niet op de pagina.
+// Aanhalingstekens komen uit de CSS.
 const reviews: { tekst: string; wie: string }[] = [
   { tekst: 'Je bent onwijs goed in mijn zelfvertrouwen in mijn rol als directeur laten groeien. Ik voelde dat ik me kwetsbaar op kan stellen bij jou. Dat jij vertrouwen had in mijn potentie. Ook toen ik dat zelf nog helemaal niet zo zeker wist.', wie: "Fanny Koerts, directeur Jimmy's" },
   { tekst: 'Professioneel schop-onder-de-kont-gever. Hij helpt ons groter denken, loskomen van vaste patronen, en geeft vertrouwen om te bouwen aan iets wat groter is dan je zelf op voorhand ziet.', wie: 'Gerben-Jelle Kazemier, co-founder TeamVV' },
   { tekst: 'Ik heb nog nooit met iemand met zoveel plezier samengewerkt. We hebben veel gelachen.', wie: 'Nico Oud, founder Springcast' },
   { tekst: "Mijn drive in het ondernemerschap is weer aangegaan. Ik voel me toch wel wat sterker met Ray aan m'n zij.", wie: 'Sytse Jongbloed, co-founder TeamVV' },
+  { tekst: "Na ons eerste gesprek wist ik dat dit een match was. Raymond legde direct de vinger op de zere plek, bracht meteen focus aan en begrijpt als geen ander mijn bedrijf. Na twee of drie gesprekken ging hij over 'ons' en 'wij' praten als hij het over OrigineelOvernachten had.", wie: 'Egan van Doorn, oprichter Origineel Overnachten' },
+  { tekst: 'Je kunt altijd een rechtdoorzee en eerlijk antwoord verwachten. Ging het goed? Dan krijg je de veren. Ging het minder? Dan krijg je het zeker te weten. Heerlijk.', wie: 'Chris van Zanden, co-founder TeamVV' },
 ];
 ---
 <Basis titel="Meedenken als mentor" beschrijving="Ik denk graag met je mee. Voor founders die groeien en daarbij niet kwijt willen raken waarom ze begonnen." actief="samenwerken" ogId="mentor">
@@ -49,8 +51,8 @@ const reviews: { tekst: string; wie: string }[] = [
           <div class="reviews">
             {reviews.map((r) => <blockquote class="review"><p>{r.tekst}</p><footer>{r.wie}</footer></blockquote>)}
           </div>
-          <p class="review-woorden">In één woord: <em>verrijkend</em>, <em>hart</em>, <em>betrokken</em>, <em>coach</em>.</p>
-          <p class="review-grap">En omdat ik het ze ook vroeg, hun favoriete tandpasta: Sensodyne, Prodent (die ene met de héél scherpe mint), Elmex Classic ("ongeëvenaard") en bolognese.</p>
+          <p class="review-woorden">In één woord: <em>verrijkend</em>, <em>hart</em>, <em>betrokken</em>, <em>coach</em>, <em>bevlogenheid</em>.</p>
+          <p class="review-grap">En omdat ik het ze ook vroeg, hun favoriete tandpasta: Sensodyne, Prodent (die ene met de héél scherpe mint), Elmex Classic ("ongeëvenaard"), cool mint ("natuurlijk!") en bolognese.</p>
         </>
       )}
 
