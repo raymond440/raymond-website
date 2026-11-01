@@ -3,9 +3,14 @@ import Basis from '../../layouts/Basis.astro';
 import Kruimel from '../../components/Kruimel.astro';
 import Aanvraag from '../../components/Aanvraag.astro';
 
-// Reviews van founders die ik mentor of mentorde zijn er nog niet. Zodra ze er zijn, komt hier een lijst
-// { tekst, wie } en verschijnt de sectie "Wat anderen zeggen." vanzelf.
-const reviews: { tekst: string; wie: string }[] = [];
+// Wat anderen zeggen: letterlijk uit atelier/gepubliceerd/2026-10-25 - Meedenken als mentor (pagina).md.
+// Aanhalingstekens komen uit de CSS. Chris van Zanden en Egan van Doorn staan nog niet op de pagina.
+const reviews: { tekst: string; wie: string }[] = [
+  { tekst: 'Je bent onwijs goed in mijn zelfvertrouwen in mijn rol als directeur laten groeien. Ik voelde dat ik me kwetsbaar op kan stellen bij jou. Dat jij vertrouwen had in mijn potentie. Ook toen ik dat zelf nog helemaal niet zo zeker wist.', wie: "Fanny Koerts, directeur Jimmy's" },
+  { tekst: 'Professioneel schop-onder-de-kont-gever. Hij helpt ons groter denken, loskomen van vaste patronen, en geeft vertrouwen om te bouwen aan iets wat groter is dan je zelf op voorhand ziet.', wie: 'Gerben-Jelle Kazemier, co-founder TeamVV' },
+  { tekst: 'Ik heb nog nooit met iemand met zoveel plezier samengewerkt. We hebben veel gelachen.', wie: 'Nico Oud, founder Springcast' },
+  { tekst: "Mijn drive in het ondernemerschap is weer aangegaan. Ik voel me toch wel wat sterker met Ray aan m'n zij.", wie: 'Sytse Jongbloed, co-founder TeamVV' },
+];
 ---
 <Basis titel="Meedenken als mentor" beschrijving="Ik denk graag met je mee. Voor founders die groeien en daarbij niet kwijt willen raken waarom ze begonnen." actief="samenwerken" ogId="mentor">
   <main class="pagina samen">
@@ -44,6 +49,8 @@ const reviews: { tekst: string; wie: string }[] = [];
           <div class="reviews">
             {reviews.map((r) => <blockquote class="review"><p>{r.tekst}</p><footer>{r.wie}</footer></blockquote>)}
           </div>
+          <p class="review-woorden">In één woord: <em>verrijkend</em>, <em>hart</em>, <em>betrokken</em>, <em>coach</em>.</p>
+          <p class="review-grap">En omdat ik het ze ook vroeg, hun favoriete tandpasta: Sensodyne, Prodent (die ene met de héél scherpe mint), Elmex Classic ("ongeëvenaard") en bolognese.</p>
         </>
       )}
 

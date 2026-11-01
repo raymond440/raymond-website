@@ -631,3 +631,7 @@ body { overflow-wrap: break-word; }
 .perdeel.eerder { grid-template-columns: minmax(0, 1fr); }
 .perdeel.eerder > .label { color: var(--gedempt); font-size: 12px; }
 .verschenen { color: var(--gedempt); margin: 0 0 1.5rem; }
+
+/* Mentorpagina: onder de reviews */
+.review-woorden { margin: 1.75rem 0 0; }
+.review-grap { margin: 0.75rem 0 0; font-size: 19px; line-height: 28px; color: var(--gedempt); }
