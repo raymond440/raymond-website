@@ -67,14 +67,22 @@ const reviews: { tekst: string; wie: string }[] = [
 
       <Aanvraag
         soort="mentor"
-        kop="Zullen we kennismaken?"
-        intro="Vertel me over je bedrijf en waar je nu staat. Ik antwoord zelf."
-        knop="Plan een kennismaking"
+        kop="Vertel me waar je staat."
+        intro="Zo kan ik zien of ik iets voor je kan betekenen, en of er nu ruimte is. Ik lees alles zelf en antwoord per mail. Ook als het niet past, krijg je een eerlijk antwoord."
+        knop="Stuur je intake"
+        bevestiging="Dank je. Ik lees je intake zelf en antwoord per mail. Dan hoor je of er ruimte is en of ik een match zie. Meestal binnen een paar dagen."
         velden={[
           { naam: 'naam', label: 'Je naam', verplicht: true, autocomplete: 'name' },
           { naam: 'mail', label: 'E-mail', type: 'email', verplicht: true, autocomplete: 'email' },
-          { naam: 'organisatie', label: 'Je bedrijf', breed: true, autocomplete: 'organization' },
-          { naam: 'bericht', label: 'Wat speelt er?', type: 'textarea', verplicht: true, breed: true, placeholder: 'Waar sta je nu, en waar loop je tegenaan?' },
+          { naam: 'organisatie', label: 'Je bedrijf', verplicht: true, autocomplete: 'organization' },
+          { naam: 'rol', label: 'Je rol', placeholder: 'Bijvoorbeeld founder of CEO', autocomplete: 'organization-title' },
+          { naam: 'link', label: 'Website of LinkedIn', type: 'text', autocomplete: 'url' },
+          { naam: 'plaats', label: 'Waar zit je ongeveer?' },
+          { naam: 'bedrijfsinfo', label: 'Wat doet je bedrijf, en hoe groot zijn jullie?', type: 'textarea', verplicht: true, breed: true, placeholder: 'Een paar zinnen is genoeg.' },
+          { naam: 'bericht', label: 'Wat speelt er nu?', type: 'textarea', verplicht: true, breed: true, placeholder: 'Waar sta je nu, en waar loop je tegenaan?' },
+          { naam: 'wens', label: 'Wat moet er over een half jaar anders zijn?', type: 'textarea', breed: true },
+          { naam: 'vorm', label: 'Welke vorm trekt je?', type: 'select', opties: ['Weet ik nog niet', 'Doorlopend', 'Eén sessie'], breed: true },
+          { naam: 'herkomst', label: 'Hoe ben je bij mij terechtgekomen?', breed: true },
         ]}
       />
     </section>

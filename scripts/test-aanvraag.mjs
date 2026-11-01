@@ -35,4 +35,15 @@ r = await verwerk(req({ ...goed, mail: 'x' }), env, (a, b, raw) => ({ a, b, raw 
 assert.equal(r.status, 400);
 r = await verwerk(req(goed), { MAIL: { send: async () => { throw new Error('nee'); } } }, (a, b, raw) => ({ a, b, raw }));
 assert.equal(r.status, 502);
+
+// intake voor mentor: bedrijf, wat het bedrijf doet en wat er speelt zijn verplicht
+const intake = { soort: 'mentor', naam: 'Eva Bos', mail: 'eva@voorbeeld.nl', organisatie: 'Bos BV', bedrijfsinfo: 'Twaalf mensen, webshop.', bericht: 'Groeit snel.', wens: 'Rust.', vorm: 'Doorlopend', link: 'https://bos.example', website: '' };
+assert.ok(leesFormulier(f(intake)).data);
+assert.ok(leesFormulier(f({ ...intake, organisatie: '' })).fout);
+assert.ok(leesFormulier(f({ ...intake, bedrijfsinfo: '' })).fout);
+const imail = bouwMail(leesFormulier(f(intake)).data, new Date('2026-11-01T12:00:00Z'), 'id2');
+const ibody = Buffer.from(imail.split('\r\n\r\n').slice(1).join('').replace(/\r\n/g, ''), 'base64').toString('utf8');
+assert.match(ibody, /Nieuwe intake/);
+assert.match(ibody, /Wat speelt er: Groeit snel/);
+assert.match(ibody, /Website of LinkedIn: https:\/\/bos.example/);
 console.log('aanvraag: alles ok');

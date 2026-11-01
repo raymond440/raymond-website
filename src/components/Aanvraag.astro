@@ -75,7 +75,7 @@ const mailAan = CONTACT_EMAIL;
       if (blok.dataset.api !== '1') {
         // zonder Worker: open het mailprogramma met de ingevulde gegevens
         const d = new FormData(form);
-        const regels = ['naam', 'mail', 'organisatie', 'wanneer', 'aantal', 'telefoon', 'adres', 'postcode', 'plaats', 'bericht'].filter((k) => d.get(k)).map((k) => `${k}: ${d.get(k)}`);
+        const regels = ['naam', 'mail', 'organisatie', 'rol', 'link', 'plaats', 'bedrijfsinfo', 'wens', 'vorm', 'herkomst', 'wanneer', 'aantal', 'telefoon', 'adres', 'postcode', 'plaats', 'bericht'].filter((k) => d.get(k)).map((k) => `${k}: ${d.get(k)}`);
         const onderwerp = encodeURIComponent(`Aanvraag ${blok.dataset.soort}`);
         location.href = `mailto:${blok.dataset.mail}?subject=${onderwerp}&body=${encodeURIComponent(regels.join('\n'))}`;
         return;
