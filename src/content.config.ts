@@ -19,7 +19,7 @@ const artikelen = defineCollection({
     kantlijn: z.string().optional(),
     // een stuk dat eerder elders verscheen: de datum wordt dan getoond als "Verschenen op ..."
     verschenen: z.coerce.date().optional(),
-    // laatst aangepast, getoond onderaan het artikel als "Bijgewerkt op ..." (zonder jaar)
+    // laatst aangepast, getoond onderaan het artikel als "Bijgewerkt op ..." (met jaar)
     bijgewerkt: z.coerce.date().optional(),
     concept: z.boolean().default(false),
   }),
