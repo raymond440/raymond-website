@@ -642,3 +642,5 @@ body { overflow-wrap: break-word; }
 .review-woorden .label { font-family: var(--sans); font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--gedempt); width: 100%; }
 .review-woorden em { font-style: normal; }
 .review-grap { margin: 1rem 0 0; font-size: 19px; line-height: 28px; color: var(--gedempt); }
+
+.bijgewerkt { color: var(--gedempt); margin: 2.5rem 0 0; }

@@ -41,6 +41,7 @@ const items = subtitels.map((h) => ({ id: h.slug, titel: h.text.replace(/\.$/, '
         <p class="intro">{a.data.beschrijving}</p>
         {a.data.verschenen && <p class="label verschenen">Verschenen op {datum(a.data.verschenen)}</p>}
         <div class="prose"><Content /></div>
+        {a.data.bijgewerkt && <p class="label bijgewerkt">Bijgewerkt op {a.data.bijgewerkt.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' })}</p>}
         <Reageren titel={a.data.titel} />
         {plek && (
           <a class="terug-naar-master" href={`/onbevangen/#${plek.onderdeelId}`}>
