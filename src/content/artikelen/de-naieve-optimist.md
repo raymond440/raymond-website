@@ -5,6 +5,7 @@ beschrijving: "Over een roze bril die tachtig procent van de tijd past, en waaro
 hoort_bij: deel-1
 brug: "Misschien is dat naïef. Veel mensen zeggen van wel."
 kantlijn: "Over een roze bril die tachtig procent van de tijd past, en waarom ik blijf vertrouwen."
+bijgewerkt: 2026-11-11T12:00:00+01:00
 concept: false
 ---
 
@@ -40,6 +41,8 @@ Niets vermoeden betekent niet dat je niets ziet. Het betekent dat je niet bij vo
 
 Wat je van mij mag verwachten, is het echte verhaal. Niet dé kijk op dingen, maar de mijne. Inclusief die twintig procent.
 
-We worden allemaal met een open geest geboren. Het schijnt normaal te zijn dat we die beetje bij beetje kwijtraken. Ik weiger dat te geloven.
+We worden allemaal met een open geest geboren. Het schijnt normaal te zijn dat we die beetje bij beetje kwijtraken. Mij overkomt dat ook. Dan zet ik hem weer open.
 
-Noem me naïef. Dat is precies wat ik bedoel.
+Naïef laat me vertrouwen. Optimistisch laat me opnieuw beginnen.
+
+Noem me naïef. Ik noem het vertrouwen met mijn ogen open.
