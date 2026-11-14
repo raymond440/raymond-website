@@ -644,3 +644,19 @@ body { overflow-wrap: break-word; }
 .review-grap { margin: 1rem 0 0; font-size: 19px; line-height: 28px; color: var(--gedempt); }
 
 .bijgewerkt { color: var(--gedempt); margin: 2.5rem 0 0; }
+
+/* Stilschrift: huisstijl van de site, met alleen de Bic-blauwe kantlijn van het merk */
+.stilschrift-pagina { --kant: #1e3aa8; }
+.stilschrift-pagina a { text-decoration-color: color-mix(in srgb, var(--kant) 45%, transparent); }
+.ss-kop { display: flex; align-items: stretch; gap: 1.4rem; margin: 0.6rem 0 2rem; }
+.ss-kantlijn { display: block; width: auto; height: 7.5rem; flex: none; }
+.ss-kop h1 { margin: 0; }
+.ss-onder { font-family: var(--speels); font-weight: 500; font-size: 36px; line-height: 40px; margin: 0.6rem 0 0; transform: rotate(-1.5deg); transform-origin: left; }
+.ss-intro { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 26px; line-height: 38px; }
+.ss-knoprij { margin: 1.8rem 0 0; }
+.stilschrift-pagina .knop { display: inline-block; font-family: var(--sans); font-size: 13.68px; letter-spacing: 1.2312px; text-transform: uppercase; font-weight: 700; padding: 0.8rem 1.3rem; background: var(--inkt); color: var(--creme); text-decoration: none; border: 1px solid var(--inkt); }
+.stilschrift-pagina .knop:hover { background: var(--kant); border-color: var(--kant); }
+.ss-handtekening { display: block; width: min(60%, 15rem); height: auto; margin: 2rem 0 0; }
+.home-stilschrift { margin-top: 1.6rem; }
+.home-stilschrift .mini-logo img { height: 72px; width: auto; display: block; margin-inline: auto; }
+@media (max-width: 700px) { .ss-intro { font-size: 22px; line-height: 33px; } .ss-kantlijn { height: 5.5rem; } .ss-onder { font-size: 30px; line-height: 34px; } }
