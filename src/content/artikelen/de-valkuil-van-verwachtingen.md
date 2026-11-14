@@ -3,7 +3,7 @@ titel: "De valkuil van verwachtingen."
 datum: 2026-10-25T16:36:36+01:00
 beschrijving: "Over alles vooraf willen weten, en waarom de beste herinneringen onverwacht komen."
 hoort_bij: deel-6
-brug: "Zie dit dus niet als een conclusie, maar als een luikje."
+brug: "Zie dit niet als een conclusie. Zie het als een luikje."
 kantlijn: "Over alles vooraf willen weten, en waarom de beste herinneringen onverwacht komen."
 concept: false
 ---
