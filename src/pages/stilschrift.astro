@@ -1,0 +1,43 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Kruimel from '../components/Kruimel.astro';
+
+const wachtlijst = 'https://stilschrift.nl/?utm_source=raymondklompsma.nl&utm_medium=referral&utm_campaign=wachtlijst';
+---
+<Basis titel="Stilschrift, ruimte in je hoofd" beschrijving="Stilschrift is mijn winkel in notitieboekjes. Acht boekjes, als je wilt per twee: één om te houden, één om weg te geven. Open vanaf zondag 3 januari 2027." ogId="stilschrift">
+  <main class="pagina samen stilschrift-pagina">
+    <Kruimel items={[{ label: 'Stilschrift' }]} />
+    <section class="keynote">
+      <div class="ss-kop">
+        <img class="ss-kantlijn" src="/stilschrift-kantlijn.svg" alt="" width="72" height="560" />
+        <div>
+          <h1>Stilschrift</h1>
+          <p class="ss-onder">Ruimte in je hoofd. Op papier.</p>
+        </div>
+      </div>
+
+      <p class="ss-intro">Je kent het vast. Je loopt rond met tien dingen tegelijk in je hoofd, en geen ervan krijgt echt aandacht. Tot je ze opschrijft. Dan wordt het even stil.</p>
+      <p>Stilschrift is mijn winkel in notitieboekjes. Vanaf zondag 3 januari 2027 kun je er kopen.</p>
+
+      <h3>Wat het is.</h3>
+      <p>Acht notitieboekjes, niet meer. Zeven koos ik uit wat er te koop is, en bij elk boekje vertel ik waarom. Het achtste is van <a href="/wobbly/">Wobbly Sun</a>, met het wiebelige zonnetje op de omslag. Geen kast vol keuze. Gewoon acht goede boekjes.</p>
+
+      <h3>Per twee.</h3>
+      <p>Bij elk boekje kun je er twee nemen. Eén om te houden, één om weg te geven, net als bij <a href="/erbij/">ERBIJ</a>. Bij het boekje van Wobbly Sun is het geen keuze: dat bestaat alleen per twee. Zo gaat er bij iemand anders ook een luikje open.</p>
+
+      <h3>Hoe ik het bouw.</h3>
+      <p>Apps en AI onthouden steeds meer voor ons. Toch zet ik Stilschrift bijna helemaal met AI op: de winkel, de verzending, de mails, de advertenties. Dat klinkt tegenstrijdig. Voor mij is het dat niet. AI doet het werk dat ik niet hoef te onthouden, zodat er ruimte blijft voor wat ertoe doet. Dat doet een notitieboekje ook. Ik deel onderweg wat goed gaat en wat niet.</p>
+
+      <h3>Waar het nu staat.</h3>
+      <p>De winkel opent op zondag 3 januari 2027. De boekjes zijn gekozen, de foto's maak ik als ze binnen zijn. Tot de opening kun je je op stilschrift.nl op de wachtlijst zetten. Dan hoor je het als eerste, van mij.</p>
+
+      <p class="ss-knoprij"><a class="knop" href={wachtlijst}>Zet me op de wachtlijst</a></p>
+
+      <img class="ss-handtekening" src="/handtekening-raymond.png" alt="Raymond" width="800" height="273" />
+
+      <p class="erbij-slot">Je hoofd is geen archief.</p>
+
+      <p class="naar-ode"><span class="label">Waar het vandaan komt</span><a href="/onbevangen/#ramen-die-lucht-geven">Over het luikje in je hoofd schreef ik in de ode aan onbevangenheid.</a></p>
+    </section>
+  </main>
+</Basis>

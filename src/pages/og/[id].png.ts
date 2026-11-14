@@ -65,6 +65,7 @@ export async function getStaticPaths() {
     { params: { id: 'onbevangen' }, props: { titel: 'Een ode aan onbevangenheid.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'samenwerken' }, props: { titel: 'Samenwerken.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'erbij' }, props: { titel: 'ERBIJ, een cadeau om te delen.', onder: 'Raymond Klompsma', tekening: 'pakje' as Naam } },
+    { params: { id: 'stilschrift' }, props: { titel: 'Stilschrift, ruimte in je hoofd.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'wobbly' }, props: { titel: 'Wobbly Sun, een wiebelige zon.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'keynote' }, props: { titel: 'Ik vertel graag een verhaal.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'mentor' }, props: { titel: 'Ik denk graag met je mee.', onder: 'Raymond Klompsma', tekening: 'trap' as Naam } },
