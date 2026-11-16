@@ -8,13 +8,13 @@ kantlijn: "Over een zin die toestemming geeft, en waarom zakelijk voor mij altij
 concept: false
 ---
 
-Ik zat aan de keukentafel bij een ondernemer voor wie ik al een tijd meedacht. Ik vond het een mooi traject. Hij ook, dacht ik. Hij schoof een kop koffie naar me toe en keek daarna vooral naar zijn telefoon.
+Stel dat je aan de keukentafel zit bij een ondernemer voor wie je al een tijd meedenkt. Je vindt het een mooi traject. Hij ook, denk je. Hij schuift een kop koffie naar je toe en kijkt daarna vooral naar zijn telefoon.
 
-"We gaan het anders doen, Raymond. Er komt een groot bureau. Ik vind het zelf ook rot. Maar het is gewoon puur zakelijk."
+"We gaan het anders doen. Er komt een groot bureau. Ik vind het zelf ook rot. Maar het is gewoon puur zakelijk."
 
-Ik knikte. Wat moet je anders? Maar onderweg naar huis zat die zin naast me in de auto. Moest ik het me dus niet aantrekken? En mocht het daarom wel?
+Je knikt. Wat moet je anders? Maar onderweg naar huis zit die zin naast je in de auto. Moet je het je dus niet aantrekken? En mag het daarom wel?
 
-Die zin stoort me. Hij raakt me ook. Want op dat moment zat er eigenlijk niemand meer tegenover me. Hij verschuilde zich, achter het bedrijf, achter de cijfers, achter dat ene woord. De man met wie ik al die tijd had meegedacht, was er even niet.
+Die zin stoort me. Hij raakt me ook. Want op dat moment zit er eigenlijk niemand meer tegenover je. Hij verschuilt zich, achter het bedrijf, achter de cijfers, achter dat ene woord. De man met wie je al die tijd hebt meegedacht, is er even niet.
 
 En eerlijk is eerlijk: ik heb hem zelf ook weleens gebruikt. Toen het financieel niet meer lukte, moest ik afscheid nemen van collega's. Mensen die ik graag mocht, en die zich jarenlang hadden ingezet. Ik zei dat het zakelijk was. Dan ging het over de cijfers, en niet over hen. En ook niet over mij.
 
