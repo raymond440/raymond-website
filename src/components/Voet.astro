@@ -62,7 +62,9 @@ const actie = import.meta.env.PUBLIC_NEWSLETTER_FORM_URL ?? '';
         await fetch(actie, {
           method: 'POST',
           mode: 'no-cors', // de nieuwsbriefdienst antwoordt zonder CORS-headers, de inschrijving komt wel aan
-          body: new URLSearchParams({ email, embed: '1' }),
+          // Velden voor MailerLite (fields[email], ml-submit) en voor Buttondown (email, embed).
+          // Zo werkt het formulier met beide, en kiest PUBLIC_NEWSLETTER_FORM_URL de dienst.
+          body: new URLSearchParams({ 'fields[email]': email, 'ml-submit': '1', anticsrf: 'true', email, embed: '1' }),
         });
         ph()?.capture('nieuwsbrief_aangemeld', { plek: location.pathname });
         form.hidden = true;
