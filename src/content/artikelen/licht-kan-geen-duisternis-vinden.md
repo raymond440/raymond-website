@@ -16,6 +16,8 @@ Ik ben gaan zoeken wat die zin betekent. Ja, zoeken, ik weet het. Ik vond allerl
 
 Klinkt als iets voor op een meditatiekussen. Maar ik zie het overal terug.
 
+<aside class="uitgelicht"><span class="markeer">Wat zoekt, kan zichzelf niet vinden.</span></aside>
+
 ## Rust kun je niet vangen.
 
 [Ook bij het mediteren wilde ik eerst naar rust toe werken.](/artikelen/ik-verveel-me-te-weinig/) Alsof het een doel was. Nog even volhouden en dan zou ik er zijn. Typisch ik: zelfs ontspannen werd een project.
