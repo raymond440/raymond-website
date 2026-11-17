@@ -3,6 +3,8 @@ import Basis from '../layouts/Basis.astro';
 import KortLijst from '../components/KortLijst.astro';
 import Tekening from '../components/Tekening.astro';
 import ErbijLogo from '../components/ErbijLogo.astro';
+import Foto from '../components/Foto.astro';
+import anniek from '../assets/ray-en-anniek.jpg';
 import { artikelen, datum } from '../site';
 import { laadOde, plekken } from '../lib/ode';
 
@@ -35,6 +37,7 @@ const plek = await plekken();
 
     <section class="wie" aria-labelledby="wie-kop">
       <p class="label" id="wie-kop">Wie hier schrijft</p>
+      <Foto src={anniek} variant="rechts" klas="wie-foto" alt="Raymond, met zijn wang tegen die van zijn vrouw Anniek, die breed lacht." bijschrift="Met mijn vrouw Anniek." sizes="(min-width: 700px) 300px, 100vw" />
       <p>Ik ben Raymond Klompsma. Vader, ondernemer, spreker en mentor van ondernemers. Op mijn negentiende begon ik mijn eerste bedrijf, met vrienden en zonder plan. Sindsdien is dat het patroon gebleven: iets zien, denken "wat als het wel kan", en beginnen voor ik het zeker weet. Nu bouw ik aan nieuwe merken en help ik ondernemers die vastzitten weer in beweging te komen.</p>
       <p class="alle"><a href="/samenwerken/">Meer over mij, en samenwerken</a></p>
     </section>
@@ -49,7 +52,7 @@ const plek = await plekken();
     </section>
 
     <section class="home-erbij home-stilschrift" aria-labelledby="ss-home-kop">
-      <a href="/stilschrift/" class="mini-logo" aria-hidden="true" tabindex="-1"><img src="/stilschrift-kantlijn.svg" alt="" width="10" height="72" /></a>
+      <a href="/stilschrift/" class="mini-logo" aria-hidden="true" tabindex="-1"><img src="/stilschrift-logo.svg" alt="" width="130" height="40" /></a>
       <div>
         <p class="label" id="ss-home-kop">Vanaf 3 januari</p>
         <a class="stam-titel" href="/stilschrift/">Stilschrift, ruimte in je hoofd.</a>

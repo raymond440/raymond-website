@@ -77,7 +77,7 @@ nav a:hover, nav a[aria-current="page"] { text-decoration: underline 2px var(--z
 .lijst.kort a.waar:hover { color: var(--inkt); text-decoration: underline 2px var(--zand); text-underline-offset: 4px; }
 .alle { margin: 0.9rem 0 0; font-size: 17px; }
 /* wie hier schrijft: kort, geen kader */
-.wie { margin-top: 3rem; }
+.wie { margin-top: 3rem; display: flow-root; }
 .wie .label { color: var(--gedempt); margin: 0 0 0.5rem; }
 .wie p:not(.label):not(.alle) { margin: 0; }
 
@@ -658,5 +658,5 @@ body { overflow-wrap: break-word; }
 .stilschrift-pagina .knop:hover { background: var(--kant); border-color: var(--kant); }
 .ss-handtekening { display: block; width: min(60%, 15rem); height: auto; margin: 2rem 0 0; }
 .home-stilschrift { margin-top: 1.6rem; }
-.home-stilschrift .mini-logo img { height: 72px; width: auto; display: block; margin-inline: auto; }
+.home-stilschrift .mini-logo img { width: 100%; height: auto; display: block; }
 @media (max-width: 700px) { .ss-intro { font-size: 22px; line-height: 33px; } .ss-kantlijn { height: 5.5rem; } .ss-onder { font-size: 30px; line-height: 34px; } }
