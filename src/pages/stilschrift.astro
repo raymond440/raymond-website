@@ -1,7 +1,9 @@
 ---
 import Basis from '../layouts/Basis.astro';
 import Kruimel from '../components/Kruimel.astro';
+import { weken, adres, kortDatum } from '../lib/bouwlog';
 
+const bouwlog = await weken();
 const wachtlijst = 'https://stilschrift.nl/?utm_source=raymondklompsma.nl&utm_medium=referral&utm_campaign=wachtlijst';
 ---
 <Basis titel="Stilschrift, ruimte in je hoofd" beschrijving="Stilschrift is mijn winkel in notitieboekjes. Acht boekjes, als je wilt per twee: één om te houden, één om weg te geven. Open vanaf zondag 3 januari 2027." ogId="stilschrift">
@@ -25,8 +27,21 @@ const wachtlijst = 'https://stilschrift.nl/?utm_source=raymondklompsma.nl&utm_me
       <h3>Per twee.</h3>
       <p>Bij elk boekje kun je er twee nemen. Eén om te houden, één om weg te geven, net als bij <a href="/erbij/">ERBIJ</a>. Bij het boekje van Wobbly Sun is het geen keuze: dat bestaat alleen per twee. Zo gaat er bij iemand anders ook een luikje open.</p>
 
-      <h3>Hoe ik het bouw.</h3>
+      <h3 id="hoe-ik-het-bouw">Hoe ik het bouw.</h3>
       <p>Apps en AI onthouden steeds meer voor ons. Toch zet ik Stilschrift bijna helemaal met AI op: de winkel, de verzending, de mails, de advertenties. Dat klinkt tegenstrijdig. Voor mij is het dat niet. AI doet het werk dat ik niet hoef te onthouden, zodat er ruimte blijft voor wat ertoe doet. Dat doet een notitieboekje ook. Ik deel onderweg wat goed gaat en wat niet.</p>
+      {bouwlog.length > 0 && (
+        <>
+          <p>Elke vrijdag tot de opening schrijf ik op hoe het gaat.</p>
+          <ol class="bouwlog-lijst">
+            {bouwlog.map((w) => (
+              <li>
+                <time datetime={w.data.date.toISOString().slice(0, 10)}>{kortDatum(w.data.date)}</time>
+                <a href={adres(w)}>{w.data.title}</a>
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
 
       <h3>Waar het nu staat.</h3>
       <p>De winkel opent op zondag 3 januari 2027. De boekjes zijn gekozen, de foto's maak ik als ze binnen zijn. Tot de opening kun je je op stilschrift.nl op de wachtlijst zetten. Dan hoor je het als eerste, van mij.</p>

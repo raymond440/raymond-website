@@ -47,4 +47,24 @@ const pagina = defineCollection({
   }),
 });
 
-export const collections = { artikelen, ode, pagina };
+// Bouwlog bij Stilschrift: elke vrijdag tot de opening één week, als week-N.md met een foto ernaast.
+// De velden zijn zoals Raymond ze aanlevert (Engelse namen). Adres: /stilschrift/bouwen/week-N/.
+const bouwlog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/bouwlog' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    seoTitle: z.string(),
+    week: z.number().int().positive(),
+    date: z.coerce.date(),
+    // dagen tot de opening en de wachtlijst, onder de ondertitel
+    stand: z.string().optional(),
+    // bestandsnaam van de foto naast het .md-bestand; komt op de plek van [FOTO: ...]
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    concept: z.boolean().default(false),
+  }),
+});
+
+export const collections = { artikelen, ode, pagina, bouwlog };

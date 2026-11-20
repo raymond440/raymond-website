@@ -17,6 +17,8 @@ interface Props {
   breed?: boolean;
   type?: 'website' | 'article';
   noindex?: boolean;
+  // volledige titel voor zoekmachines, zonder dat " · Raymond Klompsma" erachter komt
+  seoTitel?: string;
 }
 const {
   titel,
@@ -26,8 +28,9 @@ const {
   breed = false,
   type = 'website',
   noindex = false,
+  seoTitel,
 } = Astro.props;
-const paginaTitel = titel ? `${titel} · Raymond Klompsma` : 'Raymond Klompsma';
+const paginaTitel = seoTitel ?? (titel ? `${titel} · Raymond Klompsma` : 'Raymond Klompsma');
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogAfbeelding = new URL(`/og/${ogId}.png`, Astro.site);
 const menu = [
