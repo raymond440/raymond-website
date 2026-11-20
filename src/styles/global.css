@@ -672,3 +672,28 @@ body { overflow-wrap: break-word; }
 .ook-rij .beschr { margin: 0.3rem 0 0; }
 .ook-rij .meta { color: var(--gedempt); margin: 0.4rem 0 0; }
 @media (max-width: 700px) { .ook-rij { grid-template-columns: 90px minmax(0, 1fr); gap: 1rem; } .ook-rij .mini-logo img[src*="wobbly"] { width: 56px; } }
+
+/* Bouwlog bij Stilschrift (/stilschrift/bouwen/week-N/): gewone artikel-layout, met de Bic-blauwe kantlijn naast de titel */
+.bouw-kop { margin: 0 0 1.2rem; }
+.bouw-kop .ss-kantlijn { height: auto; max-height: 15rem; align-self: stretch; object-fit: fill; width: 1.6rem; }
+.bouw-kop h1 { margin: 0 0 0.8rem; }
+.bouw-kop .intro { margin: 0; }
+.bouw-label { color: var(--gedempt); margin: 0 0 0.6rem; }
+.bouw-stand { color: var(--gedempt); font-style: italic; font-size: 18px; line-height: 28px; margin: 0 0 2rem; }
+.bouwlog .foto { margin-block: 2rem 2.4rem; }
+.bouw-handtekening { margin-top: 1.6rem; }
+.bouw-buren { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem; margin-top: 2.5rem; padding-top: 1.5rem; background: var(--lijn) top left / 100% 8px no-repeat; }
+.bouw-buren > div { display: grid; gap: 0.2rem; align-content: start; }
+.bouw-buren > div:last-child { text-align: right; }
+.bouw-buren .label { color: var(--gedempt); }
+.bouw-buren .tt { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 21px; line-height: 29px; }
+.bouw-buren a.tt { text-decoration: underline 2px var(--zand); text-underline-offset: 5px; }
+.bouw-buren .stil { color: var(--gedempt); }
+.bouwlog-lijst { list-style: none; padding: 0; margin: 0.6rem 0 0; max-width: var(--maat); }
+.bouwlog-lijst li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; padding: 0.55rem 0; align-items: baseline; }
+.bouwlog-lijst time { font-family: var(--sans); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--gedempt); }
+@media (max-width: 700px) {
+  .bouw-buren { grid-template-columns: 1fr; }
+  .bouw-buren > div:last-child { text-align: left; }
+  .bouwlog-lijst li { grid-template-columns: 1fr; gap: 0.1rem; }
+}

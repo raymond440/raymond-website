@@ -1,0 +1,68 @@
+---
+import { render } from 'astro:content';
+import Basis from '../../../layouts/Basis.astro';
+import Inhoud from '../../../components/Inhoud.astro';
+import Kruimel from '../../../components/Kruimel.astro';
+import Reageren from '../../../components/Reageren.astro';
+import Foto from '../../../components/Foto.astro';
+import { weken, slug, adres, AANTAL_WEKEN, volgendeVrijdag, dagDatum, foto, knipFoto, type Week } from '../../../lib/bouwlog';
+
+export async function getStaticPaths() {
+  const lijst = await weken();
+  return lijst.map((w, i) => ({
+    params: { week: slug(w) },
+    props: { w, vorige: lijst[i - 1], volgende: lijst[i + 1] },
+  }));
+}
+const { w, vorige, volgende } = Astro.props as { w: Week; vorige?: Week; volgende?: Week };
+const { headings } = await render(w);
+const d = w.data;
+const subtitels = headings.filter((h) => h.depth === 2);
+const metToc = subtitels.length >= 2;
+const items = subtitels.map((h) => ({ id: h.slug, titel: h.text.replace(/\.$/, '') }));
+
+const { voor, na, bestand, onderschrift } = knipFoto(w.rendered?.html ?? '');
+const beeld = foto(bestand ?? d.image);
+if ((bestand || d.image) && !beeld) throw new Error(`Bouwlog week ${d.week}: foto "${bestand ?? d.image}" niet gevonden naast het .md-bestand`);
+const volgendeDatum = volgendeVrijdag(d.date);
+---
+<Basis titel={d.title.replace(/\.$/, '')} seoTitel={d.seoTitle} beschrijving={d.description} ogId={`stilschrift-${slug(w)}`} type="article">
+  <div class:list={['sub', { 'met-toc': metToc }]}>
+    <div class:list={{ master: metToc }}>
+      {metToc && <Inhoud items={items} beginLabel="Begin" />}
+      <article class:list={['bouwlog', { artikel: metToc }]}>
+        <Kruimel items={[{ label: 'Stilschrift', href: '/stilschrift/' }, { label: `Week ${d.week}` }]} />
+        <a class="hoort-bij" href="/stilschrift/#hoe-ik-het-bouw">
+          <span class="label">Hoort bij</span>
+          <span>Stilschrift <span class="pijl">›</span> Hoe ik het bouw</span>
+        </a>
+        <div class="ss-kop bouw-kop">
+          <img class="ss-kantlijn" src="/stilschrift-kantlijn.svg" alt="" width="72" height="560" />
+          <div>
+            <p class="label bouw-label">Bouwlog · week {d.week} van {AANTAL_WEKEN}</p>
+            <h1>{d.title}{d.concept && <span class="concept"> · concept</span>}</h1>
+            <p class="intro">{d.subtitle}</p>
+          </div>
+        </div>
+        {d.stand && <p class="bouw-stand">{d.stand}</p>}
+        <div class="prose" set:html={voor} />
+        {beeld && <Foto src={beeld} alt={d.imageAlt ?? ''} bijschrift={onderschrift} />}
+        {na && <div class="prose" set:html={na} />}
+        <img class="ss-handtekening bouw-handtekening" src="/handtekening-raymond.png" alt="Raymond" width="800" height="273" />
+        <Reageren titel={d.title} />
+        <nav class="bouw-buren" aria-label="Andere weken">
+          <div>
+            <span class="label">Vorige week</span>
+            {vorige ? <a class="tt" href={adres(vorige)}>{vorige.data.title}</a> : <span class="tt stil">Dit is de eerste.</span>}
+          </div>
+          {(volgende || volgendeDatum) && (
+            <div>
+              <span class="label">Volgende week</span>
+              {volgende ? <a class="tt" href={adres(volgende)}>{volgende.data.title}</a> : <span class="tt stil">{dagDatum(volgendeDatum!)}</span>}
+            </div>
+          )}
+        </nav>
+      </article>
+    </div>
+  </div>
+</Basis>

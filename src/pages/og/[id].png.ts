@@ -3,6 +3,7 @@ import opentype from 'opentype.js';
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';
 import { artikelen } from '../../site';
+import { weken, slug } from '../../lib/bouwlog';
 import { svgInhoud, type Naam } from '../../lib/tekeningen';
 
 const fontPad = 'node_modules/@fontsource/caveat/files/caveat-latin-500-normal.woff';
@@ -60,6 +61,7 @@ function regels(tekst: string, grootte: number, maxBreedte: number): string[] {
 
 export async function getStaticPaths() {
   const lijst = await artikelen();
+  const bouwlog = await weken();
   return [
     { params: { id: 'site' }, props: { titel: 'Raymond Klompsma', onder: 'Ondernemen, opvoeden, mezelf leren kennen.', tekening: 'zon' as Naam } },
     { params: { id: 'onbevangen' }, props: { titel: 'Een ode aan onbevangenheid.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
@@ -69,13 +71,16 @@ export async function getStaticPaths() {
     { params: { id: 'wobbly' }, props: { titel: 'Wobbly Sun, een wiebelige zon.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'keynote' }, props: { titel: 'Ik vertel graag een verhaal.', onder: 'Raymond Klompsma', tekening: 'zon' as Naam } },
     { params: { id: 'mentor' }, props: { titel: 'Ik denk graag met je mee.', onder: 'Raymond Klompsma', tekening: 'trap' as Naam } },
+    ...bouwlog.map((w) => ({ params: { id: `stilschrift-${slug(w)}` }, props: { titel: w.data.title, onder: 'Bouwlog Stilschrift · Raymond Klompsma', tekening: 'zon' as Naam } })),
     ...lijst.map((a) => ({ params: { id: a.id }, props: { titel: a.data.titel, onder: 'Raymond Klompsma', tekening: (a.data.tekening ?? 'zon') as Naam } })),
   ];
 }
 
 export const GET: APIRoute = async ({ props }) => {
   const { titel, onder, tekening } = props as { titel: string; onder: string; tekening: Naam };
-  const grootte = titel.length > 45 ? 78 : 96;
+  let grootte = titel.length > 45 ? 78 : 96;
+  // past de titel op 78 niet in drie regels, dan kleiner, anders raakt de vierde regel de lijn onderaan
+  if (grootte === 78 && regels(titel, 78, 640).length > 3) grootte = 66;
   // Balanceren: zelfde aantal regels, zo smal mogelijk, zodat er geen alleenstaand woord overblijft.
   const maxB = 640; // rechts is ruimte voor de tekening
   const aantal = regels(titel, grootte, maxB).length;
