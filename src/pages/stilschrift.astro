@@ -4,9 +4,9 @@ import Kruimel from '../components/Kruimel.astro';
 import { weken, adres, kortDatum } from '../lib/bouwlog';
 
 const bouwlog = await weken();
-const wachtlijst = 'https://stilschrift.nl/?utm_source=raymondklompsma.nl&utm_medium=referral&utm_campaign=wachtlijst';
+const doeMee = 'https://stilschrift.nl/doe-mee/?utm_source=raymondklompsma.nl&utm_medium=referral&utm_campaign=dertig-bladzijden';
 ---
-<Basis titel="Stilschrift, ruimte in je hoofd" beschrijving="Stilschrift is mijn winkel in notitieboekjes. Acht boekjes, als je wilt per twee: één om te houden, één om weg te geven. Open vanaf dinsdag 5 januari 2027." ogId="stilschrift">
+<Basis titel="Stilschrift, ruimte in je hoofd" beschrijving="Stilschrift laat je dertig ochtenden schrijven: tien minuten per dag, met de hand, gratis. Daarna, als je wilt, papier om in te schrijven. De winkel opent op dinsdag 5 januari 2027." ogId="stilschrift">
   <main class="pagina samen stilschrift-pagina">
     <Kruimel items={[{ label: 'Stilschrift' }]} />
     <section class="keynote">
@@ -18,20 +18,22 @@ const wachtlijst = 'https://stilschrift.nl/?utm_source=raymondklompsma.nl&utm_me
         </div>
       </div>
 
-      <p class="ss-intro">Je kent het vast. Je loopt rond met tien dingen tegelijk in je hoofd, en geen ervan krijgt echt aandacht. Tot je ze opschrijft. Dan wordt het even stil.</p>
-      <p>Stilschrift is mijn winkel in notitieboekjes. Vanaf dinsdag 5 januari 2027 kun je er kopen.</p>
+      <p class="ss-intro">Ik schrijf sinds 2018 bijna elke dag. Het brengt me veel. Wat ik opschrijf, hoef ik niet meer mee te slepen. En ik vind terug wat ik dacht, ook als ik het allang vergeten was. Dat gun ik anderen ook.</p>
+      <p>Stilschrift is mijn manier om dat te delen. Het begint met dertig ochtenden schrijven.</p>
 
       <h3>Wat het is.</h3>
-      <p>Acht notitieboekjes, niet meer. Zeven koos ik uit wat er te koop is, en bij elk boekje vertel ik waarom. Het achtste is van <a href="/wobbly/">Wobbly Sun</a>, met het wiebelige zonnetje op de omslag. Geen kast vol keuze. Gewoon acht goede boekjes.</p>
+      <p>Dertig bladzijden. De ochtend na je aanmelding krijg je de eerste mail, en dat dertig dagen op rij. Elke keer één vraag of opdracht. Jij schrijft tien minuten met de hand. Op welk papier maakt niet uit. Het is gratis.</p>
+      <p>Geen app, geen meldingen, geen streak die je kwijt kunt raken. Een pen, papier en tien minuten.</p>
 
-      <h3>Per twee.</h3>
-      <p>Bij elk boekje kun je er twee nemen. Eén om te houden, één om weg te geven, net als bij <a href="/erbij/">ERBIJ</a>. Bij het boekje van Wobbly Sun is het geen keuze: dat bestaat alleen per twee. Zo gaat er bij iemand anders ook een luikje open.</p>
+      <h3>Daarna, als je wilt.</h3>
+      <p>Na dertig dagen heb je dertig bladzijden. Wil je door, dan laat ik zien waar ik zelf in schrijf of zou willen schrijven. Een kleine winkel met papier om in te schrijven. Weinig, en elk met een reden.</p>
+      <p>Meedoen is geen voorwaarde om iets te kopen, en kopen geen voorwaarde om mee te doen.</p>
 
       <h3 id="hoe-ik-het-bouw">Hoe ik het bouw.</h3>
-      <p>Apps en AI onthouden steeds meer voor ons. Toch zet ik Stilschrift bijna helemaal met AI op: de winkel, de verzending, de mails, de advertenties. Dat klinkt tegenstrijdig. Voor mij is het dat niet. AI doet het werk dat ik niet hoef te onthouden, zodat er ruimte blijft voor wat ertoe doet. Dat doet een notitieboekje ook. Ik deel onderweg wat goed gaat en wat niet.</p>
+      <p>Apps en AI onthouden steeds meer voor ons. Toch zet ik Stilschrift bijna helemaal met AI op: de site, de mails, de verzending, de advertenties. Dat klinkt tegenstrijdig. Voor mij is het dat niet. AI doet het werk dat ik niet hoef te onthouden, zodat er ruimte blijft voor wat ertoe doet. Dat doet een notitieboek ook. Ik deel onderweg wat goed gaat en wat niet.</p>
       {bouwlog.length > 0 && (
         <>
-          <p>Elke vrijdag tot de opening schrijf ik op hoe het gaat.</p>
+          <p>Elke vrijdag schrijf ik op hoe het gaat.</p>
           <ol class="bouwlog-lijst">
             {bouwlog.map((w) => (
               <li>
@@ -44,9 +46,9 @@ const wachtlijst = 'https://stilschrift.nl/?utm_source=raymondklompsma.nl&utm_me
       )}
 
       <h3>Waar het nu staat.</h3>
-      <p>De winkel opent op dinsdag 5 januari 2027. De boekjes zijn gekozen, de foto's maak ik als ze binnen zijn. Tot de opening kun je je op stilschrift.nl op de wachtlijst zetten. Dan hoor je het als eerste, van mij.</p>
+      <p>Dertig bladzijden is open. Meld je vandaag aan, dan krijg je morgenochtend om zeven uur dag 1. De winkel opent op dinsdag 5 januari 2027.</p>
 
-      <p class="ss-knoprij"><a class="knop" href={wachtlijst}>Zet me op de wachtlijst</a></p>
+      <p class="ss-knoprij"><a class="knop" href={doeMee}>Doe mee, het is gratis</a></p>
 
       <img class="ss-handtekening" src="/handtekening-raymond.png" alt="Raymond" width="800" height="273" />
 

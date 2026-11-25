@@ -5,7 +5,7 @@ import Inhoud from '../../../components/Inhoud.astro';
 import Kruimel from '../../../components/Kruimel.astro';
 import Reageren from '../../../components/Reageren.astro';
 import Foto from '../../../components/Foto.astro';
-import { weken, slug, adres, AANTAL_WEKEN, volgendeVrijdag, dagDatum, foto, knipFoto, type Week } from '../../../lib/bouwlog';
+import { weken, slug, adres, volgendeVrijdag, dagDatum, foto, knipFoto, type Week } from '../../../lib/bouwlog';
 
 export async function getStaticPaths() {
   const lijst = await weken();
@@ -39,7 +39,7 @@ const volgendeDatum = volgendeVrijdag(d.date);
         <div class="ss-kop bouw-kop">
           <img class="ss-kantlijn" src="/stilschrift-kantlijn.svg" alt="" width="72" height="560" />
           <div>
-            <p class="label bouw-label">Bouwlog · week {d.week} van {AANTAL_WEKEN}</p>
+            <p class="label bouw-label">Bouwlog · week {d.week}</p>
             <h1>{d.title}{d.concept && <span class="concept"> · concept</span>}</h1>
             <p class="intro">{d.subtitle}</p>
           </div>

@@ -1,10 +1,8 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { toonConcepten } from '../site';
 
-// Stilschrift opent op dinsdag 5 januari 2027. De bouwlog loopt elke vrijdag tot dan:
-// van vrijdag 20 november 2026 tot en met vrijdag 1 januari 2027, zeven weken.
-export const OPENING = new Date('2027-01-03T00:00:00+01:00');
-export const AANTAL_WEKEN = 7;
+// De bouwlog loopt elke vrijdag door, zonder einddatum (besluit van 25 november 2026).
+// De winkel van Stilschrift opent op dinsdag 5 januari 2027; Dertig bladzijden is al open.
 
 export type Week = CollectionEntry<'bouwlog'>;
 
@@ -17,14 +15,14 @@ export async function weken(): Promise<Week[]> {
 export const slug = (w: Week) => `week-${w.data.week}`;
 export const adres = (w: Week) => `/stilschrift/bouwen/${slug(w)}/`;
 
-// "20 november", zonder jaar: de reeks loopt maar zeven weken.
+// "20 november", zonder jaar.
 export const kortDatum = (d: Date) =>
   d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
 
 // "Vrijdag 27 november"
-export function volgendeVrijdag(d: Date): Date | undefined {
+export function volgendeVrijdag(d: Date): Date {
   const v = new Date(d.valueOf() + 7 * 24 * 60 * 60 * 1000);
-  return v < OPENING ? v : undefined;
+  return v;
 }
 export const dagDatum = (d: Date) => {
   const s = d.toLocaleDateString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Amsterdam' });
