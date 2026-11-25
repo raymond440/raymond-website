@@ -10,7 +10,7 @@ image: week-1-strepen.jpg
 imageAlt: "Negen strepen met een blauwe Bic op een wit blad, op een houten tafel."
 ---
 
-Op 13 november had ik een naam. Stilschrift. Een week later staat er een winkel. Nog achter een wachtwoord, nog zonder boekjes op voorraad, maar hij staat er. Op zondag 3 januari gaat de deur open.
+Op 13 november had ik een naam. Stilschrift. Een week later staat er een winkel. Nog achter een wachtwoord, nog zonder boekjes op voorraad, maar hij staat er. Op dinsdag 5 januari gaat de deur open.
 
 Stilschrift verkoopt notitieboekjes. Van merken die ik zelf gebruik, of graag zou gebruiken. Ik schrijf sinds 2018 elke dag, en wat ik daarvan leerde past in één zin: je hoofd is geen archief.
 
@@ -42,7 +42,7 @@ En het eigen boekje, het Wobbly Sun-boekje, komt niet voor de opening. De drukke
 
 ## Wat ik besloot.
 
-Geen Sinterklaas, geen Kerst. Ik open op 3 januari. Ik zocht een balans. Tussen goed en snel, en tussen af en open. Want ik leer pas als de deur open is. Geen plan overleeft de markt.
+Geen Sinterklaas, geen Kerst. Ik open op 5 januari. Ik zocht een balans. Tussen goed en snel, en tussen af en open. Want ik leer pas als de deur open is. Geen plan overleeft de markt.
 
 Geen kortingen. Ook niet op Black Friday.
 

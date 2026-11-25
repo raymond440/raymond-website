@@ -1,7 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { toonConcepten } from '../site';
 
-// Stilschrift opent op zondag 3 januari 2027. De bouwlog loopt elke vrijdag tot dan:
+// Stilschrift opent op dinsdag 5 januari 2027. De bouwlog loopt elke vrijdag tot dan:
 // van vrijdag 20 november 2026 tot en met vrijdag 1 januari 2027, zeven weken.
 export const OPENING = new Date('2027-01-03T00:00:00+01:00');
 export const AANTAL_WEKEN = 7;
