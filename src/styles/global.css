@@ -343,6 +343,7 @@ hr { border: 0; height: 8px; background: var(--lijn) center / 100% 8px no-repeat
 .naar-ode { display: grid; gap: 0.2rem; margin: 2.75rem 0 0; padding-top: 1.4rem; background: var(--lijn) top left / 100% 8px no-repeat; max-width: var(--maat); }
 .naar-ode .label { color: var(--gedempt); }
 .naar-ode a { font-family: var(--display); font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: 22px; line-height: 30px; text-underline-offset: 5px; }
+.naar-ode-volgt { margin-top: 1.6rem; }
 @media (max-width: 700px) { .keynote-kort { grid-template-columns: minmax(0, 1fr); gap: 1rem; } }
 
 .foto.geplakt.rechts { float: right; width: min(46%, 22rem); margin: 0.4rem -0.5rem 1.4rem 2rem; transform: rotate(2.2deg); }
