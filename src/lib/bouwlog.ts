@@ -37,10 +37,10 @@ export function foto(bestand: string | undefined): ImageMetadata | undefined {
   return pad ? fotos[pad] : undefined;
 }
 
-// De tekst heeft een regel "[FOTO: bestand — onderschrift: "..."]". Die alinea knippen we eruit,
+// De tekst heeft een regel "[FOTO: bestand (eventueel een notitie) — onderschrift: "..."]". Die alinea knippen we eruit,
 // zodat de foto op precies die plek komt. De tekst zelf blijft ongewijzigd in het .md-bestand.
 export function knipFoto(html: string): { voor: string; na: string; bestand?: string; onderschrift?: string } {
-  const re = /<p>\[FOTO:\s*([^\s\]]+)\s*(?:[—–-]|&#x2014;|&mdash;)?\s*(?:onderschrift:\s*)?(?:"|“|&quot;|&#x201C;|&ldquo;)?([\s\S]*?)(?:"|”|&quot;|&#x201D;|&rdquo;)?\]<\/p>/;
+  const re = /<p>\[FOTO:\s*([^\s\]]+)\s*(?:\([^)]*\)\s*)?(?:[—–-]|&#x2014;|&mdash;)?\s*(?:onderschrift:\s*)?(?:"|“|&quot;|&#x201C;|&ldquo;)?([\s\S]*?)(?:"|”|&quot;|&#x201D;|&rdquo;)?\]<\/p>/;
   const m = html.match(re);
   if (!m || m.index === undefined) return { voor: html, na: '' };
   return {
